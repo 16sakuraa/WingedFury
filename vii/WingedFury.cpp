@@ -42,7 +42,7 @@ void plane(int x,int y)
 	gotoxy(x, y);
 	printf(" \\  ^ ");
 	gotoxy(x, y+=1);
-	printf(" ---O=> ");
+	printf(" ---O=D ");
 	gotoxy(x, y+=1);
 	printf(" /  v ");
 }
@@ -84,6 +84,12 @@ void draw_enemy(int x, int y)
 {
 	gotoxy(x, y);
 	printf("M");
+}
+
+void clear_enemy(int x, int y)
+{
+	gotoxy(x, y);
+	printf(" ");
 }
 
 void map_generate()
@@ -247,15 +253,41 @@ int main()
 			PlayerHP -= 1;
 		}*/
 
-		if (enemy[0].status == 1)
+		if (enemy[0].status == 0)
 		{
 			//enemy[0].status == 1;
 			enemy[0].x = RandomX();
 			enemy[0].y = RandomY();
 			draw_enemy(enemy[0].x, enemy[0].y);
+			enemy[0].status = 1;
+		}
 
-
-
+		if (enemy[0].status == 1)
+		{
+			clear_enemy(enemy[0].x, enemy[0].y);
+			if (cursor(enemy[0].x - 2, enemy[0].y) == '>')
+			{
+				Beep(400, 50);
+				clear_enemy(enemy[0].x, enemy[0].y);
+				enemy[0].status = 0;
+				//clear_bullet(enemy[0].x - 1, enemy[0].y);
+			}
+			else if (cursor(enemy[0].x - 2, enemy[0].y) == '*')
+			{
+				clear_enemy(enemy[0].x, enemy[0].y);
+				enemy[0].status = 0;
+			}
+			else if (cursor(enemy[0].x - 2, enemy[0].y) == 'D')
+			{
+				clear_enemy(enemy[0].x, enemy[0].y);
+				enemy[0].status = 0;
+				PlayerHP -= 1;
+			}
+			else 
+			{
+				draw_enemy(--enemy[0].x, enemy[0].y);
+			}
+			
 		}
 
 
