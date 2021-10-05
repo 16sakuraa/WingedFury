@@ -49,16 +49,16 @@ void plane(int x,int y)
 
 void clearplane(int x, int y)
 {
-	gotoxy(x, y -=1);
-	printf("        ");
+	/*gotoxy(x, y -= 1);
+	printf("        ");*/
 	gotoxy(x, y);
 	printf("        ");
 	gotoxy(x, y += 1);
 	printf("        ");
 	gotoxy(x, y += 1);
 	printf("       ");
-	gotoxy(x, y += 1);
-	printf("       ");
+/*	gotoxy(x, y += 1);
+	printf("       ");*/
 }
 
 void draw_bullet(int x, int y, int bulletStatus)
@@ -80,33 +80,79 @@ void clear_bullet(int x, int y, int bulletStatus)
 	printf("   ");
 }
 
+void map_generate()
+{
+	int i,j;
+	for (i = 0; i <= 60; i++)
+	{
+		printf("*");
+	}
+	printf("\n");
+	for (j = 0; j <= 20; j++)
+	{
+		for (i = 0; i <= 60; i++)
+		{
+			if (i == 0)
+			{
+				printf("*");
+			}
+
+			else if (i == 60)
+			{
+				printf("*\n");
+			}
+			else
+			{
+				printf(" ");
+			}
+		}
+	}
+	for (i = 0; i <= 60; i++)
+	{
+		printf("*");
+	}
+
+
+}
+
+void playerhealth(int php)
+{
+	gotoxy(0, 23);
+	setcolor(3, 0);
+	printf("HP : %d", php);
+}
+
 
 int main()
 {
 	setcursor(0);
-/*	struct bullet
+	struct enemy
 	{
 		int x;
 		int y;
-	}bullet; b[10];*/
+		int hp = 10;
+	};enemy enemy[10];
 	char ch = ' ';
 	int x = 12, y = 10;
 	int bulletx[5], bullety[5];
 	int bulletStatus[5];
+	int PlayerHP = 3;
 	for (int i = 0; i <= 5; i++)
 	{
 		bulletStatus[i] = 0;
 	}
-
+	map_generate();
+	playerhealth(PlayerHP);
+	setcolor(7, 0);
 	plane(x, y);
 	do {
 		if (_kbhit()) 
 		{
 			ch = _getch();
-			if (ch == 'a') { plane(--x, y); }
-			if (ch == 'd') { plane(++x, y); }
-			if (ch == 'w') { clearplane(x, y);  plane(x, --y); }
-			if (ch == 's') { clearplane(x, y);  plane(x, ++y); }
+			if (ch == 'a' && cursor(x - 1, y) != '*') { plane(--x, y); }
+			if (ch == 'd' && cursor(x + 8, y) != '*') { plane(++x, y); }
+			if (ch == 'w' && cursor(x, y - 1) != '*') { clearplane(x, y);  plane(x, --y); }
+			if (ch == 's' && cursor(x, y+3) != '*') { clearplane(x, y);  plane(x, ++y); }
 			if (bulletStatus[0] == 0 && ch == ' ')
 			{
 				Beep(700, 50);
@@ -147,6 +193,7 @@ int main()
 			fflush(stdin);
 		}
 
+
 		if (bulletStatus[0] == 1)
 		{
 
@@ -164,9 +211,6 @@ int main()
 				draw_bullet(++bulletx[0], bullety[0], 0);
 			}
 		}
-
-
-
 
 		if (bulletStatus[1] == 1)
 		{
