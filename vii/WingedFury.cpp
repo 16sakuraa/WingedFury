@@ -185,8 +185,8 @@ int main()
 	struct enemy
 	{
 		int status=0;
-		int x;
-		int y;
+		int x=0;
+		int y=0;
 		int hp = 2;
 	};enemy enemy[3];
 	char ch = ' ';
