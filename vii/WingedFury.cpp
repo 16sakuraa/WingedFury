@@ -67,7 +67,7 @@ void draw_bullet(int x, int y, int bulletStatus)
 	bx[bulletStatus] = x;
 	by[bulletStatus] = y;
 	gotoxy(bx[bulletStatus], by[bulletStatus]);
-	printf(" ->");
+	printf(" ->>");
 }
 
 void clear_bullet(int x, int y, int bulletStatus)
@@ -133,14 +133,21 @@ void playerhealth(int php)
 	setcolor(2, 0);
 	printf("HP : %d", php);
 
-	gotoxy(25, 10);
+	/*gotoxy(25, 10);
 	printf("<");
 	gotoxy(25, 15);
 	printf("<");
 	gotoxy(25, 18);
-	printf("<");
+	printf("<");*/
 
 }
+
+void scoreupdate(int score)
+{
+	gotoxy(10, 23);
+	printf("Score : %d", score);
+}
+
 int RandomX()
 {
 	int x;
@@ -186,13 +193,14 @@ int main()
 	int x = 12, y = 10;
 	int bulletx[5], bullety[5];
 	int bulletStatus[5];
-	int PlayerHP = 3, OldPlayerHP = 3;
-	for (int i = 0; i <= 5; i++)
+	int PlayerHP = 3, OldPlayerHP = 3 , score=0 , oldscore=0;
+	for (int i = 0; i <= 4; i++)
 	{
 		bulletStatus[i] = 0;
 	}
 	map_generate();
 	playerhealth(PlayerHP);
+	scoreupdate(score);
 	setcolor(7, 0);
 	plane(x, y);
 	do {
@@ -239,28 +247,24 @@ int main()
 				bulletx[4] = x + 7;
 				bullety[4] = y + 1;
 			}
-
-
 			fflush(stdin);
 		}
 
-		/*if (cursor(x + 8, y + 1) == '<')
-		{
-			PlayerHP-=1;
-		}
-		if (cursor(x + 6, y) == '<')
-		{
-			PlayerHP -= 1;
-		}*/
-
 		if (enemy[0].status == 0)
 		{
-			//enemy[0].status == 1;
 			enemy[0].x = RandomX();
 			enemy[0].y = RandomY();
 			draw_enemy(enemy[0].x, enemy[0].y);
 			enemy[0].status = 1;
 		}
+		if (enemy[1].status == 0)
+		{
+			enemy[1].x = RandomX();
+			enemy[1].y = RandomY();
+			draw_enemy(enemy[1].x, enemy[1].y);
+			enemy[1].status = 1;
+		}
+
 
 		if (enemy[0].status == 1)
 		{
@@ -283,11 +287,63 @@ int main()
 				enemy[0].status = 0;
 				PlayerHP -= 1;
 			}
+			else if (cursor(enemy[0].x - 2, enemy[0].y) == '^')
+			{
+				clear_enemy(enemy[0].x, enemy[0].y);
+				enemy[0].status = 0;
+				PlayerHP -= 1;
+			}
+			else if (cursor(enemy[0].x - 2, enemy[0].y) == 'v')
+			{
+				clear_enemy(enemy[0].x, enemy[0].y);
+				enemy[0].status = 0;
+				PlayerHP -= 1;
+			}
 			else 
 			{
 				draw_enemy(--enemy[0].x, enemy[0].y);
 			}
 			
+		}
+
+		if (enemy[1].status == 1)
+		{
+			clear_enemy(enemy[1].x, enemy[1].y);
+			if (cursor(enemy[1].x - 2, enemy[1].y) == '>')
+			{
+				Beep(400, 50);
+				clear_enemy(enemy[1].x, enemy[1].y);
+				enemy[1].status = 0;
+				//clear_bullet(enemy[0].x - 1, enemy[0].y);
+			}
+			else if (cursor(enemy[1].x - 2, enemy[1].y) == '*')
+			{
+				clear_enemy(enemy[1].x, enemy[1].y);
+				enemy[1].status = 0;
+			}
+			else if (cursor(enemy[1].x - 2, enemy[1].y) == 'D')
+			{
+				clear_enemy(enemy[1].x, enemy[1].y);
+				enemy[1].status = 0;
+				PlayerHP -= 1;
+			}
+			else if (cursor(enemy[1].x - 2, enemy[1].y) == '^')
+			{
+				clear_enemy(enemy[1].x, enemy[1].y);
+				enemy[1].status = 0;
+				PlayerHP -= 1;
+			}
+			else if (cursor(enemy[1].x - 2, enemy[1].y) == 'v')
+			{
+				clear_enemy(enemy[1].x, enemy[1].y);
+				enemy[1].status = 0;
+				PlayerHP -= 1;
+			}
+			else
+			{
+				draw_enemy(--enemy[1].x, enemy[1].y);
+			}
+
 		}
 
 
@@ -299,8 +355,9 @@ int main()
 			{
 				bulletStatus[0] = 0;
 			}
-			else if (cursor(bulletx[0]+3, bullety[0]) == '<')
+			else if (cursor(bulletx[0]+3, bullety[0]) == '*')
 			{
+				clear_bullet(bulletx[0], bullety[0], 0);
 				bulletStatus[0] = 0;
 
 			}
@@ -385,8 +442,28 @@ int main()
 			OldPlayerHP = PlayerHP;
 
 		}
+
+		if (score != oldscore)
+		{
+			scoreupdate(score);
+			oldscore = score;
+		}
+
+		if (PlayerHP == 0)
+		{
+			bulletStatus[0] = 0;
+			bulletStatus[1] = 0;
+			bulletStatus[2] = 0;
+			bulletStatus[3] = 0;
+			bulletStatus[4] = 0;
+			system("cls");
+			//printf("You noob");
+				
+		}
 		Sleep(100);
 	} while (ch != 'x');
+	printf("You noob");
+	
 	return 0;
 
 
