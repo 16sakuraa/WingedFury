@@ -41,8 +41,10 @@ void gotoxy(int x, int y)
 int PlayerStats()
 {
 	char name[100];
-	printf("You noob");
-	scanf("Your name here : %s", name);
+	printf("You did great , pilot !\n");
+	Sleep(1000);
+	printf("The world will known you as : ");
+	scanf("%s", name);
 	return 0;
 }
 
@@ -242,7 +244,7 @@ int main()
 	plane(x, y);
 	do {
 		setcolor(7, 0);
-		if (_kbhit() && gameState == 1) 
+		if (_kbhit()) 
 		{
 			ch = _getch();
 			if (ch == 'a' && cursor(x - 1, y) != '*') { plane(--x, y); }
@@ -287,14 +289,14 @@ int main()
 			fflush(stdin);
 		}
 
-		if (enemy[0].status == 0 && gameState == 1)
+		if (enemy[0].status == 0)
 		{
 			enemy[0].x = RandomX();
 			enemy[0].y = RandomY();
 			draw_enemy(enemy[0].x, enemy[0].y);
 			enemy[0].status = 1;
 		}
-		if (enemy[1].status == 0 && gameState == 1)
+		if (enemy[1].status == 0)
 		{
 			enemy[1].x = RandomX();
 			enemy[1].y = RandomY();
