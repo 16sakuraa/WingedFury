@@ -219,7 +219,7 @@ int RandomY()
 int main()
 {
 	setcursor(0);
-	srand(time(0));
+	srand(time(NULL));
 	struct enemy
 	{
 		int status=0;
