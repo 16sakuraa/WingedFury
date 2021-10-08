@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS 1
 #include<stdio.h>
 #include<windows.h>
 #include<conio.h>
@@ -35,6 +36,14 @@ void gotoxy(int x, int y)
 	COORD c = { x, y };
 	SetConsoleCursorPosition(
 		GetStdHandle(STD_OUTPUT_HANDLE), c);
+}
+
+int PlayerStats()
+{
+	char name[100];
+	printf("You noob");
+	scanf("Your name here : %s", name);
+	return 0;
 }
 
 void plane(int x,int y)
@@ -150,30 +159,57 @@ void scoreupdate(int score)
 
 int RandomX()
 {
-	int x;
+	long int x;
 	x = rand();
-	if (x > 20 && x < 57)
+	/*if (x > 20 && x < 57)
 	{
 		return x;
 	}
 	else
 	{
 		RandomX();
+	}*/
+
+	x = x % 58;
+	if (x > 37)
+	{
+		return x;
 	}
+	else
+	{
+		x += 21;
+		return x;
+	}
+
+	
+	
 }
 
 int RandomY()
 {
-	int y;
+	long int y;
 	y = rand();
-	if (y > 1 && y < 19)
+	/*if (y > 1 && y < 19)
 	{
 		return y;
 	}
 	else
 	{
-		RandomY();
+		
+	}*/
+	y = y % 20;
+	if (y == 19)
+	{
+		return y;
 	}
+	else
+	{
+		y += 1;
+		return y;
+	}
+	
+	
+
 }
 
 
@@ -181,17 +217,18 @@ int RandomY()
 int main()
 {
 	setcursor(0);
-	srand(time(NULL));
+	srand(time(0));
 	struct enemy
 	{
 		int status=0;
-		int x=0;
-		int y=0;
+		long int x=0;
+		long int y=0;
 		int hp = 2;
 	};enemy enemy[3];
 	char ch = ' ';
-	int x = 12, y = 10;
-	int bulletx[5], bullety[5];
+	int x = 12, y = 10 , gameState = 1;
+	//char name[100];
+	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
 	int PlayerHP = 3, OldPlayerHP = 3 , score=0 , oldscore=0;
 	for (int i = 0; i <= 4; i++)
@@ -205,7 +242,7 @@ int main()
 	plane(x, y);
 	do {
 		setcolor(7, 0);
-		if (_kbhit()) 
+		if (_kbhit() && gameState == 1) 
 		{
 			ch = _getch();
 			if (ch == 'a' && cursor(x - 1, y) != '*') { plane(--x, y); }
@@ -250,14 +287,14 @@ int main()
 			fflush(stdin);
 		}
 
-		if (enemy[0].status == 0)
+		if (enemy[0].status == 0 && gameState == 1)
 		{
 			enemy[0].x = RandomX();
 			enemy[0].y = RandomY();
 			draw_enemy(enemy[0].x, enemy[0].y);
 			enemy[0].status = 1;
 		}
-		if (enemy[1].status == 0)
+		if (enemy[1].status == 0 && gameState == 1)
 		{
 			enemy[1].x = RandomX();
 			enemy[1].y = RandomY();
@@ -274,14 +311,14 @@ int main()
 				Beep(400, 50);
 				clear_enemy(enemy[0].x, enemy[0].y);
 				enemy[0].status = 0;
-				//clear_bullet(enemy[0].x - 1, enemy[0].y);
+				score += 100;
 			}
 			else if (cursor(enemy[0].x - 2, enemy[0].y) == '*')
 			{
 				clear_enemy(enemy[0].x, enemy[0].y);
 				enemy[0].status = 0;
 			}
-			else if (cursor(enemy[0].x - 2, enemy[0].y) == 'D')
+			else if (cursor(enemy[0].x - 2, enemy[0].y) == 'D' || cursor(enemy[0].x - 2, enemy[0].y) == '=')
 			{
 				clear_enemy(enemy[0].x, enemy[0].y);
 				enemy[0].status = 0;
@@ -314,14 +351,14 @@ int main()
 				Beep(400, 50);
 				clear_enemy(enemy[1].x, enemy[1].y);
 				enemy[1].status = 0;
-				//clear_bullet(enemy[0].x - 1, enemy[0].y);
+				score += 100;
 			}
 			else if (cursor(enemy[1].x - 2, enemy[1].y) == '*')
 			{
 				clear_enemy(enemy[1].x, enemy[1].y);
 				enemy[1].status = 0;
 			}
-			else if (cursor(enemy[1].x - 2, enemy[1].y) == 'D')
+			else if (cursor(enemy[1].x - 2, enemy[1].y) == 'D' || cursor(enemy[0].x - 2, enemy[0].y) == '=')
 			{
 				clear_enemy(enemy[1].x, enemy[1].y);
 				enemy[1].status = 0;
@@ -451,18 +488,12 @@ int main()
 
 		if (PlayerHP == 0)
 		{
-			bulletStatus[0] = 0;
-			bulletStatus[1] = 0;
-			bulletStatus[2] = 0;
-			bulletStatus[3] = 0;
-			bulletStatus[4] = 0;
-			system("cls");
-			//printf("You noob");
-				
+			break;
 		}
 		Sleep(100);
 	} while (ch != 'x');
-	printf("You noob");
+	system("cls");
+	PlayerStats();
 	
 	return 0;
 
