@@ -74,7 +74,7 @@ int PlayerStats(int pscore, int lv)
 
 	//for (i = 0; i <= 4; i++)
 	//{
-		printf("Enter Player Name : ", i + 1); scanf("%s", p[i].name);
+		printf("\nEnter Player Name : ", i + 1); scanf("%s", p[i].name);
 		//printf("Level : "); scanf("%d", &p[i].lv);
 		//printf("Score : "); scanf("%d", &p[i].score);
 		fwrite(&p, sizeof(struct player), 1, fptr);
@@ -284,7 +284,7 @@ void healthpack()
 {
 	int x, y, drop;
 	drop = rand() % 100;
-	if (drop >= 80)
+	if (drop >= 90)
 	{
 		x = RandomX();
 		y = RandomY();
@@ -370,7 +370,7 @@ void title()
 	Sleep(a);
 	printf("       ~~--..                             .\' .\'     /_|.      : | | \\\n");
 	Sleep(a);
-	printf("   JRO     /_.\' ~~--..__             .----.\'_.\'      /. . . . . . | |  |\n");
+	printf("           /_.\' ~~--..__             .----.\'_.\'      /. . . . . . | |  |\n");
 	Sleep(a);
 	printf("                      ~~--.._______\'.__.\'  .\'      /____________.\' :  /\n");
 	Sleep(a);
@@ -378,7 +378,7 @@ void title()
 	Sleep(a);
 	printf("                               \'---\'\n");
 	Sleep(600);
-	printf("  __      __.__                          .___ ___________                   \n");
+	printf("   __      __.__                          .___ ___________                   \n");
 	printf("  /  \\    /  \\__| ____    ____   ____   __| _/ \\_   _____/_ _________ ___.__.\n");
 	printf("  \\   \\/\\/   /  |/    \\  / ___\\_/ __ \\ / __ |   |    __)|  |  \\_  __ <   |  |\n");
 	printf("   \\        /|  |   |  \\/ /_/  >  ___// /_/ |   |     \\ |  |  /|  | \\/\\___  |\n");
@@ -391,6 +391,7 @@ void menu()
 	char ch = ' ';
 	int play = 1;
 	title();
+	Sleep(500);
 	gotoxy(15,20);
 	printf("> ");
 
@@ -406,6 +407,7 @@ void menu()
 			ch = _getch();
 			if (ch == 'w' && play != 1)
 			{
+				Beep(900, 40);
 				gotoxy(15, 21);
 				printf("  ");
 				gotoxy(15, 20);
@@ -414,6 +416,7 @@ void menu()
 			}
 			else if (ch == 's' && play == 1)
 			{
+				Beep(900, 40);
 				gotoxy(15, 20);
 				printf("  ");
 				gotoxy(15, 21);
@@ -439,7 +442,24 @@ void menu()
 	}
 }
 
-
+void gameover()
+{
+	int a = 200;
+	setcolor(3, 0);
+	printf("  _______      ___      .___  ___.  _______      ______   ____    ____  _______ .______      \n");
+	Sleep(a);
+	printf(" /  _____|    /   \\     |   \\/   | |   ____|    /  __  \\  \\   \\  /   / |   ____||   _  \\     \n");
+	Sleep(a);
+	printf("|  |  __     /  ^  \\    |  \\  /  | |  |__      |  |  |  |  \\   \\/   /  |  |__   |  |_)  |    \n");
+	Sleep(a);
+	printf("|  | |_ |   /  /_\\  \\   |  |\\/|  | |   __|     |  |  |  |   \\      /   |   __|  |      /     \n");
+	Sleep(a);
+	printf("|  |__| |  /  _____  \\  |  |  |  | |  |____    |  `--\'  |    \\    /    |  |____ |  |\\  \\----.\n");
+	Sleep(a);
+	printf(" \\______| /__/     \\__\\ |__|  |__| |_______|    \\______/      \\__/     |_______|| _| `._____|\n     ");
+	Sleep(500);
+	setcolor(7, 0);
+}
 
 
 int main()
@@ -527,7 +547,7 @@ int main()
 		}
 		if (cursor(x + 8, y+1) == '+')
 		{
-			Beep(900, 50);
+			Beep(650, 50);
 			clearpack(x + 8, y + 1);
 			PlayerHP += 1;
 		}
@@ -808,6 +828,7 @@ int main()
 		Sleep(100);
 	} while (ch != 'x');
 	system("cls");
+	gameover();
 	PlayerStats(score , level);
 	
 	return 0;
