@@ -39,7 +39,7 @@ void gotoxy(int x, int y)
 		GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
 
-int PlayerStats(int pscore)
+int PlayerStats(int pscore, int lv)
 {
 	FILE* fptr;
 	struct player
@@ -50,6 +50,7 @@ int PlayerStats(int pscore)
 	}; player p[5];
 
 	p[0].score = pscore;
+	p[0].lv = lv;
 
 	strcpy(p[1].name, "Nom Carver");
 	p[1].lv = 2;
@@ -73,8 +74,8 @@ int PlayerStats(int pscore)
 
 	//for (i = 0; i <= 4; i++)
 	//{
-		printf("Player %d Name : ", i + 1); scanf("%s", p[i].name);
-		printf("Level : "); scanf("%d", &p[i].lv);
+		printf("Enter Player Name : ", i + 1); scanf("%s", p[i].name);
+		//printf("Level : "); scanf("%d", &p[i].lv);
 		//printf("Score : "); scanf("%d", &p[i].score);
 		fwrite(&p, sizeof(struct player), 1, fptr);
 	//}
@@ -101,6 +102,8 @@ int PlayerStats(int pscore)
 				//i++;
 		}
 	fclose(fptr);
+
+	printf(" Thank you for playing !\n");
 	return 0;
 }
 
@@ -144,7 +147,7 @@ void clear_bullet(int x, int y, int bulletStatus)
 	by[bulletStatus] = y;
 	gotoxy(bx[bulletStatus], by[bulletStatus]);
 	setcolor(7, 0);
-	printf("   ");
+	printf("    ");
 }
 
 void draw_enemy(int x, int y)
@@ -282,9 +285,9 @@ int main()
 		long int x=0;
 		long int y=0;
 		int hp = 2;
-	};enemy enemy[3];
+	};enemy enemy[5];
 	char ch = ' ';
-	int x = 12, y = 10 , gameState = 1;
+	int x = 12, y = 10 , level = 1;
 	//char name[100];
 	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
@@ -494,7 +497,7 @@ int main()
 		{
 
 			clear_bullet(bulletx[0], bullety[0], 0);
-			if (bulletx[0] == 57)
+			if (bulletx[0] == 56)
 			{
 				bulletStatus[0] = 0;
 			}
@@ -513,7 +516,7 @@ int main()
 		if (bulletStatus[1] == 1)
 		{
 			clear_bullet(bulletx[1], bullety[1], 1);
-			if (bulletx[1] == 57)
+			if (bulletx[1] == 56)
 			{
 				bulletStatus[1] = 0;
 			}
@@ -530,7 +533,7 @@ int main()
 		if (bulletStatus[2] == 1)
 		{
 			clear_bullet(bulletx[2], bullety[2], 2);
-			if (bulletx[2] == 57)
+			if (bulletx[2] == 56)
 			{
 				bulletStatus[2] = 0;
 			}
@@ -548,7 +551,7 @@ int main()
 		if (bulletStatus[3] == 1)
 		{
 			clear_bullet(bulletx[3], bullety[3], 3);
-			if (bulletx[3] == 57)
+			if (bulletx[3] == 56)
 			{
 				bulletStatus[3] = 0;
 			}
@@ -564,7 +567,7 @@ int main()
 		if (bulletStatus[4] == 1)
 		{
 			clear_bullet(bulletx[4], bullety[4], 4);
-			if (bulletx[4] == 57)
+			if (bulletx[4] == 56)
 			{
 				bulletStatus[4] = 0;
 			}
@@ -590,6 +593,10 @@ int main()
 		{
 			scoreupdate(score);
 			oldscore = score;
+			if (score % 1000 == 0)
+			{
+				level += 1;
+			}
 		}
 
 		if (PlayerHP == 0)
@@ -599,7 +606,7 @@ int main()
 		Sleep(100);
 	} while (ch != 'x');
 	system("cls");
-	PlayerStats(score);
+	PlayerStats(score , level);
 	
 	return 0;
 
