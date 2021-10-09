@@ -300,6 +300,83 @@ void clearpack(int x ,int y)
 	printf(" ");
 }
 
+void menu()
+{
+	char ch = ' ';
+	int play = 1;
+	gotoxy(8, 10);
+	printf("> ");
+	while (1)
+	{
+		//print game name
+		
+		gotoxy(10, 10);
+		printf("Play");
+		gotoxy(10, 11);
+		printf("Score");
+		gotoxy(10, 12);
+		if (_kbhit())
+		{
+			ch = _getch();
+			if (ch == 'w' && play != 1)
+			{
+				gotoxy(8, 11);
+				printf("  ");
+				gotoxy(8, 10);
+				printf("> ");
+				play = 1;
+			}
+			else if (ch == 's' && play == 1)
+			{
+				gotoxy(8, 10);
+				printf("  ");
+				gotoxy(8, 11);
+				printf("> ");
+				play = 0;
+			}
+			else if (ch == ' ' && play == 1)
+			{
+				system("cls");
+				break;
+			}
+			else if (ch == ' ' && play == 0)
+			{
+				system("cls");
+				FILE* fptr;
+				struct player
+				{
+					char name[20];
+					int lv;
+					int score;
+				}; player p[5];
+				int i = 0;
+				printf("\n-------Score Summary-------\n");
+
+
+				fptr = fopen("PlayerStatsnew.txt", "r");
+				if (fptr == (FILE*)NULL)
+					printf("Cannot open file\n");
+				else
+					for (i = 0; i <= 4; i++)
+						//while (fread(&p,sizeof(struct player),5,fptr)!=0)
+					{
+						/*   for(i=0;i<=2;i++)
+						   {*/
+						printf("Player %d Name : %s\n", i + 1, p[i].name);
+						printf("Level : %d\n", p[i].lv);
+						printf("Score : %d\n", p[i].score);
+						printf("---------------------------\n");
+						// }
+							//i++;
+					}
+				fclose(fptr);
+
+			}
+
+		}
+	}
+}
+
 
 
 int main()
@@ -332,6 +409,7 @@ int main()
 	{
 		bulletStatus[i] = 0;
 	}
+	menu();
 	map_generate();
 	playerhealth(PlayerHP);
 	setcolor(7, 0);
