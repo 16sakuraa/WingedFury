@@ -214,7 +214,7 @@ void playerhealth(int php)
 
 void scoreupdate(int score)
 {
-	gotoxy(25, 23);
+	gotoxy(23, 23);
 	printf("Score : %d", score);
 }
 
@@ -304,9 +304,9 @@ int main()
 	}
 	map_generate();
 	playerhealth(PlayerHP);
+	setcolor(7, 0);
 	scoreupdate(score);
 	levelupdate(level);
-	setcolor(7, 0);
 	plane(x, y);
 	do {
 		setcolor(7, 0);
