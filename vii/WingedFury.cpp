@@ -300,82 +300,145 @@ void clearpack(int x ,int y)
 	printf(" ");
 }
 
+void seescore()
+{
+	char ch = ' ';
+	FILE* fptr;
+	struct player
+	{
+		char name[20];
+		int lv;
+		int score;
+	}; player p[5];
+	int i = 0;
+	printf("\n-------Score Summary-------\n");
+
+
+	fptr = fopen("PlayerStatsnew.txt", "r");
+	if (fptr == (FILE*)NULL)
+		printf("Cannot open file\n");
+	else
+		for (i = 0; i <= 4; i++)
+			//while (fread(&p,sizeof(struct player),5,fptr)!=0)
+		{
+			/*   for(i=0;i<=2;i++)
+			   {*/
+			printf("Player %d Name : %s\n", i + 1, p[i].name);
+			printf("Level : %d\n", p[i].lv);
+			printf("Score : %d\n", p[i].score);
+			printf("---------------------------\n");
+			// }
+				//i++;
+		}
+	fclose(fptr);
+
+	while (1)
+	{
+		gotoxy(40, 10);
+		printf("> Back");
+		if (_kbhit())
+		{
+			ch = _getch();
+			if (ch == ' ')
+			{
+				system("cls");
+				break;
+			}
+
+		}
+	}
+}
+
+void title()
+{
+	int a = 200;
+	printf("         .----.                                                  .\'.\n");
+	Sleep(a);
+	printf("        |  /   \'                                                 |  \'\n");
+	Sleep(a);
+	printf("        |  |    \'                                                \'  :\n");
+	Sleep(a);
+	printf("        |334916  \'             .-~~~-.               .-~-.        \\ |\n");
+	Sleep(a);
+	printf("        |  |      \'          .\\\\   .//\'._+_________.\'.\'  /_________\\|\n");
+	Sleep(a);
+	printf("        |  |___ ...\'.__..--~~ .\\\\__//_.-     . . .\' .\'  /      :  |  `.\n");
+	Sleep(a);
+	printf("        |.-\"  .\'  /                          . .\' .\'   /.      :_.|__.\'\n");
+	Sleep(a);
+	printf("       <    .\'___/                           .\' .\'    /|.      : .\'|\\\n");
+	Sleep(a);
+	printf("       ~~--..                             .\' .\'     /_|.      : | | \\\n");
+	Sleep(a);
+	printf("   JRO     /_.\' ~~--..__             .----.\'_.\'      /. . . . . . | |  |\n");
+	Sleep(a);
+	printf("                      ~~--.._______\'.__.\'  .\'      /____________.\' :  /\n");
+	Sleep(a);
+	printf("                               .\'   .\'\'.._\'______.\'                \'-\'\n");
+	Sleep(a);
+	printf("                               \'---\'\n");
+	Sleep(600);
+	printf("  __      __.__                          .___ ___________                   \n");
+	printf("  /  \\    /  \\__| ____    ____   ____   __| _/ \\_   _____/_ _________ ___.__.\n");
+	printf("  \\   \\/\\/   /  |/    \\  / ___\\_/ __ \\ / __ |   |    __)|  |  \\_  __ <   |  |\n");
+	printf("   \\        /|  |   |  \\/ /_/  >  ___// /_/ |   |     \\ |  |  /|  | \\/\\___  |\n");
+	printf("    \\__/\\  / |__|___|  /\\___  / \\___  >____ |   \\___  / |____/ |__|   / ____|\n");
+	printf("         \\/          \\//_____/      \\/     \\/       \\/                \\/     ");
+}
+
 void menu()
 {
 	char ch = ' ';
 	int play = 1;
-	gotoxy(8, 10);
+	title();
+	gotoxy(15,20);
 	printf("> ");
+
 	while (1)
 	{
-		//print game name
-		
-		gotoxy(10, 10);
+		gotoxy(17, 20);
 		printf("Play");
-		gotoxy(10, 11);
+		gotoxy(17, 21);
 		printf("Score");
-		gotoxy(10, 12);
+		//gotoxy(10, 12);
 		if (_kbhit())
 		{
 			ch = _getch();
 			if (ch == 'w' && play != 1)
 			{
-				gotoxy(8, 11);
+				gotoxy(15, 21);
 				printf("  ");
-				gotoxy(8, 10);
-				printf("> ");
+				gotoxy(15, 20);
+				printf(">");
 				play = 1;
 			}
 			else if (ch == 's' && play == 1)
 			{
-				gotoxy(8, 10);
+				gotoxy(15, 20);
 				printf("  ");
-				gotoxy(8, 11);
-				printf("> ");
+				gotoxy(15, 21);
+				printf(">");
 				play = 0;
 			}
 			else if (ch == ' ' && play == 1)
 			{
 				system("cls");
 				break;
+
 			}
 			else if (ch == ' ' && play == 0)
 			{
 				system("cls");
-				FILE* fptr;
-				struct player
-				{
-					char name[20];
-					int lv;
-					int score;
-				}; player p[5];
-				int i = 0;
-				printf("\n-------Score Summary-------\n");
+				seescore();
+				title();
 
-
-				fptr = fopen("PlayerStatsnew.txt", "r");
-				if (fptr == (FILE*)NULL)
-					printf("Cannot open file\n");
-				else
-					for (i = 0; i <= 4; i++)
-						//while (fread(&p,sizeof(struct player),5,fptr)!=0)
-					{
-						/*   for(i=0;i<=2;i++)
-						   {*/
-						printf("Player %d Name : %s\n", i + 1, p[i].name);
-						printf("Level : %d\n", p[i].lv);
-						printf("Score : %d\n", p[i].score);
-						printf("---------------------------\n");
-						// }
-							//i++;
-					}
-				fclose(fptr);
 
 			}
 
 		}
 	}
 }
+
 
 
 
