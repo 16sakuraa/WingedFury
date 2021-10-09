@@ -376,7 +376,7 @@ void title()
 	Sleep(a);
 	printf("        |  |    \'                                                \'  :\n");
 	Sleep(a);
-	printf("        |334916  \'             .-~~~-.               .-~-.        \\ |\n");
+	printf("        |010860  \'             .-~~~-.               .-~-.        \\ |\n");
 	Sleep(a);
 	printf("        |  |      \'          .\\\\   .//\'._+_________.\'.\'  /_________\\|\n");
 	Sleep(a);
@@ -425,7 +425,8 @@ void menu()
 			ch = _getch();
 			if (ch == 'w' && play != 1)
 			{
-				Beep(900, 40);
+				Beep(900, 50);
+				Beep(700, 50);
 				gotoxy(15, 21);
 				printf("  ");
 				gotoxy(15, 20);
@@ -434,7 +435,8 @@ void menu()
 			}
 			else if (ch == 's' && play == 1)
 			{
-				Beep(900, 40);
+				Beep(900, 50);
+				Beep(700, 50);
 				gotoxy(15, 20);
 				printf("  ");
 				gotoxy(15, 21);
@@ -566,7 +568,8 @@ int main()
 		{
 			if (PlayerHP < 5)
 			{
-				Beep(650, 50);
+				Beep(800, 25);
+				Beep(650, 25);
 				clearpack(x + 8, y + 1);
 				PlayerHP += 1;
 			}
