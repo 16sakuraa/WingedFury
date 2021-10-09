@@ -84,16 +84,16 @@ int PlayerStats(int pscore, int lv)
 		p[1].score = 3200;
 
 		strcpy(p[2].name, "CT-7567");
-		p[2].lv = 99;
-		p[2].score = 42069;
+		p[2].lv = 69;
+		p[2].score = 69420;
 
 		strcpy(p[3].name, "James Bond");
 		p[3].lv = 700;
-		p[3].score = 777;
+		p[3].score = 77777;
 
 		strcpy(p[4].name, "Snoopy");
 		p[4].lv = 5;
-		p[4].score = 2000;
+		p[4].score = 5300;
 		fwrite(&p, sizeof(struct player), 5, fptr);
 	//}
 	fclose(fptr);
@@ -256,13 +256,13 @@ int RandomX()
 	}*/
 
 	x = x % 58;
-	if (x > 37)
+	if (x > 32)
 	{
 		return x;
 	}
 	else
 	{
-		x += 21;
+		x += 25;
 		return x;
 	}
 
