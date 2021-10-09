@@ -103,7 +103,7 @@ int PlayerStats(int pscore, int lv)
 		}
 	fclose(fptr);
 
-	printf(" Thank you for playing !\n");
+	printf(" Thank you for playing my game!\n");
 	return 0;
 }
 
@@ -272,7 +272,7 @@ int RandomY()
 	}
 	else
 	{
-		y += 1;
+		y += 2;
 		return y;
 	}
 	
