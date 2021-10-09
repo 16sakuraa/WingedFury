@@ -3,6 +3,7 @@
 #include<windows.h>
 #include<conio.h>
 #include<time.h>
+#include<string.h>
 
 void setcolor(int fg, int bg)
 {
@@ -38,13 +39,68 @@ void gotoxy(int x, int y)
 		GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
 
-int PlayerStats()
+int PlayerStats(int pscore)
 {
-	char name[100];
-	printf("You did great , pilot !\n");
-	Sleep(1000);
-	printf("The world will known you as : ");
-	scanf("%s", name);
+	FILE* fptr;
+	struct player
+	{
+		char name[20];
+		int lv;
+		int score;
+	}; player p[5];
+
+	p[0].score = pscore;
+
+	strcpy(p[1].name, "Nom Carver");
+	p[1].lv = 2;
+	p[1].score = 3200;
+
+	strcpy(p[2].name, "CT-7567");
+	p[2].lv = 99;
+	p[2].score = 42069;
+
+	strcpy(p[3].name, "James Bond");
+	p[3].lv = 700;
+	p[3].score = 777;
+
+	strcpy(p[4].name, "Snoopy");
+	p[4].lv = 5;
+	p[4].score = 2000;
+
+	int i = 0;
+	setcolor(7, 0);
+	fptr = fopen("PlayerStatsnew.txt", "w");
+
+	//for (i = 0; i <= 4; i++)
+	//{
+		printf("Player %d Name : ", i + 1); scanf("%s", p[i].name);
+		printf("Level : "); scanf("%d", &p[i].lv);
+		//printf("Score : "); scanf("%d", &p[i].score);
+		fwrite(&p, sizeof(struct player), 1, fptr);
+	//}
+	fclose(fptr);
+
+	i = 0;
+	printf("\n-------Score Summary-------\n");
+
+
+	fptr = fopen("PlayerStatsnew.txt", "r");
+	if (fptr == (FILE*)NULL)
+		printf("Cannot open file\n");
+	else
+		for (i = 0; i <= 4; i++)
+			//while (fread(&p,sizeof(struct player),5,fptr)!=0)
+		{
+			/*   for(i=0;i<=2;i++)
+			   {*/
+			printf("Player %d Name : %s\n", i + 1, p[i].name);
+			printf("Level : %d\n", p[i].lv);
+			printf("Score : %d\n", p[i].score);
+			printf("---------------------------\n");
+			// }
+				//i++;
+		}
+	fclose(fptr);
 	return 0;
 }
 
@@ -495,7 +551,7 @@ int main()
 		Sleep(100);
 	} while (ch != 'x');
 	system("cls");
-	PlayerStats();
+	PlayerStats(score);
 	
 	return 0;
 
