@@ -224,6 +224,7 @@ void levelupdate(int lv)
 	printf("Level : %d", lv);
 }
 
+
 int RandomX()
 {
 	long int x;
@@ -279,12 +280,34 @@ int RandomY()
 
 }
 
+void healthpack()
+{
+	int x, y, drop;
+	drop = rand() % 100;
+	if (drop >= 80)
+	{
+		x = RandomX();
+		y = RandomY();
+		gotoxy(x, y);
+		printf("+");
+	}
+
+
+}
+void clearpack(int x ,int y)
+{
+	gotoxy(x, y);
+	printf(" ");
+}
+
 
 
 int main()
 {
 	setcursor(0);
 	srand(time(NULL));
+
+
 	struct enemy
 	{
 		int status=0;
@@ -292,8 +315,15 @@ int main()
 		long int y=0;
 		int hp = 2;
 	};enemy enemy[5];
+
+	struct repair
+	{
+		int x = 0;
+		int y = 0;
+	}; repair rep[1];
+
 	char ch = ' ';
-	int x = 12, y = 10 , level = 1 , oldlevel = 1;
+	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0;
 	//char name[100];
 	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
@@ -354,6 +384,12 @@ int main()
 			}
 			fflush(stdin);
 		}
+		if (cursor(x + 8, y+1) == '+')
+		{
+			Beep(900, 50);
+			clearpack(x + 8, y + 1);
+			PlayerHP += 1;
+		}
 
 		if (enemy[0].status == 0)
 		{
@@ -385,6 +421,7 @@ int main()
 			if (cursor(enemy[0].x - 2, enemy[0].y) == '>')
 			{
 				Beep(400, 50);
+				healthpack();
 				clear_enemy(enemy[0].x, enemy[0].y);
 				enemy[0].status = 0;
 				score += 100;
@@ -425,6 +462,7 @@ int main()
 			if (cursor(enemy[1].x - 2, enemy[1].y) == '>')
 			{
 				Beep(400, 50);
+				healthpack();
 				clear_enemy(enemy[1].x, enemy[1].y);
 				enemy[1].status = 0;
 				score += 100;
@@ -465,6 +503,7 @@ int main()
 			if (cursor(enemy[2].x - 2, enemy[2].y) == '>')
 			{
 				Beep(400, 50);
+				healthpack();
 				clear_enemy(enemy[2].x, enemy[2].y);
 				enemy[2].status = 0;
 				score += 100;
@@ -508,6 +547,12 @@ int main()
 			{
 				bulletStatus[0] = 0;
 			}
+		/*	else if (cursor(bulletx[0] + 5, bullety[0]) == 'M')
+			{
+				clear_bullet(bulletx[0], bullety[0], 0);
+				bulletStatus[0] = 0;
+
+			}*/
 			else if (cursor(bulletx[0]+3, bullety[0]) == '*')
 			{
 				clear_bullet(bulletx[0], bullety[0], 0);
@@ -527,7 +572,7 @@ int main()
 			{
 				bulletStatus[1] = 0;
 			}
-			else if (cursor(bulletx[1]+3, bullety[1] - 1) == '*')
+			else if (cursor(bulletx[1] + 3, bullety[1] - 1) == '*')
 			{
 
 				bulletStatus[1] = 0;
@@ -589,7 +634,7 @@ int main()
 			}
 		}
 
-		if (PlayerHP < OldPlayerHP)
+		if (PlayerHP != OldPlayerHP)
 		{
 			playerhealth(PlayerHP);
 			OldPlayerHP = PlayerHP;
