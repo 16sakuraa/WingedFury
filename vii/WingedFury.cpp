@@ -660,7 +660,7 @@ int main()
 		}
 		
 
-		if (PlayerHP == 0)
+		if (PlayerHP <= 0)
 		{
 			break;
 		}
