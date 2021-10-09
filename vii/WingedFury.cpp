@@ -214,8 +214,14 @@ void playerhealth(int php)
 
 void scoreupdate(int score)
 {
-	gotoxy(10, 23);
+	gotoxy(25, 23);
 	printf("Score : %d", score);
+}
+
+void levelupdate(int lv)
+{
+	gotoxy(10, 23);
+	printf("Level : %d", lv);
 }
 
 int RandomX()
@@ -287,7 +293,7 @@ int main()
 		int hp = 2;
 	};enemy enemy[5];
 	char ch = ' ';
-	int x = 12, y = 10 , level = 1;
+	int x = 12, y = 10 , level = 1 , oldlevel = 1;
 	//char name[100];
 	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
@@ -299,6 +305,7 @@ int main()
 	map_generate();
 	playerhealth(PlayerHP);
 	scoreupdate(score);
+	levelupdate(level);
 	setcolor(7, 0);
 	plane(x, y);
 	do {
@@ -597,7 +604,16 @@ int main()
 			{
 				level += 1;
 			}
+			
 		}
+
+		if (level != oldlevel)
+		{
+			levelupdate(level);
+			oldlevel = level;
+
+		}
+		
 
 		if (PlayerHP == 0)
 		{
