@@ -69,7 +69,6 @@ int PlayerStats(int pscore, int lv)
 	p[4].score = 2000;*/
 	
 	int i = 0;
-	setcolor(7, 0);
 	fptr = fopen("PlayerStatsnew.txt", "w");
 
 	//for (i = 0; i <= 4; i++)
@@ -99,6 +98,7 @@ int PlayerStats(int pscore, int lv)
 	fclose(fptr);
 
 	i = 0;
+	setcolor(14, 0);
 	printf("\n-------Score Summary-------\n");
 
 
@@ -119,8 +119,9 @@ int PlayerStats(int pscore, int lv)
 				//i++;
 		}
 	fclose(fptr);
-
+	setcolor(11, 0);
 	printf(" Thank you for playing my game!\n");
+	setcolor(7, 0);
 	return 0;
 }
 
@@ -130,7 +131,7 @@ void plane(int x,int y)
 	gotoxy(x, y);
 	printf(" \\  ^ ");
 	gotoxy(x, y+=1);
-	printf(" ---O=D ");
+	printf(" =>=O=D ");
 	gotoxy(x, y+=1);
 	printf(" /  v ");
 	setcolor(7, 0);
@@ -157,7 +158,7 @@ void draw_bullet(int x, int y, int bulletStatus)
 	by[bulletStatus] = y;
 	setcolor(14, 0);
 	gotoxy(bx[bulletStatus], by[bulletStatus]);
-	printf(" ->>");
+	printf(" >>");
 	setcolor(7, 0);
 }
 
@@ -418,9 +419,9 @@ void title()
 	Sleep(a);
 	printf("       <    .\'___/                           .\' .\'    /|.      : .\'|\\\n");
 	Sleep(a);
-	printf("       ~~--..                             .\' .\'     /_|.      : | | \\\n");
+	printf("        ~~--..                             .\' .\'     /_|.      : | | \\\n");
 	Sleep(a);
-	printf("           /_.\' ~~--..__             .----.\'_.\'      /. . . . . . | |  |\n");
+	printf("          /_.\' ~~--..__             .----.\'_.\'      /. . . . . . | |  |\n");
 	Sleep(a);
 	printf("                      ~~--.._______\'.__.\'  .\'      /____________.\' :  /\n");
 	Sleep(a);
@@ -891,6 +892,72 @@ int main()
 
 		}
 
+		if (wmy[2].status == 0 && level >= 5)
+		{
+			wmy[2].x = RandomX();
+			wmy[2].y = 19;
+			draw_w(wmy[2].x, wmy[2].y);
+			wmy[2].status = 1;
+
+		}
+
+		if (wmy[2].status == 1)
+		{
+			wmy[2].walk += 1;
+			if (wmy[2].walk % 4 == 0)
+			{
+				clear_enemy(wmy[2].x, wmy[2].y);
+				if (cursor(wmy[2].x, wmy[2].y - 2) == '*')
+				{
+					clear_enemy(wmy[2].x, wmy[2].y);
+					wmy[2].status = 0;
+				}
+				else if (cursor(wmy[2].x, wmy[2].y - 1) == '>' || cursor(wmy[2].x, wmy[2].y - 1) == '-' || cursor(wmy[2].x + 1, wmy[2].y) == '>')
+				{
+					Beep(480, 50);
+					clear_enemy(wmy[2].x, wmy[2].y);
+					wmy[2].status = 0;
+					score += 200;
+				}
+				else if (wmy[2].y == y + 1 && wb[2].status == 0)
+				{
+					wb[2].x = wmy[2].x - 1;
+					wb[2].y = wmy[2].y;
+					wb[2].status = 1;
+					draw_w(wmy[2].x, --wmy[2].y);
+				}
+				else
+				{
+					draw_w(wmy[2].x, --wmy[2].y);
+				}
+
+
+			}
+
+
+		}
+
+		if (wb[2].status == 1)
+		{
+			clear_enemy(wb[2].x, wb[2].y);
+			if (wb[2].x == 2)
+			{
+				clear_enemy(wb[2].x, wb[2].y);
+				wb[2].status = 0;
+			}
+			else if (cursor(wb[2].x - 1, wb[2].y) == 'D' || cursor(wb[2].x - 1, wb[2].y) == '^' || cursor(wb[2].x - 1, wb[2].y) == 'v')
+			{
+				clear_enemy(wb[2].x, wb[2].y);
+				PlayerHP -= 1;
+				wb[2].status = 0;
+			}
+			else
+			{
+				wbullet(--wb[2].x, wb[2].y);
+			}
+
+		}
+
 
 
 		
@@ -1339,7 +1406,7 @@ int main()
 			break;
 		}
 
-	/*	if (level == 2 && bossstate == 1)
+		/*if (level == 2 && bossstate == 1)
 		{
 			squid();
 			bossstate = 0;
