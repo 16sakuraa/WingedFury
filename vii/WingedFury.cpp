@@ -619,7 +619,6 @@ int main()
 		int status = 0;
 		int x = 0;
 		int y = 0;
-		//int hp = 2;
 	}; wb wb[5];
 
 	char ch = ' ';
@@ -628,7 +627,6 @@ int main()
 	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
 	int PlayerHP = 3, OldPlayerHP = 3 , score=0 , oldscore=0;
-	//int walk = 0;
 	for (int i = 0; i <= 4; i++)
 	{
 		bulletStatus[i] = 0;
