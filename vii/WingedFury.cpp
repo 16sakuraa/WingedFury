@@ -179,6 +179,22 @@ void draw_enemy(int x, int y)
 	setcolor(7, 0);
 }
 
+void draw_w(int x, int y)
+{
+	setcolor(4, 0);
+	gotoxy(x, y);
+	printf("W");
+	setcolor(7, 0);
+}
+
+void wbullet(int x, int y)
+{
+	gotoxy(x, y);
+	printf("-");
+}
+
+
+
 void clear_enemy(int x, int y)
 {
 	gotoxy(x, y);
@@ -567,6 +583,12 @@ void bosshpupdate(int hp)
 	printf("Boss HP : %d", hp);
 }
 
+void delay(int ms)
+{
+	clock_t timeDelay = ms + clock();
+	while (timeDelay > clock());
+}
+
 
 int main()
 {
@@ -582,11 +604,21 @@ int main()
 		int hp = 2;
 	};enemy enemy[10];
 
-	struct repair
+	struct wmy
 	{
+		int status = 0;
 		int x = 0;
 		int y = 0;
-	}; repair rep[1];
+		int hp = 2;
+	}; wmy wmy[5];
+
+	struct wb
+	{
+		int status = 0;
+		int x = 0;
+		int y = 0;
+		//int hp = 2;
+	}; wb wb[5];
 
 	char ch = ' ';
 	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0;
@@ -724,13 +756,68 @@ int main()
 			enemy[6].status = 1;
 		}
 
-	/*	if (enemy[level + 1].status == 0 && level >= 5)
+		if (wmy[0].status == 0 && level >= 3)
 		{
-			enemy[level + 1].x = RandomX();
-			enemy[level + 1].y = RandomY();
-			draw_enemy(enemy[level + 1].x, enemy[level + 1].y);
-			enemy[level + 1].status = 1;
-		} */
+			wmy[0].x = RandomX();
+			wmy[0].y = 19;
+			draw_w(wmy[0].x, wmy[0].y);
+			wmy[0].status = 1;
+
+		}
+
+		if (wmy[0].status == 1)
+		{
+
+			clear_enemy(wmy[0].x, wmy[0].y);
+			if (cursor(wmy[0].x, wmy[0].y-2) == '*')
+			{
+				clear_enemy(wmy[0].x, wmy[0].y);
+				wmy[0].status = 0;
+			}
+			else if (cursor(wmy[0].x, wmy[0].y - 1) == '>' || cursor(wmy[0].x, wmy[0].y - 1) == '-')
+			{
+				Beep(480, 50);
+				clear_enemy(wmy[0].x, wmy[0].y);
+				wmy[0].status = 0;
+				score += 200;
+			}
+			else if (wmy[0].y == y+1 && wb[0].status == 0)
+			{
+				wb[0].x = wmy[0].x-1;
+				wb[0].y = wmy[0].y;
+				wb[0].status = 1;
+			}
+			else
+			{
+				draw_w(wmy[0].x, --wmy[0].y);
+			}
+
+			
+		}
+
+		if (wb[0].status == 1)
+		{
+			clear_enemy(wb[0].x, wb[0].y);
+			if (wb[0].x == 2)
+			{
+				clear_enemy(wb[0].x, wb[0].y);
+				wb[0].status = 0;
+			}
+			else if (cursor(wb[0].x - 1, wb[0].y) == 'D' || cursor(wb[0].x - 1, wb[0].y) == '^' || cursor(wb[0].x - 1, wb[0].y) == 'v')
+			{
+				clear_enemy(wb[0].x, wb[0].y);
+				PlayerHP -= 1;
+				wb[0].status = 0;
+			}
+			else
+			{
+				wbullet(--wb[0].x, wb[0].y);
+			}
+
+		}
+
+
+
 
 
 		
