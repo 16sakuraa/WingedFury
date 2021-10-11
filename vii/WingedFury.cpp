@@ -126,12 +126,14 @@ int PlayerStats(int pscore, int lv)
 
 void plane(int x,int y)
 {
+	setcolor(3, 0);
 	gotoxy(x, y);
 	printf(" \\  ^ ");
 	gotoxy(x, y+=1);
 	printf(" ---O=D ");
 	gotoxy(x, y+=1);
 	printf(" /  v ");
+	setcolor(7, 0);
 }
 
 void clearplane(int x, int y)
@@ -153,8 +155,10 @@ void draw_bullet(int x, int y, int bulletStatus)
 	int bx[6], by[6];
 	bx[bulletStatus] = x;
 	by[bulletStatus] = y;
+	setcolor(14, 0);
 	gotoxy(bx[bulletStatus], by[bulletStatus]);
 	printf(" ->>");
+	setcolor(7, 0);
 }
 
 void clear_bullet(int x, int y, int bulletStatus)
@@ -169,8 +173,10 @@ void clear_bullet(int x, int y, int bulletStatus)
 
 void draw_enemy(int x, int y)
 {
+	setcolor(12, 0);
 	gotoxy(x, y);
 	printf("M");
+	setcolor(7, 0);
 }
 
 void clear_enemy(int x, int y)
@@ -305,8 +311,10 @@ void healthpack()
 	{
 		x = RandomX();
 		y = RandomY();
+		setcolor(10, 0);
 		gotoxy(x, y);
 		printf("+");
+		setcolor(7, 0);
 	}
 
 
@@ -370,6 +378,7 @@ void seescore()
 void title()
 {
 	int a = 200;
+	setcolor(3, 0);
 	printf("         .----.                                                  .\'.\n");
 	Sleep(a);
 	printf("        |  /   \'                                                 |  \'\n");
@@ -396,12 +405,14 @@ void title()
 	Sleep(a);
 	printf("                               \'---\'\n");
 	Sleep(600);
+	setcolor(6, 0);
 	printf("   __      __.__                          .___ ___________                   \n");
 	printf("  /  \\    /  \\__| ____    ____   ____   __| _/ \\_   _____/_ _________ ___.__.\n");
 	printf("  \\   \\/\\/   /  |/    \\  / ___\\_/ __ \\ / __ |   |    __)|  |  \\_  __ <   |  |\n");
 	printf("   \\        /|  |   |  \\/ /_/  >  ___// /_/ |   |     \\ |  |  /|  | \\/\\___  |\n");
 	printf("    \\__/\\  / |__|___|  /\\___  / \\___  >____ |   \\___  / |____/ |__|   / ____|\n");
 	printf("         \\/          \\//_____/      \\/     \\/       \\/                \\/     ");
+	setcolor(7, 0);
 }
 
 void menu()
@@ -481,6 +492,74 @@ void gameover()
 	setcolor(7, 0);
 }
 
+void squid()
+{
+	setcolor(4, 0);
+	gotoxy(35, 5);
+	printf("                        _,--._\n");
+	gotoxy(35, 6);
+	printf("                      ,\'      `.\n");
+	gotoxy(35, 7);
+	printf("              |\\     / ,-.  ,-. \\     /|\n");
+	gotoxy(35, 8);
+	printf("              )o),/ ( ( o )( o ) ) \\.(o(\n");
+	gotoxy(35, 9);
+	printf("             /o/// /|  `-\'  `-\'  |\\ \\\\\\o\\\n");
+	gotoxy(35, 10);
+	printf("            / / |\\ \\(   .    ,   )/ /| \\ \\\n");
+	gotoxy(35, 11);
+	printf("            | | \\o`-/    `\\/\'    \\-\'o/ | |\n");
+	gotoxy(35, 12);
+	printf("            \\ \\  `,\'              `.\'  / /\n");
+	gotoxy(35, 13);
+	printf("         \\.  \\ `-\'  ,\'|   /\\   |`.  `-\' /  ,/\n");
+	gotoxy(35, 14);
+	printf("          \\`. `.__,\' /   /  \\   \\ `.__,\' ,\'/\n");
+	gotoxy(35, 15);
+	printf("           \\o\\     ,\'  ,\'    `.  `.     /o/\n");
+	gotoxy(35, 16);
+	printf("            \\o`---\'  ,\'        `.  `---\'o/\n");
+	gotoxy(35, 17);
+	printf("             `.____,\'            `.____,\'\n");
+	setcolor(7, 0);
+}
+
+void delsquid()
+{
+	gotoxy(35, 5);
+	printf("                                  ");
+	gotoxy(35, 6);
+	printf("                                   ");
+	gotoxy(35, 7);
+	printf("                                            ");
+	gotoxy(35, 8);
+	printf("                                           ");
+	gotoxy(35, 9);
+	printf("													");
+	gotoxy(35, 10);
+	printf("												");
+	gotoxy(35, 11);
+	printf("													");
+	gotoxy(35, 12);
+	printf("												");
+	gotoxy(35, 13);
+	printf("														");
+	gotoxy(35, 14);
+	printf("													");
+	gotoxy(35, 15);
+	printf("												");
+	gotoxy(35, 16);
+	printf("													");
+	gotoxy(35, 17);
+	printf("												");
+}
+
+void bosshpupdate(int hp)
+{
+	gotoxy(38, 23);
+	printf("Boss HP : %d", hp);
+}
+
 
 int main()
 {
@@ -494,7 +573,7 @@ int main()
 		long int x=0;
 		long int y=0;
 		int hp = 2;
-	};enemy enemy[5];
+	};enemy enemy[10];
 
 	struct repair
 	{
@@ -504,6 +583,7 @@ int main()
 
 	char ch = ' ';
 	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0;
+	int bosshp = 30, oldbosshp = 30 , bossstate = 1;
 	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
 	int PlayerHP = 3, OldPlayerHP = 3 , score=0 , oldscore=0;
@@ -517,6 +597,8 @@ int main()
 	setcolor(7, 0);
 	scoreupdate(score);
 	levelupdate(level);
+	//squid();
+	//bosshpupdate(bosshp);
 	plane(x, y);
 	do {
 		setcolor(7, 0);
@@ -611,6 +693,39 @@ int main()
 			enemy[3].status = 1;
 		}
 
+		if (enemy[4].status == 0 && level >= 3)
+		{
+			enemy[4].x = RandomX();
+			enemy[4].y = RandomY();
+			draw_enemy(enemy[4].x, enemy[4].y);
+			enemy[4].status = 1;
+		}
+
+		if (enemy[5].status == 0 && level >= 4)
+		{
+			enemy[5].x = RandomX();
+			enemy[5].y = RandomY();
+			draw_enemy(enemy[5].x, enemy[5].y);
+			enemy[5].status = 1;
+		}
+
+		if (enemy[6].status == 0 && level >= 5)
+		{
+			enemy[6].x = RandomX();
+			enemy[6].y = RandomY();
+			draw_enemy(enemy[6].x, enemy[6].y);
+			enemy[6].status = 1;
+		}
+
+	/*	if (enemy[level + 1].status == 0 && level >= 5)
+		{
+			enemy[level + 1].x = RandomX();
+			enemy[level + 1].y = RandomY();
+			draw_enemy(enemy[level + 1].x, enemy[level + 1].y);
+			enemy[level + 1].status = 1;
+		} */
+
+
 		
 
 		if (enemy[0].status == 1)
@@ -670,7 +785,7 @@ int main()
 				clear_enemy(enemy[1].x, enemy[1].y);
 				enemy[1].status = 0;
 			}
-			else if (cursor(enemy[1].x - 2, enemy[1].y) == 'D' || cursor(enemy[0].x - 2, enemy[0].y) == '=')
+			else if (cursor(enemy[1].x - 2, enemy[1].y) == 'D' || cursor(enemy[1].x - 2, enemy[1].y) == '=')
 			{
 				clear_enemy(enemy[1].x, enemy[1].y);
 				enemy[1].status = 0;
@@ -777,6 +892,129 @@ int main()
 
 		}
 
+		if (enemy[4].status == 1)
+		{
+			clear_enemy(enemy[4].x, enemy[4].y);
+			if (cursor(enemy[4].x - 2, enemy[4].y) == '>')
+			{
+				Beep(400, 50);
+				healthpack();
+				clear_enemy(enemy[4].x, enemy[4].y);
+				enemy[4].status = 0;
+				score += 100;
+			}
+			else if (cursor(enemy[4].x - 2, enemy[4].y) == '*')
+			{
+				clear_enemy(enemy[4].x, enemy[4].y);
+				enemy[4].status = 0;
+			}
+			else if (cursor(enemy[4].x - 2, enemy[4].y) == 'D' || cursor(enemy[4].x - 2, enemy[4].y) == '=')
+			{
+				clear_enemy(enemy[4].x, enemy[4].y);
+				enemy[4].status = 0;
+				PlayerHP -= 1;
+			}
+			else if (cursor(enemy[4].x - 2, enemy[4].y) == '^')
+			{
+				clear_enemy(enemy[4].x, enemy[4].y);
+				enemy[4].status = 0;
+				PlayerHP -= 1;
+			}
+			else if (cursor(enemy[4].x - 2, enemy[4].y) == 'v')
+			{
+				clear_enemy(enemy[4].x, enemy[4].y);
+				enemy[4].status = 0;
+				PlayerHP -= 1;
+			}
+			else
+			{
+				draw_enemy(--enemy[4].x, enemy[4].y);
+			}
+
+		}
+
+		if (enemy[5].status == 1)
+		{
+			clear_enemy(enemy[5].x, enemy[5].y);
+			if (cursor(enemy[5].x - 2, enemy[5].y) == '>')
+			{
+				Beep(400, 50);
+				healthpack();
+				clear_enemy(enemy[5].x, enemy[5].y);
+				enemy[5].status = 0;
+				score += 100;
+			}
+			else if (cursor(enemy[5].x - 2, enemy[5].y) == '*')
+			{
+				clear_enemy(enemy[5].x, enemy[5].y);
+				enemy[5].status = 0;
+			}
+			else if (cursor(enemy[5].x - 2, enemy[5].y) == 'D' || cursor(enemy[5].x - 2, enemy[5].y) == '=')
+			{
+				clear_enemy(enemy[5].x, enemy[5].y);
+				enemy[5].status = 0;
+				PlayerHP -= 1;
+			}
+			else if (cursor(enemy[5].x - 2, enemy[5].y) == '^')
+			{
+				clear_enemy(enemy[5].x, enemy[5].y);
+				enemy[5].status = 0;
+				PlayerHP -= 1;
+			}
+			else if (cursor(enemy[5].x - 2, enemy[5].y) == 'v')
+			{
+				clear_enemy(enemy[5].x, enemy[5].y);
+				enemy[5].status = 0;
+				PlayerHP -= 1;
+			}
+			else
+			{
+				draw_enemy(--enemy[5].x, enemy[5].y);
+			}
+
+		}
+
+		if (enemy[6].status == 1)
+		{
+			clear_enemy(enemy[6].x, enemy[6].y);
+			if (cursor(enemy[6].x - 2, enemy[6].y) == '>')
+			{
+				Beep(400, 50);
+				healthpack();
+				clear_enemy(enemy[6].x, enemy[6].y);
+				enemy[6].status = 0;
+				score += 100;
+			}
+			else if (cursor(enemy[6].x - 2, enemy[6].y) == '*')
+			{
+				clear_enemy(enemy[6].x, enemy[6].y);
+				enemy[6].status = 0;
+			}
+			else if (cursor(enemy[6].x - 2, enemy[6].y) == 'D' || cursor(enemy[6].x - 2, enemy[6].y) == '=')
+			{
+				clear_enemy(enemy[6].x, enemy[6].y);
+				enemy[6].status = 0;
+				PlayerHP -= 1;
+			}
+			else if (cursor(enemy[6].x - 2, enemy[6].y) == '^')
+			{
+				clear_enemy(enemy[6].x, enemy[6].y);
+				enemy[6].status = 0;
+				PlayerHP -= 1;
+			}
+			else if (cursor(enemy[6].x - 2, enemy[6].y) == 'v')
+			{
+				clear_enemy(enemy[6].x, enemy[6].y);
+				enemy[6].status = 0;
+				PlayerHP -= 1;
+			}
+			else
+			{
+				draw_enemy(--enemy[6].x, enemy[6].y);
+			}
+
+		}
+
 
 		if (bulletStatus[0] == 1)
 		{
@@ -786,12 +1024,13 @@ int main()
 			{
 				bulletStatus[0] = 0;
 			}
-		/*	else if (cursor(bulletx[0] + 5, bullety[0]) == 'M')
+			else if (cursor(bulletx[0] + 4, bullety[0]) == '\\' || cursor(bulletx[0] + 4, bullety[0]) == '|' || cursor(bulletx[0] + 4, bullety[0]) == '/' || cursor(bulletx[0] + 4, bullety[0]) == ')' || cursor(bulletx[0] + 4, bullety[0]) == ',' || cursor(bulletx[0] + 4, bullety[0]) == '_')
 			{
 				clear_bullet(bulletx[0], bullety[0], 0);
 				bulletStatus[0] = 0;
+				bosshp -= 1;
 
-			}*/
+			}
 			else if (cursor(bulletx[0]+3, bullety[0]) == '*')
 			{
 				clear_bullet(bulletx[0], bullety[0], 0);
@@ -811,6 +1050,13 @@ int main()
 			{
 				bulletStatus[1] = 0;
 			}
+			else if (cursor(bulletx[1] + 4, bullety[1]) == '\\' || cursor(bulletx[1] + 4, bullety[1]) == '|' || cursor(bulletx[1] + 4, bullety[1]) == '/' || cursor(bulletx[1] + 4, bullety[1]) == ')' || cursor(bulletx[1] + 4, bullety[1]) == ',' || cursor(bulletx[1] + 4, bullety[1]) == '_')
+			{
+				clear_bullet(bulletx[1], bullety[1], 1);
+				bulletStatus[1] = 0;
+				bosshp -= 1;
+
+			}
 			else if (cursor(bulletx[1] + 3, bullety[1] - 1) == '*')
 			{
 
@@ -827,6 +1073,13 @@ int main()
 			if (bulletx[2] == 56)
 			{
 				bulletStatus[2] = 0;
+			}
+			else if (cursor(bulletx[2] + 4, bullety[2]) == '\\' || cursor(bulletx[2] + 4, bullety[2]) == '|' || cursor(bulletx[2] + 4, bullety[2]) == '/' || cursor(bulletx[2] + 4, bullety[2]) == ')' || cursor(bulletx[2] + 4, bullety[2]) == ',' || cursor(bulletx[2] + 4, bullety[2]) == '_')
+			{
+				clear_bullet(bulletx[2], bullety[2], 1);
+				bulletStatus[2] = 0;
+				bosshp -= 1;
+
 			}
 			else if (cursor(bulletx[2]+3, bullety[2] - 1) == '*')
 			{
@@ -846,6 +1099,13 @@ int main()
 			{
 				bulletStatus[3] = 0;
 			}
+			else if (cursor(bulletx[3] + 4, bullety[3]) == '\\' || cursor(bulletx[3] + 4, bullety[3]) == '|' || cursor(bulletx[3] + 4, bullety[3]) == '/' || cursor(bulletx[3] + 4, bullety[3]) == ')' || cursor(bulletx[3] + 4, bullety[3]) == ',' || cursor(bulletx[3] + 4, bullety[3]) == '_')
+			{
+				clear_bullet(bulletx[3], bullety[3], 1);
+				bulletStatus[3] = 0;
+				bosshp -= 1;
+
+			}
 			else if (cursor(bulletx[3]+3, bullety[3] - 1) == '*')
 			{
 				bulletStatus[3] = 0;
@@ -861,6 +1121,13 @@ int main()
 			if (bulletx[4] == 56)
 			{
 				bulletStatus[4] = 0;
+			}
+			else if (cursor(bulletx[4] + 4, bullety[4]) == '\\' || cursor(bulletx[4] + 4, bullety[4]) == '|' || cursor(bulletx[4] + 4, bullety[4]) == '/' || cursor(bulletx[4] + 4, bullety[4]) == ')' || cursor(bulletx[4] + 4, bullety[4]) == ',' || cursor(bulletx[4] + 4, bullety[4]) == '_')
+			{
+				clear_bullet(bulletx[4], bullety[4], 1);
+				bulletStatus[4] = 0;
+				bosshp -= 1;
+
 			}
 			else if (cursor(bulletx[4]+3, bullety[4] - 1) == '*')
 			{
@@ -887,6 +1154,7 @@ int main()
 			if (score % 1000 == 0)
 			{
 				level += 1;
+				bossstate = 1;
 			}
 			
 		}
@@ -903,6 +1171,27 @@ int main()
 		{
 			break;
 		}
+
+	/*	if (level == 2 && bossstate == 1)
+		{
+			squid();
+			bossstate = 0;
+		}
+
+		if (bosshp != oldbosshp)
+		{
+			bosshpupdate(bosshp);
+			oldbosshp = bosshp;
+		}
+
+		if (bosshp <= 0)
+		{
+			delsquid();
+			//score += 500;
+			bosshp = 50;
+		
+		}*/
+
 		Sleep(100);
 	} while (ch != 'x');
 	system("cls");
