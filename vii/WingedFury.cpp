@@ -188,6 +188,7 @@ void clear_enemy(int x, int y)
 void map_generate()
 {
 	int i,j;
+	setcolor(9,0);
 	for (i = 0; i <= 60; i++)
 	{
 		printf("*");
@@ -217,6 +218,8 @@ void map_generate()
 		printf("*");
 	}
 
+	setcolor(7, 0);
+
 
 }
 
@@ -237,14 +240,18 @@ void playerhealth(int php)
 
 void scoreupdate(int score)
 {
+	setcolor(10, 0);
 	gotoxy(23, 23);
 	printf("Score : %d", score);
+	setcolor(7, 0);
 }
 
 void levelupdate(int lv)
 {
+	setcolor(13, 0);
 	gotoxy(10, 23);
 	printf("Level : %d", lv);
+	setcolor(7, 0);
 }
 
 
