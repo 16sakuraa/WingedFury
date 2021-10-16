@@ -570,7 +570,7 @@ void extrabullet(int max)
 	int x, y, drop , chance;
 	if (max == 4)
 	{
-		chance = 96;
+		chance = 98;
 	}
 	else if (max == 5)
 	{
@@ -590,6 +590,21 @@ void extrabullet(int max)
 		printf("A");
 		setcolor(7, 0);
 	}
+}
+
+void updatemaxbullet(int max)
+{
+
+	setcolor(14, 0);
+	gotoxy(13, 25);
+	printf("You can now fire %d rockets at once !",max);
+	setcolor(7, 0);
+}
+
+void clearmaxbullet()
+{
+	gotoxy(13, 25);
+	printf("                                       ");
 }
 
 
@@ -627,7 +642,7 @@ int main()
 
 	char ch = ' ';
 	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0;
-	int bosshp = 30, oldbosshp = 30 , bossstate = 1 , maxbullet = 3;
+	int bosshp = 30, oldbosshp = 30 , bossstate = 1 , maxbullet = 3 , message = 0;
 	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
 	int PlayerHP = 3, OldPlayerHP = 3 , score=0 , oldscore=0;
@@ -708,7 +723,10 @@ int main()
 
 		if (cursor(x + 8, y + 1) == 'A')
 		{
+			Beep(800, 25);
+			Beep(650, 25);
 			maxbullet += 1;
+			updatemaxbullet(maxbullet);
 			clearpack(x + 8, y + 1);
 		}
 
@@ -1420,6 +1438,12 @@ int main()
 		if (PlayerHP <= 0)
 		{
 			break;
+		}
+
+		message += 1;
+		if (message % 100 == 0)
+		{
+			clearmaxbullet();
 		}
 
 		/*if (level == 2 && bossstate == 1)
