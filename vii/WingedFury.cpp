@@ -384,6 +384,7 @@ void title()
 {
 	int a = 200;
 	setcolor(3, 0);
+	printf("\n");
 	printf("         .----.                                                  .\'.\n");
 	Sleep(a);
 	printf("        |  /   \'                                                 |  \'\n");
@@ -426,14 +427,15 @@ void menu()
 	int play = 1;
 	title();
 	Sleep(500);
-	gotoxy(15,20);
+	setcolor(14, 0);
+	gotoxy(32,22);
 	printf("> ");
 
 	while (1)
 	{
-		gotoxy(17, 20);
+		gotoxy(34, 22);
 		printf("Play");
-		gotoxy(17, 21);
+		gotoxy(34, 23);
 		printf("Score");
 		//gotoxy(10, 12);
 		if (_kbhit())
@@ -443,9 +445,9 @@ void menu()
 			{
 				Beep(900, 50);
 				Beep(700, 50);
-				gotoxy(15, 21);
+				gotoxy(32, 23);
 				printf("  ");
-				gotoxy(15, 20);
+				gotoxy(32, 22);
 				printf(">");
 				play = 1;
 			}
@@ -453,9 +455,9 @@ void menu()
 			{
 				Beep(900, 50);
 				Beep(700, 50);
-				gotoxy(15, 20);
+				gotoxy(32, 22);
 				printf("  ");
-				gotoxy(15, 21);
+				gotoxy(32, 23);
 				printf(">");
 				play = 0;
 			}
@@ -470,6 +472,8 @@ void menu()
 				system("cls");
 				seescore();
 				title();
+				gotoxy(32, 23);
+				printf(">");
 
 
 			}
