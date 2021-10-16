@@ -4,6 +4,8 @@
 #include<conio.h>
 #include<time.h>
 #include<string.h>
+#include <fcntl.h>
+#include <io.h>
 
 void setcolor(int fg, int bg)
 {
@@ -73,7 +75,8 @@ int PlayerStats(int pscore, int lv)
 
 	//for (i = 0; i <= 4; i++)
 	//{
-		printf("\nEnter Player Name : ", i + 1); scanf("%s", p[i].name);
+		printf("\nEnter Player Name : ", i + 1);
+		scanf("%s", p[i].name);
 		p[0].score = pscore;
 		p[0].lv = lv;
 		//printf("Level : "); scanf("%d", &p[i].lv);
@@ -244,14 +247,8 @@ void playerhealth(int php)
 {
 	gotoxy(0, 23);
 	setcolor(2, 0);
-	printf("HP : %d", php);
+	printf("HP : %d",php);
 
-	/*gotoxy(25, 10);
-	printf("<");
-	gotoxy(25, 15);
-	printf("<");
-	gotoxy(25, 18);
-	printf("<");*/
 
 }
 
@@ -276,14 +273,6 @@ int RandomX()
 {
 	long int x;
 	x = rand();
-	/*if (x > 20 && x < 57)
-	{
-		return x;
-	}
-	else
-	{
-		RandomX();
-	}*/
 
 	x = x % 58;
 	if (x > 32)
@@ -304,14 +293,6 @@ int RandomY()
 {
 	long int y;
 	y = rand();
-	/*if (y > 1 && y < 19)
-	{
-		return y;
-	}
-	else
-	{
-		
-	}*/
 	y = y % 20;
 	if (y == 19)
 	{
@@ -584,11 +565,34 @@ void bosshpupdate(int hp)
 	printf("Boss HP : %d", hp);
 }
 
-void delay(int ms)
+void extrabullet(int max)
 {
-	clock_t timeDelay = ms + clock();
-	while (timeDelay > clock());
+	int x, y, drop , chance;
+	if (max == 4)
+	{
+		chance = 96;
+	}
+	else if (max == 5)
+	{
+		chance = 100;
+	}
+	else
+	{
+		chance = 95;
+	}
+	drop = rand() % 100;
+	if (drop >= chance)
+	{
+		x = RandomX();
+		y = RandomY();
+		setcolor(14, 0);
+		gotoxy(x, y);
+		printf("A");
+		setcolor(7, 0);
+	}
 }
+
+
 
 
 int main()
@@ -623,7 +627,7 @@ int main()
 
 	char ch = ' ';
 	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0;
-	int bosshp = 30, oldbosshp = 30 , bossstate = 1;
+	int bosshp = 30, oldbosshp = 30 , bossstate = 1 , maxbullet = 3;
 	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
 	int PlayerHP = 3, OldPlayerHP = 3 , score=0 , oldscore=0;
@@ -670,14 +674,14 @@ int main()
 				bulletx[2] = x + 7;
 				bullety[2] = y + 1;
 			}
-			else if (bulletStatus[3] == 0 && ch == ' ')
+			else if (bulletStatus[3] == 0 && ch == ' ' && maxbullet >= 4)
 			{
 				Beep(700, 50);
 				bulletStatus[3] = 1;
 				bulletx[3] = x + 7;
 				bullety[3] = y + 1;
 			}
-			else if (bulletStatus[4] == 0 && ch == ' ')
+			else if (bulletStatus[4] == 0 && ch == ' ' && maxbullet >= 5)
 			{
 				Beep(700, 50);
 				bulletStatus[4] = 1;
@@ -700,6 +704,12 @@ int main()
 				clearpack(x + 8, y + 1);
 			}
 			
+		}
+
+		if (cursor(x + 8, y + 1) == 'A')
+		{
+			maxbullet += 1;
+			clearpack(x + 8, y + 1);
 		}
 
 		if (enemy[0].status == 0)
@@ -967,6 +977,7 @@ int main()
 			{
 				Beep(400, 50);
 				healthpack();
+				extrabullet(maxbullet);
 				clear_enemy(enemy[0].x, enemy[0].y);
 				enemy[0].status = 0;
 				score += 100;
@@ -1008,6 +1019,7 @@ int main()
 			{
 				Beep(400, 50);
 				healthpack();
+				extrabullet(maxbullet);
 				clear_enemy(enemy[1].x, enemy[1].y);
 				enemy[1].status = 0;
 				score += 100;
@@ -1049,6 +1061,7 @@ int main()
 			{
 				Beep(400, 50);
 				healthpack();
+				extrabullet(maxbullet);
 				clear_enemy(enemy[2].x, enemy[2].y);
 				enemy[2].status = 0;
 				score += 100;
@@ -1090,6 +1103,7 @@ int main()
 			{
 				Beep(400, 50);
 				healthpack();
+				extrabullet(maxbullet);
 				clear_enemy(enemy[3].x, enemy[3].y);
 				enemy[3].status = 0;
 				score += 100;
@@ -1131,6 +1145,7 @@ int main()
 			{
 				Beep(400, 50);
 				healthpack();
+				extrabullet(maxbullet);
 				clear_enemy(enemy[4].x, enemy[4].y);
 				enemy[4].status = 0;
 				score += 100;
@@ -1172,6 +1187,7 @@ int main()
 			{
 				Beep(400, 50);
 				healthpack();
+				extrabullet(maxbullet);
 				clear_enemy(enemy[5].x, enemy[5].y);
 				enemy[5].status = 0;
 				score += 100;
@@ -1213,6 +1229,7 @@ int main()
 			{
 				Beep(400, 50);
 				healthpack();
+				extrabullet(maxbullet);
 				clear_enemy(enemy[6].x, enemy[6].y);
 				enemy[6].status = 0;
 				score += 100;
@@ -1263,6 +1280,7 @@ int main()
 				bosshp -= 1;
 
 			}
+
 			else if (cursor(bulletx[0]+3, bullety[0]) == '*')
 			{
 				clear_bullet(bulletx[0], bullety[0], 0);
