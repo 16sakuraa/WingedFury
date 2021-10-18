@@ -49,55 +49,53 @@ int PlayerStats(int pscore, int lv)
 		char name[20];
 		int lv;
 		int score;
-	}; player p[5];
+	} p[5];
 
 	/*p[0].score = pscore;
 	p[0].lv = lv;
+	strcpy(p[1].name, "Nom Carver");
+	p[1].lv = 2;
+	p[1].score = 3200;
+	strcpy(p[2].name, "CT-7567");
+	p[2].lv = 99;
+	p[2].score = 42069;
+	strcpy(p[3].name, "James Bond");
+	p[3].lv = 700;
+	p[3].score = 777;
+	strcpy(p[4].name, "Snoopy");
+	p[4].lv = 5;
+	p[4].score = 2000;*/
+
+	int i = 0;
+	fptr = fopen("PlayerStatsnew.txt", "w");
+
+	
+	printf("\nEnter Player Name : ");
+	scanf("%s", p[0].name);
+	p[0].score = pscore;
+	p[0].lv = lv;
+	fwrite(&p, sizeof(struct player), 5, fptr);
 
 	strcpy(p[1].name, "Nom Carver");
 	p[1].lv = 2;
 	p[1].score = 3200;
+	fwrite(&p, sizeof(struct player), 5, fptr);
 
 	strcpy(p[2].name, "CT-7567");
-	p[2].lv = 99;
-	p[2].score = 42069;
+	p[2].lv = 69;
+	p[2].score = 69420;
+	fwrite(&p, sizeof(struct player), 5, fptr);
 
 	strcpy(p[3].name, "James Bond");
 	p[3].lv = 700;
-	p[3].score = 777;
+	p[3].score = 77777;
+	fwrite(&p, sizeof(struct player), 5, fptr);
 
 	strcpy(p[4].name, "Snoopy");
 	p[4].lv = 5;
-	p[4].score = 2000;*/
-	
-	int i = 0;
-	fptr = fopen("PlayerStatsnew.txt", "w");
+	p[4].score = 5300;
+	fwrite(&p, sizeof(struct player), 5, fptr);
 
-	//for (i = 0; i <= 4; i++)
-	//{
-		printf("\nEnter Player Name : ", i + 1);
-		scanf("%s", p[i].name);
-		p[0].score = pscore;
-		p[0].lv = lv;
-		//printf("Level : "); scanf("%d", &p[i].lv);
-		//printf("Score : "); scanf("%d", &p[i].score);
-		strcpy(p[1].name, "Nom Carver");
-		p[1].lv = 2;
-		p[1].score = 3200;
-
-		strcpy(p[2].name, "CT-7567");
-		p[2].lv = 69;
-		p[2].score = 69420;
-
-		strcpy(p[3].name, "James Bond");
-		p[3].lv = 700;
-		p[3].score = 77777;
-
-		strcpy(p[4].name, "Snoopy");
-		p[4].lv = 5;
-		p[4].score = 5300;
-		fwrite(&p, sizeof(struct player), 5, fptr);
-	//}
 	fclose(fptr);
 
 	i = 0;
@@ -109,17 +107,15 @@ int PlayerStats(int pscore, int lv)
 	if (fptr == (FILE*)NULL)
 		printf("Cannot open file\n");
 	else
-		for (i = 0; i <= 4; i++)
-			//while (fread(&p,sizeof(struct player),5,fptr)!=0)
+
+			while (fread(&p,sizeof(struct player),5,fptr)!=0)
 		{
-			/*   for(i=0;i<=2;i++)
-			   {*/
+			
 			printf("Player %d Name : %s\n", i + 1, p[i].name);
 			printf("Level : %d\n", p[i].lv);
 			printf("Score : %d\n", p[i].score);
 			printf("---------------------------\n");
-			// }
-				//i++;
+				i++;
 		}
 	fclose(fptr);
 	setcolor(11, 0);
@@ -332,17 +328,21 @@ void clearpack(int x ,int y)
 
 void seescore()
 {
+	
+	int i = 0;
+	char ch = ' ';
+	FILE* fptr;
+
 	struct player
 	{
 		char name[20];
 		int lv;
 		int score;
-	}; player p[5];
+	} p[5];
 
-	char ch = ' ';
-	FILE* fptr;
 
-	int i = 0;
+	i = 0;
+	setcolor(14, 0);
 	printf("\n-------Score Summary-------\n");
 
 
@@ -350,18 +350,18 @@ void seescore()
 	if (fptr == (FILE*)NULL)
 		printf("Cannot open file\n");
 	else
-	
-		while (fread(&p,sizeof(struct player),5,fptr)!=0)
-		{
 
+			while (fread(&p,sizeof(struct player),5,fptr)!=0)
+		{
+			
 			printf("Player %d Name : %s\n", i + 1, p[i].name);
 			printf("Level : %d\n", p[i].lv);
 			printf("Score : %d\n", p[i].score);
 			printf("---------------------------\n");
-			
 				i++;
 		}
 	fclose(fptr);
+
 
 	while (1)
 	{
