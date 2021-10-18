@@ -157,7 +157,7 @@ int PlayerStats(int pscore, int lv)
 
 	i = 0;
 	setcolor(14, 0);
-	printf("\n-------Score Summary-------\n");
+	printf("\n--------Leaderboard--------\n");
 
 
 	fptr = fopen("PlayerStatsnew.txt", "r");
@@ -416,7 +416,7 @@ void seescore()
 
 	i = 0;
 	setcolor(14, 0);
-	printf("\n-------Score Summary-------\n");
+	printf("\n--------Leaderboard--------\n");
 
 
 	fptr = fopen("PlayerStatsnew.txt", "r");
