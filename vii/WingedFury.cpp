@@ -474,7 +474,7 @@ void title()
 	Sleep(a);
 	printf("        |.-\"  .\'  /                          . .\' .\'   /.      :_.|__.\'\n");
 	Sleep(a);
-	printf("       <    .\'___/                           .\' .\'    /|.      : .\'|\\\n");
+	printf("       <    .\'___/      64010860 Suppaphol   .\' .\'    /|.      : .\'|\\\n");
 	Sleep(a);
 	printf("        ~~--..                             .\' .\'     /_|.      : | | \\\n");
 	Sleep(a);
