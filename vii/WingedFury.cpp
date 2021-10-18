@@ -160,7 +160,7 @@ int PlayerStats(int pscore, int lv)
 
 	i = 0;
 	setcolor(14, 0);
-	printf("\n--------Leaderboard--------\n");
+	printf("\n --------Leaderboard--------\n");
 
 
 	fptr = fopen("PlayerStatsnew.txt", "r");
@@ -173,7 +173,7 @@ int PlayerStats(int pscore, int lv)
 			printf("Player %d : %s\n", i + 1, sp[i].name);
 			printf("Level : %d\n", sp[i].lv);
 			printf("Score : %d\n", sp[i].score);
-			printf("---------------------------\n");
+			printf(" ---------------------------\n");
 				i++;
 		}
 	fclose(fptr);
@@ -418,7 +418,7 @@ void seescore()
 
 	i = 0;
 	setcolor(14, 0);
-	printf("\n--------Leaderboard--------\n");
+	printf("\n --------Leaderboard--------\n");
 
 
 	fptr = fopen("PlayerStatsnew.txt", "r");
@@ -432,7 +432,7 @@ void seescore()
 			printf("Player %d : %s\n", i + 1, p[i].name);
 			printf("Level : %d\n", p[i].lv);
 			printf("Score : %d\n", p[i].score);
-			printf("---------------------------\n");
+			printf(" ---------------------------\n");
 				i++;
 		}
 	fclose(fptr);
@@ -1899,6 +1899,7 @@ int main()
 		
 		if (message % 100 == 0)
 		{
+			message = 0;
 			messagecount = 0;
 			clearmaxbullet();
 		}
