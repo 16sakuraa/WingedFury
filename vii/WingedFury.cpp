@@ -289,7 +289,23 @@ void scoreupdate(int score)
 
 void levelupdate(int lv)
 {
-	setcolor(13, 0);
+	if (lv < 3)
+	{
+		setcolor(15, 0);
+	}
+	else if (lv >= 3 && lv < 5)
+	{
+		setcolor(9, 0);
+	}
+	else if (lv >= 5 && lv < 7)
+	{
+		setcolor(13, 0);
+	}
+	else if (lv >= 7)
+	{
+		setcolor(12, 0);
+	}
+	
 	gotoxy(10, 23);
 	printf("Level : %d", lv);
 	setcolor(7, 0);
