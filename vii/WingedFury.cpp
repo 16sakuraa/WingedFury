@@ -710,18 +710,18 @@ int main()
 		int y = 0;
 		int hp = 2;
 		int walk = 0;
-	}; wmy wmy[5];
+	}; wmy wmy[10];
 
 	struct wb
 	{
 		int status = 0;
 		int x = 0;
 		int y = 0;
-	}; wb wb[5];
+	}; wb wb[10];
 
 	char ch = ' ';
 	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0;
-	int bosshp = 30, oldbosshp = 30 , bossstate = 1 , maxbullet = 3 , message = 0 , levelcap = 1000;
+	int bosshp = 30, oldbosshp = 30 , bossstate = 1 , maxbullet = 3 , oldmaxbullet = 3, message = 0 , messagecount = 0 , levelcap = 1000;
 	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
 	int PlayerHP = 3, OldPlayerHP = 3 , score=0 , oldscore=0;
@@ -747,7 +747,9 @@ int main()
 			if (ch == 'd' && cursor(x + 8, y) != '*') { plane(++x, y); }
 			if (ch == 'w' && cursor(x, y - 1) != '*') { clearplane(x, y);  plane(x, --y); }
 			if (ch == 's' && cursor(x, y+3) != '*') { clearplane(x, y);  plane(x, ++y); }
-			if (bulletStatus[0] == 0 && ch == ' ')
+			if (ch == '+') { score += 500; }
+			//if (ch == 'r') { maxbullet += 1; updatemaxbullet(maxbullet); }
+			//if (bulletStatus[0] == 0 && ch == ' ')
 			{
 				Beep(700, 50);
 				bulletStatus[0] = 1;
@@ -862,6 +864,22 @@ int main()
 			enemy[6].y = RandomY();
 			draw_enemy(enemy[6].x, enemy[6].y);
 			enemy[6].status = 1;
+		}
+
+		if (enemy[7].status == 0 && level >= 7)
+		{
+			enemy[7].x = RandomX();
+			enemy[7].y = RandomY();
+			draw_enemy(enemy[7].x, enemy[7].y);
+			enemy[7].status = 1;
+		}
+
+		if (enemy[8].status == 0 && level >= 7)
+		{
+			enemy[8].x = RandomX();
+			enemy[8].y = RandomY();
+			draw_enemy(enemy[8].x, enemy[8].y);
+			enemy[8].status = 1;
 		}
 
 		if (wmy[0].status == 0 && level >= 3)
@@ -1059,6 +1077,271 @@ int main()
 			else
 			{
 				wbullet(--wb[2].x, wb[2].y);
+			}
+
+		}
+
+		if (wmy[3].status == 0 && level >= 6)
+		{
+			wmy[3].x = RandomX();
+			wmy[3].y = 19;
+			draw_w(wmy[3].x, wmy[3].y);
+			wmy[3].status = 1;
+
+		}
+
+		if (wmy[3].status == 1)
+		{
+			wmy[3].walk += 1;
+			if (wmy[3].walk % 4 == 0)
+			{
+				clear_enemy(wmy[3].x, wmy[3].y);
+				if (cursor(wmy[3].x, wmy[3].y - 2) == '*')
+				{
+					clear_enemy(wmy[3].x, wmy[3].y);
+					wmy[3].status = 0;
+				}
+				else if (cursor(wmy[3].x, wmy[3].y - 1) == '>' || cursor(wmy[3].x, wmy[3].y - 1) == '-' || cursor(wmy[3].x + 1, wmy[3].y) == '>')
+				{
+					Beep(480, 50);
+					clear_enemy(wmy[3].x, wmy[3].y);
+					wmy[3].status = 0;
+					score += 200;
+				}
+				else if (wmy[3].y == y + 1 && wb[3].status == 0)
+				{
+					wb[3].x = wmy[3].x - 1;
+					wb[3].y = wmy[3].y;
+					wb[3].status = 1;
+					draw_w(wmy[3].x, --wmy[3].y);
+				}
+				else
+				{
+					draw_w(wmy[3].x, --wmy[3].y);
+				}
+
+
+			}
+
+
+		}
+
+		if (wb[3].status == 1)
+		{
+			clear_enemy(wb[3].x, wb[3].y);
+			if (wb[3].x == 2)
+			{
+				clear_enemy(wb[3].x, wb[3].y);
+				wb[3].status = 0;
+			}
+			else if (cursor(wb[3].x - 1, wb[3].y) == 'D' || cursor(wb[3].x - 1, wb[3].y) == '^' || cursor(wb[3].x - 1, wb[3].y) == 'v')
+			{
+				clear_enemy(wb[3].x, wb[3].y);
+				PlayerHP -= 1;
+				wb[3].status = 0;
+			}
+			else
+			{
+				wbullet(--wb[3].x, wb[3].y);
+			}
+
+		}
+
+		if (wmy[4].status == 0 && level >= 7)
+		{
+			wmy[4].x = RandomX();
+			wmy[4].y = 19;
+			draw_w(wmy[4].x, wmy[4].y);
+			wmy[4].status = 1;
+
+		}
+
+		if (wmy[4].status == 1)
+		{
+			wmy[4].walk += 1;
+			if (wmy[4].walk % 4 == 0)
+			{
+				clear_enemy(wmy[4].x, wmy[4].y);
+				if (cursor(wmy[4].x, wmy[4].y - 2) == '*')
+				{
+					clear_enemy(wmy[4].x, wmy[4].y);
+					wmy[4].status = 0;
+				}
+				else if (cursor(wmy[4].x, wmy[4].y - 1) == '>' || cursor(wmy[4].x, wmy[4].y - 1) == '-' || cursor(wmy[4].x + 1, wmy[4].y) == '>')
+				{
+					Beep(480, 50);
+					clear_enemy(wmy[4].x, wmy[4].y);
+					wmy[4].status = 0;
+					score += 200;
+				}
+				else if (wmy[4].y == y + 1 && wb[4].status == 0)
+				{
+					wb[4].x = wmy[4].x - 1;
+					wb[4].y = wmy[4].y;
+					wb[4].status = 1;
+					draw_w(wmy[4].x, --wmy[4].y);
+				}
+				else
+				{
+					draw_w(wmy[4].x, --wmy[4].y);
+				}
+
+
+			}
+
+
+		}
+
+		if (wb[4].status == 1)
+		{
+			clear_enemy(wb[4].x, wb[4].y);
+			if (wb[4].x == 2)
+			{
+				clear_enemy(wb[4].x, wb[4].y);
+				wb[4].status = 0;
+			}
+			else if (cursor(wb[4].x - 1, wb[4].y) == 'D' || cursor(wb[4].x - 1, wb[4].y) == '^' || cursor(wb[4].x - 1, wb[4].y) == 'v')
+			{
+				clear_enemy(wb[4].x, wb[4].y);
+				PlayerHP -= 1;
+				wb[4].status = 0;
+			}
+			else
+			{
+				wbullet(--wb[4].x, wb[4].y);
+			}
+
+		}
+
+		if (wmy[5].status == 0 && level >= 8)
+		{
+			wmy[5].x = RandomX();
+			wmy[5].y = 19;
+			draw_w(wmy[5].x, wmy[5].y);
+			wmy[5].status = 1;
+
+		}
+
+		if (wmy[5].status == 1)
+		{
+			wmy[5].walk += 1;
+			if (wmy[5].walk % 4 == 0)
+			{
+				clear_enemy(wmy[5].x, wmy[5].y);
+				if (cursor(wmy[5].x, wmy[5].y - 2) == '*')
+				{
+					clear_enemy(wmy[5].x, wmy[5].y);
+					wmy[5].status = 0;
+				}
+				else if (cursor(wmy[5].x, wmy[5].y - 1) == '>' || cursor(wmy[5].x, wmy[5].y - 1) == '-' || cursor(wmy[5].x + 1, wmy[5].y) == '>')
+				{
+					Beep(480, 50);
+					clear_enemy(wmy[5].x, wmy[5].y);
+					wmy[5].status = 0;
+					score += 200;
+				}
+				else if (wmy[5].y == y + 1 && wb[5].status == 0)
+				{
+					wb[5].x = wmy[5].x - 1;
+					wb[5].y = wmy[5].y;
+					wb[5].status = 1;
+					draw_w(wmy[5].x, --wmy[5].y);
+				}
+				else
+				{
+					draw_w(wmy[5].x, --wmy[5].y);
+				}
+
+
+			}
+
+
+		}
+
+		if (wb[5].status == 1)
+		{
+			clear_enemy(wb[5].x, wb[5].y);
+			if (wb[5].x == 2)
+			{
+				clear_enemy(wb[5].x, wb[5].y);
+				wb[5].status = 0;
+			}
+			else if (cursor(wb[5].x - 1, wb[5].y) == 'D' || cursor(wb[5].x - 1, wb[5].y) == '^' || cursor(wb[5].x - 1, wb[5].y) == 'v')
+			{
+				clear_enemy(wb[5].x, wb[5].y);
+				PlayerHP -= 1;
+				wb[5].status = 0;
+			}
+			else
+			{
+				wbullet(--wb[5].x, wb[5].y);
+			}
+
+		}
+
+		if (wmy[6].status == 0 && level >= 9)
+		{
+			wmy[6].x = RandomX();
+			wmy[6].y = 1;
+			draw_w(wmy[6].x, wmy[6].y);
+			wmy[6].status = 1;
+
+		}
+
+		if (wmy[6].status == 1)
+		{
+			wmy[6].walk += 1;
+			if (wmy[6].walk % 4 == 0)
+			{
+				clear_enemy(wmy[6].x, wmy[6].y);
+				if (cursor(wmy[6].x, wmy[6].y + 1) == '*')
+				{
+					clear_enemy(wmy[6].x, wmy[6].y);
+					wmy[6].status = 0;
+				}
+				else if (cursor(wmy[6].x, wmy[6].y - 1) == '>' || cursor(wmy[6].x, wmy[6].y - 1) == '-' || cursor(wmy[6].x + 1, wmy[6].y) == '>')
+				{
+					Beep(480, 50);
+					clear_enemy(wmy[6].x, wmy[6].y);
+					wmy[6].status = 0;
+					score += 200;
+				}
+				else if (wmy[6].y == y + 1 && wb[6].status == 0)
+				{
+
+					wb[6].x = wmy[6].x - 1;
+					wb[6].y = wmy[6].y;
+					wb[6].status = 1;
+					draw_w(wmy[6].x, ++wmy[6].y);
+				}
+				else
+				{
+					draw_w(wmy[6].x, ++wmy[6].y);
+				}
+
+
+			}
+
+
+		}
+
+		if (wb[6].status == 1)
+		{
+			clear_enemy(wb[6].x, wb[6].y);
+			if (wb[6].x == 2)
+			{
+				clear_enemy(wb[6].x, wb[6].y);
+				wb[6].status = 0;
+			}
+			else if (cursor(wb[6].x - 1, wb[6].y) == 'D' || cursor(wb[6].x - 1, wb[6].y) == '^' || cursor(wb[6].x - 1, wb[6].y) == 'v')
+			{
+				clear_enemy(wb[6].x, wb[6].y);
+				PlayerHP -= 1;
+				wb[6].status = 0;
+			}
+			else
+			{
+				wbullet(--wb[6].x, wb[6].y);
 			}
 
 		}
@@ -1361,6 +1644,90 @@ int main()
 
 		}
 
+		if (enemy[7].status == 1)
+		{
+			clear_enemy(enemy[7].x, enemy[7].y);
+			if (cursor(enemy[7].x - 2, enemy[7].y) == '>')
+			{
+				Beep(400, 50);
+				healthpack();
+				extrabullet(maxbullet);
+				clear_enemy(enemy[7].x, enemy[7].y);
+				enemy[7].status = 0;
+				score += 100;
+			}
+			else if (cursor(enemy[7].x - 2, enemy[7].y) == '*')
+			{
+				clear_enemy(enemy[7].x, enemy[7].y);
+				enemy[7].status = 0;
+			}
+			else if (cursor(enemy[7].x - 2, enemy[7].y) == 'D' || cursor(enemy[7].x - 2, enemy[7].y) == '=')
+			{
+				clear_enemy(enemy[7].x, enemy[7].y);
+				enemy[7].status = 0;
+				PlayerHP -= 1;
+			}
+			else if (cursor(enemy[7].x - 2, enemy[7].y) == '^' || cursor(enemy[7].x - 2, enemy[7].y) == '\\' || cursor(enemy[7].x - 2, enemy[7].y) == '/')
+			{
+				clear_enemy(enemy[7].x, enemy[7].y);
+				enemy[7].status = 0;
+				PlayerHP -= 1;
+			}
+			else if (cursor(enemy[7].x - 2, enemy[7].y) == 'v')
+			{
+				clear_enemy(enemy[7].x, enemy[7].y);
+				enemy[7].status = 0;
+				PlayerHP -= 1;
+			}
+			else
+			{
+				draw_enemy(--enemy[7].x, enemy[7].y);
+			}
+
+		}
+
+		if (enemy[8].status == 1)
+		{
+			clear_enemy(enemy[8].x, enemy[8].y);
+			if (cursor(enemy[8].x - 2, enemy[8].y) == '>')
+			{
+				Beep(400, 50);
+				healthpack();
+				extrabullet(maxbullet);
+				clear_enemy(enemy[8].x, enemy[8].y);
+				enemy[8].status = 0;
+				score += 100;
+			}
+			else if (cursor(enemy[8].x - 2, enemy[8].y) == '*')
+			{
+				clear_enemy(enemy[8].x, enemy[8].y);
+				enemy[8].status = 0;
+			}
+			else if (cursor(enemy[8].x - 2, enemy[8].y) == 'D' || cursor(enemy[8].x - 2, enemy[8].y) == '=')
+			{
+				clear_enemy(enemy[8].x, enemy[8].y);
+				enemy[8].status = 0;
+				PlayerHP -= 1;
+			}
+			else if (cursor(enemy[8].x - 2, enemy[8].y) == '^' || cursor(enemy[8].x - 2, enemy[8].y) == '\\' || cursor(enemy[8].x - 2, enemy[8].y) == '/')
+			{
+				clear_enemy(enemy[8].x, enemy[8].y);
+				enemy[8].status = 0;
+				PlayerHP -= 1;
+			}
+			else if (cursor(enemy[8].x - 2, enemy[8].y) == 'v')
+			{
+				clear_enemy(enemy[8].x, enemy[8].y);
+				enemy[8].status = 0;
+				PlayerHP -= 1;
+			}
+			else
+			{
+				draw_enemy(--enemy[8].x, enemy[8].y);
+			}
+
+		}
+
 
 		if (bulletStatus[0] == 1)
 		{
@@ -1519,9 +1886,20 @@ int main()
 			break;
 		}
 
-		message += 1;
+
+		if (maxbullet != oldmaxbullet)
+		{
+			messagecount = 1;
+		}
+
+		if (messagecount == 1)
+		{
+			message += 1;
+		}
+		
 		if (message % 100 == 0)
 		{
+			messagecount = 0;
 			clearmaxbullet();
 		}
 
