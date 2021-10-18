@@ -747,9 +747,9 @@ int main()
 			if (ch == 'd' && cursor(x + 8, y) != '*') { plane(++x, y); }
 			if (ch == 'w' && cursor(x, y - 1) != '*') { clearplane(x, y);  plane(x, --y); }
 			if (ch == 's' && cursor(x, y+3) != '*') { clearplane(x, y);  plane(x, ++y); }
-			if (ch == '+') { score += 500; }
+			//if (ch == '+') { score += 500; }
 			//if (ch == 'r') { maxbullet += 1; updatemaxbullet(maxbullet); }
-			//if (bulletStatus[0] == 0 && ch == ' ')
+			if (bulletStatus[0] == 0 && ch == ' ')
 			{
 				Beep(700, 50);
 				bulletStatus[0] = 1;
