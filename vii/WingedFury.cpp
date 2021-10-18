@@ -83,11 +83,11 @@ int PlayerStats(int pscore, int lv)
 			i++;
 		}
 	fclose(fptr);
-
+	setcolor(15, 0);
 	printf("\nEnter Player Name : ");
 	scanf("%s", p[5].name);
 	setcolor(11, 0);
-	printf("Your Level : %d  ", lv);
+	printf(" Your Level : %d  ", lv);
 	printf("Your Score : %d",pscore);
 	p[5].score = pscore;
 	p[5].lv = lv;
@@ -170,8 +170,7 @@ int PlayerStats(int pscore, int lv)
 
 			while (fread(&p,sizeof(struct player),5,fptr)!=0)
 		{
-			
-			printf("Player %d Name : %s\n", i + 1, sp[i].name);
+			printf("Player %d : %s\n", i + 1, sp[i].name);
 			printf("Level : %d\n", sp[i].lv);
 			printf("Score : %d\n", sp[i].score);
 			printf("---------------------------\n");
@@ -430,7 +429,7 @@ void seescore()
 			while (fread(&p,sizeof(struct player),5,fptr)!=0)
 		{
 			
-			printf("Player %d Name : %s\n", i + 1, p[i].name);
+			printf("Player %d : %s\n", i + 1, p[i].name);
 			printf("Level : %d\n", p[i].lv);
 			printf("Score : %d\n", p[i].score);
 			printf("---------------------------\n");
