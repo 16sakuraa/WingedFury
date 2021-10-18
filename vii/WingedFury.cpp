@@ -51,49 +51,80 @@ int PlayerStats(int pscore, int lv)
 		int score;
 	} p[5];
 
-	/*p[0].score = pscore;
-	p[0].lv = lv;
-	strcpy(p[1].name, "Nom Carver");
-	p[1].lv = 2;
-	p[1].score = 3200;
-	strcpy(p[2].name, "CT-7567");
-	p[2].lv = 99;
-	p[2].score = 42069;
-	strcpy(p[3].name, "James Bond");
-	p[3].lv = 700;
-	p[3].score = 777;
-	strcpy(p[4].name, "Snoopy");
-	p[4].lv = 5;
-	p[4].score = 2000;*/
+	struct Splayer
+	{
+		char name[20];
+		int lv;
+		int score;
+	} sp[5];
 
-	int i = 0;
-	fptr = fopen("PlayerStatsnew.txt", "w");
 
-	
+	int i = 0 , j = 0 , k = 0;
+	struct player temp;
+
 	printf("\nEnter Player Name : ");
 	scanf("%s", p[0].name);
 	p[0].score = pscore;
 	p[0].lv = lv;
-	fwrite(&p, sizeof(struct player), 5, fptr);
 
 	strcpy(p[1].name, "Nom Carver");
 	p[1].lv = 2;
 	p[1].score = 3200;
-	fwrite(&p, sizeof(struct player), 5, fptr);
 
 	strcpy(p[2].name, "CT-7567");
 	p[2].lv = 69;
 	p[2].score = 69420;
-	fwrite(&p, sizeof(struct player), 5, fptr);
 
 	strcpy(p[3].name, "James Bond");
 	p[3].lv = 700;
 	p[3].score = 77777;
-	fwrite(&p, sizeof(struct player), 5, fptr);
 
 	strcpy(p[4].name, "Snoopy");
 	p[4].lv = 5;
 	p[4].score = 5300;
+
+	for (j = 0; j < 4 ; j++)
+	{
+		for (k = 0; k < (4 - j); k++)
+		{
+			if (p[k].score < p[k + 1].score)
+			{
+				temp = p[k];
+				p[k] = p[k + 1];
+				p[k + 1] = temp;
+			}
+		}
+	}
+
+
+
+	fptr = fopen("PlayerStatsnew.txt", "w");
+
+	
+	
+	strcpy(sp[0].name, p[0].name);
+	sp[0].score = p[0].score;
+	sp[0].lv = p[0].lv ;
+	fwrite(&p, sizeof(struct player), 5, fptr);
+
+	strcpy(sp[1].name, p[1].name);
+	sp[1].score = p[1].score;
+	sp[1].lv = p[1].lv;
+	fwrite(&p, sizeof(struct player), 5, fptr);
+
+	strcpy(sp[2].name, p[2].name);
+	sp[2].score = p[2].score;
+	sp[2].lv = p[2].lv;
+	fwrite(&p, sizeof(struct player), 5, fptr);
+
+	strcpy(sp[3].name, p[3].name);
+	sp[3].score = p[3].score;
+	sp[3].lv = p[3].lv;
+	fwrite(&p, sizeof(struct player), 5, fptr);
+
+	strcpy(sp[4].name, p[4].name);
+	sp[4].score = p[4].score;
+	sp[4].lv = p[4].lv;
 	fwrite(&p, sizeof(struct player), 5, fptr);
 
 	fclose(fptr);
