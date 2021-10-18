@@ -49,43 +49,69 @@ int PlayerStats(int pscore, int lv)
 		char name[20];
 		int lv;
 		int score;
-	} p[5];
+	} p[6];
 
 	struct Splayer
 	{
 		char name[20];
 		int lv;
 		int score;
-	} sp[5];
+	} sp[6];
+
+	struct Tplayer
+	{
+		char name[20];
+		int lv;
+		int score;
+	} tp[6];
 
 
 	int i = 0 , j = 0 , k = 0;
 	struct player temp;
 
+	fptr = fopen("PlayerStatsnew.txt", "r");
+	if (fptr == (FILE*)NULL)
+		printf("Cannot open file\n");
+	else
+
+		while (fread(&tp, sizeof(struct player), 5, fptr) != 0)
+		{
+
+			strcpy(p[i].name , tp[i].name);
+			p[i].lv = tp[i].lv;
+			p[i].score = tp[i].score;
+			i++;
+		}
+	fclose(fptr);
+
 	printf("\nEnter Player Name : ");
-	scanf("%s", p[0].name);
-	p[0].score = pscore;
-	p[0].lv = lv;
+	scanf("%s", p[5].name);
+	p[5].score = pscore;
+	p[5].lv = lv;
 
-	strcpy(p[1].name, "Nom Carver");
-	p[1].lv = 2;
-	p[1].score = 3200;
+	/*strcpy(p[0].name, "Nom Carver");
+	p[0].lv = 4;
+	p[0].score = 3200;
 
-	strcpy(p[2].name, "CT-7567");
-	p[2].lv = 69;
-	p[2].score = 69420;
+	strcpy(p[1].name, "Ink");
+	p[1].lv = 5;
+	p[1].score = 4200;
 
-	strcpy(p[3].name, "James Bond");
-	p[3].lv = 700;
-	p[3].score = 77777;
+	strcpy(p[2].name, "James Bond");
+	p[2].lv = 7;
+	p[2].score = 7007;
 
-	strcpy(p[4].name, "Snoopy");
-	p[4].lv = 5;
-	p[4].score = 5300;
+	strcpy(p[3].name, "Snoopy");
+	p[3].lv = 6;
+	p[3].score = 5300;
 
-	for (j = 0; j < 4 ; j++)
+	strcpy(p[4].name, "Faye");
+	p[4].lv = 1;
+	p[4].score = 200;*/
+
+	for (j = 0; j < 5 ; j++)
 	{
-		for (k = 0; k < (4 - j); k++)
+		for (k = 0; k < (5 - j); k++)
 		{
 			if (p[k].score < p[k + 1].score)
 			{
@@ -105,27 +131,27 @@ int PlayerStats(int pscore, int lv)
 	strcpy(sp[0].name, p[0].name);
 	sp[0].score = p[0].score;
 	sp[0].lv = p[0].lv ;
-	fwrite(&p, sizeof(struct player), 5, fptr);
+	fwrite(&sp, sizeof(struct player), 5, fptr);
 
 	strcpy(sp[1].name, p[1].name);
 	sp[1].score = p[1].score;
 	sp[1].lv = p[1].lv;
-	fwrite(&p, sizeof(struct player), 5, fptr);
+	fwrite(&sp, sizeof(struct player), 5, fptr);
 
 	strcpy(sp[2].name, p[2].name);
 	sp[2].score = p[2].score;
 	sp[2].lv = p[2].lv;
-	fwrite(&p, sizeof(struct player), 5, fptr);
+	fwrite(&sp, sizeof(struct player), 5, fptr);
 
 	strcpy(sp[3].name, p[3].name);
 	sp[3].score = p[3].score;
 	sp[3].lv = p[3].lv;
-	fwrite(&p, sizeof(struct player), 5, fptr);
+	fwrite(&sp, sizeof(struct player), 5, fptr);
 
 	strcpy(sp[4].name, p[4].name);
 	sp[4].score = p[4].score;
 	sp[4].lv = p[4].lv;
-	fwrite(&p, sizeof(struct player), 5, fptr);
+	fwrite(&sp, sizeof(struct player), 5, fptr);
 
 	fclose(fptr);
 
@@ -142,9 +168,9 @@ int PlayerStats(int pscore, int lv)
 			while (fread(&p,sizeof(struct player),5,fptr)!=0)
 		{
 			
-			printf("Player %d Name : %s\n", i + 1, p[i].name);
-			printf("Level : %d\n", p[i].lv);
-			printf("Score : %d\n", p[i].score);
+			printf("Player %d Name : %s\n", i + 1, sp[i].name);
+			printf("Level : %d\n", sp[i].lv);
+			printf("Score : %d\n", sp[i].score);
 			printf("---------------------------\n");
 				i++;
 		}
