@@ -86,6 +86,9 @@ int PlayerStats(int pscore, int lv)
 
 	printf("\nEnter Player Name : ");
 	scanf("%s", p[5].name);
+	setcolor(11, 0);
+	printf("Your Level : %d  ", lv);
+	printf("Your Score : %d",pscore);
 	p[5].score = pscore;
 	p[5].lv = lv;
 
@@ -719,7 +722,7 @@ int main()
 
 	char ch = ' ';
 	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0;
-	int bosshp = 30, oldbosshp = 30 , bossstate = 1 , maxbullet = 3 , message = 0;
+	int bosshp = 30, oldbosshp = 30 , bossstate = 1 , maxbullet = 3 , message = 0 , levelcap = 1000;
 	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
 	int PlayerHP = 3, OldPlayerHP = 3 , score=0 , oldscore=0;
@@ -1496,10 +1499,10 @@ int main()
 		{
 			scoreupdate(score);
 			oldscore = score;
-			if (score % 1000 == 0)
+			if (score >= levelcap )
 			{
 				level += 1;
-				bossstate = 1;
+				levelcap += 1000;
 			}
 			
 		}
