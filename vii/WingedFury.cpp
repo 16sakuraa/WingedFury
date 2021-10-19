@@ -712,9 +712,9 @@ void clearcharged(int x, int y)
 
 void chargedstatus(int count)
 {
-	gotoxy(39, 23);
+	gotoxy(38, 23);
 	setcolor(11, 0);
-	if (count == -1)
+	/*if (count == -1)
 	{
 		printf("Charge Shot : 0 ");
 	}
@@ -726,7 +726,28 @@ void chargedstatus(int count)
 	{
 		printf("Charge Shot : %d ", count);
 	}
-	setcolor(7, 0);
+	setcolor(7, 0);*/
+
+	if (count == -1 || count == 0)
+	{
+		printf("Charge Shot : DEPLETED ");
+	}
+	else if (count >= 1 && count < 20)
+	{
+		printf("Charge Shot : LOW      ");
+	}
+	else if (count >= 20 && count < 40)
+	{
+		printf("Charge Shot : MEDIUM ");
+	}
+	else if (count >= 20 && count < 40)
+	{
+		printf("Charge Shot : HIGH   ");
+	}
+	else
+	{
+		printf("Charge Shot : MAX    ");
+	}
 }
 
 
@@ -799,7 +820,7 @@ int main()
 			if (ch == 'd' && cursor(x + 8, y) != '*') { plane(++x, y); }
 			if (ch == 'w' && cursor(x, y - 1) != '*') { clearplane(x, y);  plane(x, --y); }
 			if (ch == 's' && cursor(x, y+3) != '*') { clearplane(x, y);  plane(x, ++y); }
-			//if (ch == '+') { score += 500; }
+			if (ch == '+') { score += 500; }
 			//if (ch == 'r') { maxbullet += 1; updatemaxbullet(maxbullet); }
 			if (ch == 'e') 
 			{ 
