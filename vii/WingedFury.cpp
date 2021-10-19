@@ -84,11 +84,11 @@ int PlayerStats(int pscore, int lv)
 		}
 	fclose(fptr);
 	setcolor(15, 0);
-	printf("\nEnter Player Name : ");
+	printf("\n Enter Player Name : ");
 	scanf("%s", p[5].name);
 	setcolor(11, 0);
 	printf(" Your Level : %d  ", lv);
-	printf("Your Score : %d",pscore);
+	printf("Your Score : %d\n",pscore);
 	p[5].score = pscore;
 	p[5].lv = lv;
 
@@ -508,11 +508,11 @@ void menu()
 
 	while (1)
 	{
+
 		gotoxy(34, 22);
 		printf("Play");
 		gotoxy(34, 23);
 		printf("Score");
-		//gotoxy(10, 12);
 		if (_kbhit())
 		{
 			ch = _getch();
@@ -548,6 +548,7 @@ void menu()
 				seescore();
 				title();
 				gotoxy(32, 23);
+				setcolor(14, 0);
 				printf(">");
 
 
@@ -561,17 +562,17 @@ void gameover()
 {
 	int a = 200;
 	setcolor(3, 0);
-	printf("  _______      ___      .___  ___.  _______      ______   ____    ____  _______ .______      \n");
+	printf("\n         _______      ___      .___  ___.  _______      ______   ____    ____  _______ .______      \n");
 	Sleep(a);
-	printf(" /  _____|    /   \\     |   \\/   | |   ____|    /  __  \\  \\   \\  /   / |   ____||   _  \\     \n");
+	printf("        /  _____|    /   \\     |   \\/   | |   ____|    /  __  \\  \\   \\  /   / |   ____||   _  \\     \n");
 	Sleep(a);
-	printf("|  |  __     /  ^  \\    |  \\  /  | |  |__      |  |  |  |  \\   \\/   /  |  |__   |  |_)  |    \n");
+	printf("       |  |  __     /  ^  \\    |  \\  /  | |  |__      |  |  |  |  \\   \\/   /  |  |__   |  |_)  |    \n");
 	Sleep(a);
-	printf("|  | |_ |   /  /_\\  \\   |  |\\/|  | |   __|     |  |  |  |   \\      /   |   __|  |      /     \n");
+	printf("       |  | |_ |   /  /_\\  \\   |  |\\/|  | |   __|     |  |  |  |   \\      /   |   __|  |      /     \n");
 	Sleep(a);
-	printf("|  |__| |  /  _____  \\  |  |  |  | |  |____    |  `--\'  |    \\    /    |  |____ |  |\\  \\----.\n");
+	printf("       |  |__| |  /  _____  \\  |  |  |  | |  |____    |  `--\'  |    \\    /    |  |____ |  |\\  \\----.\n");
 	Sleep(a);
-	printf(" \\______| /__/     \\__\\ |__|  |__| |_______|    \\______/      \\__/     |_______|| _| `._____|\n     ");
+	printf("        \\______| /__/     \\__\\ |__|  |__| |_______|    \\______/      \\__/     |_______|| _| `._____|\n     ");
 	Sleep(500);
 	setcolor(7, 0);
 }
