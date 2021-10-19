@@ -687,6 +687,47 @@ void clearmaxbullet()
 	printf("                                       ");
 }
 
+void chargedshot(int x, int y)
+{
+	setcolor(11, 0);
+	gotoxy(x, y);
+	printf("  >>");
+	gotoxy(x, y-1);
+	printf(" >>");
+	gotoxy(x, y+1);
+	printf(" >>");
+	setcolor(7, 0);
+}
+
+void clearcharged(int x, int y)
+{
+	gotoxy(x, y);
+	printf("    ");
+	gotoxy(x, y - 1);
+	printf("   ");
+	gotoxy(x, y + 1);
+	printf("   ");
+
+}
+
+void chargedstatus(int count)
+{
+	gotoxy(39, 23);
+	setcolor(11, 0);
+	if (count == -1)
+	{
+		printf("Charge Shot : 0 ");
+	}
+	else if (count >= 10)
+	{
+		printf("Charge Shot : %d", count);
+	}
+	else
+	{
+		printf("Charge Shot : %d ", count);
+	}
+	setcolor(7, 0);
+}
 
 
 
@@ -720,6 +761,15 @@ int main()
 		int y = 0;
 	}; wb wb[10];
 
+	struct chargeshot
+	{
+		int x = 0;
+		int y = 0;
+		int status = 0;
+		int chargeshothold = 0;
+		int chargeshotholdold = 0;
+	}; chargeshot cs[10];
+
 	char ch = ' ';
 	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0;
 	int bosshp = 30, oldbosshp = 30 , bossstate = 1 , maxbullet = 3 , oldmaxbullet = 3, message = 0 , messagecount = 0 , levelcap = 1000;
@@ -736,6 +786,7 @@ int main()
 	setcolor(7, 0);
 	scoreupdate(score);
 	levelupdate(level);
+	chargedstatus(cs[0].chargeshothold);
 	//squid();
 	//bosshpupdate(bosshp);
 	plane(x, y);
@@ -750,6 +801,16 @@ int main()
 			if (ch == 's' && cursor(x, y+3) != '*') { clearplane(x, y);  plane(x, ++y); }
 			//if (ch == '+') { score += 500; }
 			//if (ch == 'r') { maxbullet += 1; updatemaxbullet(maxbullet); }
+			if (ch == 'e') 
+			{ 
+				cs[0].chargeshothold += 1; 
+				
+			}
+			else if (cs[0].chargeshothold > 0)
+			{
+	
+				cs[0].chargeshothold -= 2;
+			}
 			if (bulletStatus[0] == 0 && ch == ' ')
 			{
 				Beep(700, 50);
@@ -810,6 +871,47 @@ int main()
 			maxbullet += 1;
 			updatemaxbullet(maxbullet);
 			clearpack(x + 8, y + 1);
+		}
+
+		
+
+		if (cs[0].chargeshothold == 50)
+		{
+			Beep(900, 60);
+			cs[0].x = x + 7;
+			cs[0].y = y + 1;
+			cs[0].status = 1;
+		}
+
+		if (cs[0].status == 1)
+		{
+			cs[0].chargeshothold = 0;
+			clearcharged(cs[0].x, cs[0].y);
+			if (cs[0].x == 56)
+			{
+				chargedstatus(-1);
+			    cs[0].chargeshothold = 0;
+				cs[0].status = 0;
+			}
+
+			else if (cursor(cs[0].x + 3, cs[0].y) == '*')
+			{
+				chargedstatus(-1);
+				clearcharged(cs[0].x, cs[0].y);
+				cs[0].status = 0;
+				cs[0].chargeshothold = 0;
+
+			}
+			else
+			{
+				chargedshot(++cs[0].x, cs[0].y);
+			}
+		}
+
+		if (cs[0].chargeshothold != cs[0].chargeshotholdold)
+		{
+			chargedstatus(cs[0].chargeshothold);
+			cs[0].chargeshothold = cs[0].chargeshothold;
 		}
 
 		if (enemy[0].status == 0)
