@@ -440,7 +440,7 @@ void seescore()
 
 	while (1)
 	{
-		gotoxy(40, 10);
+		gotoxy(25, 24);
 		printf("> Back");
 		if (_kbhit())
 		{
