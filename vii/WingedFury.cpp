@@ -940,7 +940,7 @@ int main()
 		if (cs[0].chargeshothold != cs[0].chargeshotholdold)
 		{
 			chargedstatus(cs[0].chargeshothold);
-			cs[0].chargeshothold = cs[0].chargeshothold;
+			cs[0].chargeshotholdold = cs[0].chargeshothold;
 		}
 
 		if (enemy[0].status == 0)
