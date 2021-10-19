@@ -740,15 +740,15 @@ void chargedstatus(int count)
 	{
 		printf("Charge Shot : DEPLETED ");
 	}
-	else if (count >= 1 && count < 10)
+	else if (count >= 1 && count < 8)
 	{
 		printf("Charge Shot : LOW      ");
 	}
-	else if (count >= 10 && count < 20)
+	else if (count >= 8 && count < 14)
 	{
 		printf("Charge Shot : MEDIUM ");
 	}
-	else if (count >= 20 && count < 27)
+	else if (count >= 14 && count < 18)
 	{
 		printf("Charge Shot : HIGH   ");
 	}
@@ -904,7 +904,7 @@ int main()
 
 		
 
-		if (cs[0].chargeshothold == 30)
+		if (cs[0].chargeshothold == 20)
 		{
 			Beep(900, 60);
 			cs[0].x = x + 7;
