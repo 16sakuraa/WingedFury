@@ -689,13 +689,21 @@ void clearmaxbullet()
 
 void chargedshot(int x, int y)
 {
+	setcolor(3, 0);
+	gotoxy(x, y);
+	printf("   >");
+	gotoxy(x, y-1);
+	printf("  >");
+	gotoxy(x, y+1);
+	printf("  >");
+
 	setcolor(11, 0);
 	gotoxy(x, y);
-	printf("  >>");
-	gotoxy(x, y-1);
-	printf(" >>");
-	gotoxy(x, y+1);
-	printf(" >>");
+	printf("  >");
+	gotoxy(x, y - 1);
+	printf(" >");
+	gotoxy(x, y + 1);
+	printf(" >");
 	setcolor(7, 0);
 }
 
@@ -732,15 +740,15 @@ void chargedstatus(int count)
 	{
 		printf("Charge Shot : DEPLETED ");
 	}
-	else if (count >= 1 && count < 20)
+	else if (count >= 1 && count < 10)
 	{
 		printf("Charge Shot : LOW      ");
 	}
-	else if (count >= 20 && count < 40)
+	else if (count >= 10 && count < 20)
 	{
 		printf("Charge Shot : MEDIUM ");
 	}
-	else if (count >= 20 && count < 40)
+	else if (count >= 20 && count < 27)
 	{
 		printf("Charge Shot : HIGH   ");
 	}
@@ -896,7 +904,7 @@ int main()
 
 		
 
-		if (cs[0].chargeshothold == 50)
+		if (cs[0].chargeshothold == 30)
 		{
 			Beep(900, 60);
 			cs[0].x = x + 7;
