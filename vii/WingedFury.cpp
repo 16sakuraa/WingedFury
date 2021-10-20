@@ -383,9 +383,9 @@ void healthpack()
 {
 	int x, y, drop;
 	drop = rand() % 100;
-	if (drop >= 90)
+	if (drop >= 91)
 	{
-		x = RandomX();
+		x = RandomX()%30+10;
 		y = RandomY();
 		setcolor(10, 0);
 		gotoxy(x, y);
@@ -692,10 +692,14 @@ void chargedshot(int x, int y)
 	setcolor(3, 0);
 	gotoxy(x, y);
 	printf("   >");
+	gotoxy(x-1, y - 2);
+	printf(" >>");
 	gotoxy(x, y-1);
 	printf("  >");
 	gotoxy(x, y+1);
 	printf("  >");
+	gotoxy(x-1, y + 2);
+	printf(" >>");
 
 	setcolor(11, 0);
 	gotoxy(x, y);
@@ -713,7 +717,11 @@ void clearcharged(int x, int y)
 	printf("    ");
 	gotoxy(x, y - 1);
 	printf("   ");
+	gotoxy(x, y - 2);
+	printf("   ");
 	gotoxy(x, y + 1);
+	printf("   ");
+	gotoxy(x, y + 2);
 	printf("   ");
 
 }
@@ -738,7 +746,7 @@ void chargedstatus(int count)
 
 	if (count == -1 || count == 0)
 	{
-		printf("Charge Shot : DEPLETED ");
+		printf("Charge Shot : DEPLETED  ");
 	}
 	else if (count >= 1 && count < 8)
 	{
@@ -752,11 +760,64 @@ void chargedstatus(int count)
 	{
 		printf("Charge Shot : HIGH   ");
 	}
+	else if (count == -2)
+	{
+		printf("Charge Shot : RECHARGING");
+	}
+	else if (count == -3)
+	{
+		printf("Charge Shot : LOCKED");
+	}
 	else
 	{
 		printf("Charge Shot : MAX    ");
 	}
+
+	setcolor(7, 0);
 }
+
+void chargedrop(int acq)
+{
+	int drop, chance , x ,y ;
+	if (acq == -3)
+	{
+		chance = 95;
+	}
+	else
+	{
+		chance = 100;
+	}
+
+	drop = rand() % 100;
+	if (drop >= chance)
+	{
+		x = RandomX()%20+15;
+		y = RandomY();
+		setcolor(11, 0);
+		gotoxy(x, y);
+		printf("C");
+		setcolor(7, 0);
+	}
+
+}
+
+void chargedready()
+{
+	setcolor(11, 0);
+	gotoxy(13, 26);
+	printf("Hold 'e' to charge and fire charged shot !");
+	setcolor(7, 0);
+}
+
+void delchargedready()
+{
+
+	
+	gotoxy(13, 26);
+	printf("                                          ");
+	
+}
+
 
 
 
@@ -794,13 +855,13 @@ int main()
 	{
 		int x = 0;
 		int y = 0;
-		int status = 0;
+		int status = -3;
 		int chargeshothold = 0;
 		int chargeshotholdold = 0;
 	}; chargeshot cs[10];
 
 	char ch = ' ';
-	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0;
+	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0 , chargemessage = 0 , chargedel = 0;
 	int bosshp = 30, oldbosshp = 30 , bossstate = 1 , maxbullet = 3 , oldmaxbullet = 3, message = 0 , messagecount = 0 , levelcap = 1000;
 	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
@@ -815,7 +876,7 @@ int main()
 	setcolor(7, 0);
 	scoreupdate(score);
 	levelupdate(level);
-	chargedstatus(cs[0].chargeshothold);
+	chargedstatus(cs[0].status);
 	//squid();
 	//bosshpupdate(bosshp);
 	plane(x, y);
@@ -830,7 +891,7 @@ int main()
 			if (ch == 's' && cursor(x, y+3) != '*') { clearplane(x, y);  plane(x, ++y); }
 			if (ch == '+') { score += 500; }
 			//if (ch == 'r') { maxbullet += 1; updatemaxbullet(maxbullet); }
-			if (ch == 'e') 
+			if (ch == 'e' && cs[0].status != -3) 
 			{ 
 				cs[0].chargeshothold += 1; 
 				
@@ -902,6 +963,27 @@ int main()
 			clearpack(x + 8, y + 1);
 		}
 
+		if (cursor(x + 8, y + 1) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 8, y + 1);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (chargemessage == 1)
+		{
+			chargedel += 1;
+		}
+
+		if (chargedel % 100 == 0)
+		{
+			delchargedready();
+			chargemessage = 0;
+		}
 		
 
 		if (cs[0].chargeshothold == 20)
@@ -934,6 +1016,7 @@ int main()
 			else
 			{
 				chargedshot(++cs[0].x, cs[0].y);
+				chargedstatus(-2);
 			}
 		}
 
@@ -942,6 +1025,8 @@ int main()
 			chargedstatus(cs[0].chargeshothold);
 			cs[0].chargeshotholdold = cs[0].chargeshothold;
 		}
+		
+
 
 		if (enemy[0].status == 0)
 		{
@@ -1034,7 +1119,7 @@ int main()
 					clear_enemy(wmy[0].x, wmy[0].y);
 					wmy[0].status = 0;
 				}
-				else if (cursor(wmy[0].x, wmy[0].y - 1) == '>' || cursor(wmy[0].x, wmy[0].y - 1) == '-' || cursor(wmy[0].x+1, wmy[0].y) == '>' )
+				else if (cursor(wmy[0].x, wmy[0].y - 1) == '>' || cursor(wmy[0].x, wmy[0].y - 1) == '-' || cursor(wmy[0].x+1, wmy[0].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
 					Beep(480, 50);
 					clear_enemy(wmy[0].x, wmy[0].y);
@@ -1100,7 +1185,7 @@ int main()
 					clear_enemy(wmy[1].x, wmy[1].y);
 					wmy[1].status = 0;
 				}
-				else if (cursor(wmy[1].x, wmy[1].y - 1) == '>' || cursor(wmy[1].x, wmy[1].y - 1) == '-' || cursor(wmy[1].x + 1, wmy[1].y) == '>')
+				else if (cursor(wmy[1].x, wmy[1].y - 1) == '>' || cursor(wmy[1].x, wmy[1].y - 1) == '-' || cursor(wmy[1].x + 1, wmy[1].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
 					Beep(480, 50);
 					clear_enemy(wmy[1].x, wmy[1].y);
@@ -1167,7 +1252,7 @@ int main()
 					clear_enemy(wmy[2].x, wmy[2].y);
 					wmy[2].status = 0;
 				}
-				else if (cursor(wmy[2].x, wmy[2].y - 1) == '>' || cursor(wmy[2].x, wmy[2].y - 1) == '-' || cursor(wmy[2].x + 1, wmy[2].y) == '>')
+				else if (cursor(wmy[2].x, wmy[2].y - 1) == '>' || cursor(wmy[2].x, wmy[2].y - 1) == '-' || cursor(wmy[2].x + 1, wmy[2].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
 					Beep(480, 50);
 					clear_enemy(wmy[2].x, wmy[2].y);
@@ -1233,7 +1318,7 @@ int main()
 					clear_enemy(wmy[3].x, wmy[3].y);
 					wmy[3].status = 0;
 				}
-				else if (cursor(wmy[3].x, wmy[3].y - 1) == '>' || cursor(wmy[3].x, wmy[3].y - 1) == '-' || cursor(wmy[3].x + 1, wmy[3].y) == '>')
+				else if (cursor(wmy[3].x, wmy[3].y - 1) == '>' || cursor(wmy[3].x, wmy[3].y - 1) == '-' || cursor(wmy[3].x + 1, wmy[3].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
 					Beep(480, 50);
 					clear_enemy(wmy[3].x, wmy[3].y);
@@ -1299,7 +1384,7 @@ int main()
 					clear_enemy(wmy[4].x, wmy[4].y);
 					wmy[4].status = 0;
 				}
-				else if (cursor(wmy[4].x, wmy[4].y - 1) == '>' || cursor(wmy[4].x, wmy[4].y - 1) == '-' || cursor(wmy[4].x + 1, wmy[4].y) == '>')
+				else if (cursor(wmy[4].x, wmy[4].y - 1) == '>' || cursor(wmy[4].x, wmy[4].y - 1) == '-' || cursor(wmy[4].x + 1, wmy[4].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
 					Beep(480, 50);
 					clear_enemy(wmy[4].x, wmy[4].y);
@@ -1365,7 +1450,7 @@ int main()
 					clear_enemy(wmy[5].x, wmy[5].y);
 					wmy[5].status = 0;
 				}
-				else if (cursor(wmy[5].x, wmy[5].y - 1) == '>' || cursor(wmy[5].x, wmy[5].y - 1) == '-' || cursor(wmy[5].x + 1, wmy[5].y) == '>')
+				else if (cursor(wmy[5].x, wmy[5].y - 1) == '>' || cursor(wmy[5].x, wmy[5].y - 1) == '-' || cursor(wmy[5].x + 1, wmy[5].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
 					Beep(480, 50);
 					clear_enemy(wmy[5].x, wmy[5].y);
@@ -1431,7 +1516,7 @@ int main()
 					clear_enemy(wmy[6].x, wmy[6].y);
 					wmy[6].status = 0;
 				}
-				else if (cursor(wmy[6].x, wmy[6].y - 1) == '>' || cursor(wmy[6].x, wmy[6].y - 1) == '-' || cursor(wmy[6].x + 1, wmy[6].y) == '>')
+				else if (cursor(wmy[6].x, wmy[6].y - 1) == '>' || cursor(wmy[6].x, wmy[6].y - 1) == '-' || cursor(wmy[6].x + 1, wmy[6].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
 					Beep(480, 50);
 					clear_enemy(wmy[6].x, wmy[6].y);
@@ -1489,6 +1574,7 @@ int main()
 			{
 				Beep(400, 50);
 				healthpack();
+				chargedrop(cs[0].status);
 				extrabullet(maxbullet);
 				clear_enemy(enemy[0].x, enemy[0].y);
 				enemy[0].status = 0;
@@ -1532,6 +1618,7 @@ int main()
 				Beep(400, 50);
 				healthpack();
 				extrabullet(maxbullet);
+				chargedrop(cs[0].status);
 				clear_enemy(enemy[1].x, enemy[1].y);
 				enemy[1].status = 0;
 				score += 100;
@@ -1574,6 +1661,7 @@ int main()
 				Beep(400, 50);
 				healthpack();
 				extrabullet(maxbullet);
+				chargedrop(cs[0].status);
 				clear_enemy(enemy[2].x, enemy[2].y);
 				enemy[2].status = 0;
 				score += 100;
@@ -1616,6 +1704,7 @@ int main()
 				Beep(400, 50);
 				healthpack();
 				extrabullet(maxbullet);
+				chargedrop(cs[0].status);
 				clear_enemy(enemy[3].x, enemy[3].y);
 				enemy[3].status = 0;
 				score += 100;
@@ -1658,6 +1747,7 @@ int main()
 				Beep(400, 50);
 				healthpack();
 				extrabullet(maxbullet);
+				chargedrop(cs[0].status);
 				clear_enemy(enemy[4].x, enemy[4].y);
 				enemy[4].status = 0;
 				score += 100;
@@ -1700,6 +1790,7 @@ int main()
 				Beep(400, 50);
 				healthpack();
 				extrabullet(maxbullet);
+				chargedrop(cs[0].status);
 				clear_enemy(enemy[5].x, enemy[5].y);
 				enemy[5].status = 0;
 				score += 100;
@@ -1741,6 +1832,7 @@ int main()
 			{
 				Beep(400, 50);
 				healthpack();
+				chargedrop(cs[0].status);
 				extrabullet(maxbullet);
 				clear_enemy(enemy[6].x, enemy[6].y);
 				enemy[6].status = 0;
@@ -1784,6 +1876,7 @@ int main()
 				Beep(400, 50);
 				healthpack();
 				extrabullet(maxbullet);
+				chargedrop(cs[0].status);
 				clear_enemy(enemy[7].x, enemy[7].y);
 				enemy[7].status = 0;
 				score += 100;
@@ -1826,6 +1919,7 @@ int main()
 				Beep(400, 50);
 				healthpack();
 				extrabullet(maxbullet);
+				chargedrop(cs[0].status);
 				clear_enemy(enemy[8].x, enemy[8].y);
 				enemy[8].status = 0;
 				score += 100;
