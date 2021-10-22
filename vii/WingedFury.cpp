@@ -863,12 +863,12 @@ void delchargedready()
 
 void key()
 {
-	gotoxy(63,2);
+	gotoxy(63,1);
 	setcolor(14, 0);
 	printf("Moves  - w,a,s,d");
-	gotoxy(63, 3);
+	gotoxy(63, 2);
 	printf("Shoots - SPACEBAR");
-	gotoxy(63, 4);
+	gotoxy(63, 3);
 	printf("Charge - e (hold)");
 	setcolor(7, 0);
 }
@@ -912,9 +912,9 @@ void knife()
 	gotoxy(62, 22);
 	printf("         V");
 	setcolor(14, 0);
-	gotoxy(62, 24);
-	printf("DEVELOPED BY");
 	gotoxy(62, 25);
+	printf("DEVELOPED BY");
+	gotoxy(62, 26);
 	printf("64010860 SUPPAPHOL");
 	setcolor(7, 0);
 }
