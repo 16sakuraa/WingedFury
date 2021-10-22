@@ -413,7 +413,7 @@ void healthpack()
 {
 	int x, y, drop;
 	drop = rand() % 100;
-	if (drop >= 91)
+	if (drop >= 89)
 	{
 		x = RandomX()%30+10;
 		y = RandomY();
@@ -832,7 +832,7 @@ void chargedrop(int acq)
 	}
 
 	drop = rand() % 100;
-	if (drop >= chance)
+	if (drop >= 0)
 	{
 		x = RandomX()%20+15;
 		y = RandomY();
@@ -1072,6 +1072,152 @@ int main()
 			
 		}
 
+		if (cursor(x + 6, y) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x + 6, y);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x + 6, y);
+			}
+
+		}
+
+		if (cursor(x + 6, y+2) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x + 6, y + 2);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x + 6, y+2);
+			}
+
+		}
+
+		if (cursor(x + 4, y - 1) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x + 4, y - 1);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x + 4, y - 1);
+			}
+
+		}
+
+		if (cursor(x + 3, y - 1) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x + 3, y - 1);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x + 3, y - 1);
+			}
+
+		}
+
+		if (cursor(x + 2, y - 1) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x + 2, y - 1);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x + 2, y - 1);
+			}
+
+		}
+
+		if (cursor(x + 1, y - 1) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x + 1, y - 1);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x + 1, y - 1);
+			}
+
+		}
+
+		if (cursor(x + 3, y + 3) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x + 3, y + 3);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x + 3, y + 3);
+			}
+
+		}
+
+		if (cursor(x + 2, y + 3) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x + 2, y + 3);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x + 2, y + 3);
+			}
+
+		}
+
+		if (cursor(x + 1, y + 3) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x + 1, y + 3);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x + 1, y + 3);
+			}
+
+		}
+
+		
+
 		if (cursor(x + 8, y + 1) == 'A')
 		{
 			Beep(800, 25);
@@ -1081,12 +1227,213 @@ int main()
 			clearpack(x + 8, y + 1);
 		}
 
+		if (cursor(x + 6, y ) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x + 6, y );
+		}
+
+		if (cursor(x + 6, y + 2) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x + 6, y + 2);
+		}
+
+		if (cursor(x + 4, y - 1) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x + 4, y - 1);
+		}
+
+		if (cursor(x + 3, y - 1) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x + 3, y - 1);
+		}
+
+		if (cursor(x + 2, y - 1) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x + 2, y - 1);
+		}
+
+		if (cursor(x + 1, y - 1) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x + 1, y - 1);
+		
+
+		if (cursor(x + 4, y + 3) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x + 4, y + 3);
+		}
+
+		if (cursor(x + 3, y + 3) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x + 3, y + 3);
+		}
+
+		if (cursor(x + 2, y + 3) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x + 2, y + 3);
+		}
+
+		if (cursor(x + 1, y + 3) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x + 1, y + 3);
+		}
+
+
 		if (cursor(x + 8, y + 1) == 'C')
 		{
 			Beep(800, 25);
 			Beep(650, 25);
 			cs[0].status = 0;
 			clearpack(x + 8, y + 1);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x + 6, y) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 6, y);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x + 6, y + 2) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 6, y + 2);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x + 4, y - 1) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 4, y - 1);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x + 3, y - 1) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 3, y - 1);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x + 2, y - 1) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 2, y - 1);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x + 1, y - 1) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 1, y - 1);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x + 4, y + 3) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 4, y + 3);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x + 3, y + 3) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 3, y + 3);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x + 2, y + 3) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 2, y + 3);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x + 1, y + 3) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 1, y + 3);
 			chargedstatus(cs[0].status);
 			chargedready();
 			chargemessage = 1;
@@ -1270,7 +1617,7 @@ int main()
 				clear_enemy(wb[0].x, wb[0].y);
 				wb[0].status = 0;
 			}
-			else if (cursor(wb[0].x - 1, wb[0].y) == 'D' || cursor(wb[0].x - 1, wb[0].y) == '^' || cursor(wb[0].x - 1, wb[0].y) == 'v')
+			else if (cursor(wb[0].x - 1, wb[0].y) == 'D' || cursor(wb[0].x - 1, wb[0].y) == '^' || cursor(wb[0].x - 1, wb[0].y) == 'v' || cursor(wb[0].x - 1, wb[0].y) == '=')
 			{
 				clear_enemy(wb[0].x, wb[0].y);
 				PlayerHP -= 1;
@@ -1337,7 +1684,7 @@ int main()
 				clear_enemy(wb[1].x, wb[1].y);
 				wb[1].status = 0;
 			}
-			else if (cursor(wb[1].x - 1, wb[1].y) == 'D' || cursor(wb[1].x - 1, wb[1].y) == '^' || cursor(wb[1].x - 1, wb[1].y) == 'v')
+			else if (cursor(wb[1].x - 1, wb[1].y) == 'D' || cursor(wb[1].x - 1, wb[1].y) == '^' || cursor(wb[1].x - 1, wb[1].y) == 'v' || cursor(wb[1].x - 1, wb[1].y) == '=')
 			{
 				clear_enemy(wb[1].x, wb[1].y);
 				PlayerHP -= 1;
@@ -1403,7 +1750,7 @@ int main()
 				clear_enemy(wb[2].x, wb[2].y);
 				wb[2].status = 0;
 			}
-			else if (cursor(wb[2].x - 1, wb[2].y) == 'D' || cursor(wb[2].x - 1, wb[2].y) == '^' || cursor(wb[2].x - 1, wb[2].y) == 'v')
+			else if (cursor(wb[2].x - 1, wb[2].y) == 'D' || cursor(wb[2].x - 1, wb[2].y) == '^' || cursor(wb[2].x - 1, wb[2].y) == 'v' || cursor(wb[2].x - 1, wb[2].y) == '=')
 			{
 				clear_enemy(wb[2].x, wb[2].y);
 				PlayerHP -= 1;
@@ -1469,7 +1816,7 @@ int main()
 				clear_enemy(wb[3].x, wb[3].y);
 				wb[3].status = 0;
 			}
-			else if (cursor(wb[3].x - 1, wb[3].y) == 'D' || cursor(wb[3].x - 1, wb[3].y) == '^' || cursor(wb[3].x - 1, wb[3].y) == 'v')
+			else if (cursor(wb[3].x - 1, wb[3].y) == 'D' || cursor(wb[3].x - 1, wb[3].y) == '^' || cursor(wb[3].x - 1, wb[3].y) == 'v' || cursor(wb[3].x - 1, wb[3].y) == '=')
 			{
 				clear_enemy(wb[3].x, wb[3].y);
 				PlayerHP -= 1;
@@ -1535,7 +1882,7 @@ int main()
 				clear_enemy(wb[4].x, wb[4].y);
 				wb[4].status = 0;
 			}
-			else if (cursor(wb[4].x - 1, wb[4].y) == 'D' || cursor(wb[4].x - 1, wb[4].y) == '^' || cursor(wb[4].x - 1, wb[4].y) == 'v')
+			else if (cursor(wb[4].x - 1, wb[4].y) == 'D' || cursor(wb[4].x - 1, wb[4].y) == '^' || cursor(wb[4].x - 1, wb[4].y) == 'v' || cursor(wb[4].x - 1, wb[4].y) == '=')
 			{
 				clear_enemy(wb[4].x, wb[4].y);
 				PlayerHP -= 1;
@@ -1601,7 +1948,7 @@ int main()
 				clear_enemy(wb[5].x, wb[5].y);
 				wb[5].status = 0;
 			}
-			else if (cursor(wb[5].x - 1, wb[5].y) == 'D' || cursor(wb[5].x - 1, wb[5].y) == '^' || cursor(wb[5].x - 1, wb[5].y) == 'v')
+			else if (cursor(wb[5].x - 1, wb[5].y) == 'D' || cursor(wb[5].x - 1, wb[5].y) == '^' || cursor(wb[5].x - 1, wb[5].y) == 'v' || cursor(wb[5].x - 1, wb[5].y) == '=')
 			{
 				clear_enemy(wb[5].x, wb[5].y);
 				PlayerHP -= 1;
@@ -1668,7 +2015,7 @@ int main()
 				clear_enemy(wb[6].x, wb[6].y);
 				wb[6].status = 0;
 			}
-			else if (cursor(wb[6].x - 1, wb[6].y) == 'D' || cursor(wb[6].x - 1, wb[6].y) == '^' || cursor(wb[6].x - 1, wb[6].y) == 'v')
+			else if (cursor(wb[6].x - 1, wb[6].y) == 'D' || cursor(wb[6].x - 1, wb[6].y) == '^' || cursor(wb[6].x - 1, wb[6].y) == 'v' || cursor(wb[6].x - 1, wb[6].y) == '=')
 			{
 				clear_enemy(wb[6].x, wb[6].y);
 				PlayerHP -= 1;
