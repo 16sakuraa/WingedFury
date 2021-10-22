@@ -195,6 +195,8 @@ int PlayerStats(int pscore, int lv)
 	fclose(fptr);
 
 	i = 0;
+	Beep(900, 50);
+	Beep(700, 25);
 	setcolor(14, 0);
 	printf("\n\n --------Leaderboard--------\n");
 
@@ -576,12 +578,16 @@ void menu()
 			}
 			else if (ch == ' ' && play == 1)
 			{
+				Beep(900, 50);
+				Beep(700, 25);
 				system("cls");
 				break;
 
 			}
 			else if (ch == ' ' && play == 0)
 			{
+				Beep(900, 50);
+				Beep(700, 25);
 				system("cls");
 				seescore();
 				title();
@@ -601,17 +607,23 @@ void gameover()
 	int a = 200;
 	setcolor(3, 0);
 	printf("\n         _______      ___      .___  ___.  _______\n");
-	Sleep(a);
+	Sleep(a-20);
+	Beep(600,20);
 	printf("        /  _____|    /   \\     |   \\/   | |   ____|\n");
-	Sleep(a);
+	Sleep(a-20);
+	Beep(400, 20);
 	printf("       |  |  __     /  ^  \\    |  \\  /  | |  |__\n");
-	Sleep(a);
+	Sleep(a-40);
+	Beep(200, 40);
 	printf("       |  | |_ |   /  /_\\  \\   |  |\\/|  | |   __|\n");
-	Sleep(a);
+	Sleep(a-60);
+	Beep(200, 60);
 	printf("       |  |__| |  /  _____  \\  |  |  |  | |  |____\n");
-	Sleep(a);
+	Sleep(a-80);
+	Beep(200, 80);
 	printf("        \\______| /__/     \\__\\ |__|  |__| |_______|\n");
-	Sleep(a);
+	Sleep(a-40)
+	Beep(400, 40);
 	printf("                    ______   ____    ____  _______ .______      \n");
 	Sleep(a);
 	printf("                   /  __  \\  \\   \\  /   / |   ____||   _  \\     \n");
@@ -877,7 +889,9 @@ void key()
 	gotoxy(63, 2);
 	printf("Shoots - SPACEBAR");
 	gotoxy(63, 3);
-	printf("Charge - e (hold)");
+	printf("Charge - e (HOLD)");
+	gotoxy(63, 4);
+	printf("Exit   - x");
 	setcolor(7, 0);
 }
 
