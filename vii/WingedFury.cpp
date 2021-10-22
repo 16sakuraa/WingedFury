@@ -7,6 +7,19 @@
 #include <fcntl.h>
 #include <io.h>
 
+#define screen_x 80
+#define screen_y 27
+HANDLE wHnd;
+COORD bufferSize = { screen_x,screen_y };
+SMALL_RECT windowSize = { 0,0,screen_x - 1,screen_y - 1 };
+int setConsole(int x, int y)
+{
+	wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleWindowInfo(wHnd, TRUE, &windowSize);
+	SetConsoleScreenBufferSize(wHnd, bufferSize);
+	return 0;
+}
+
 void setcolor(int fg, int bg)
 {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -39,6 +52,18 @@ void gotoxy(int x, int y)
 	COORD c = { x, y };
 	SetConsoleCursorPosition(
 		GetStdHandle(STD_OUTPUT_HANDLE), c);
+}
+
+void displayscore(int pscore, int lv , char name[30])
+{
+	setcolor(11, 0);
+	gotoxy(40, 17);
+	printf("Player Name : %s",name);
+	gotoxy(40, 18);
+	printf("Your Level : %d  ", lv);
+	gotoxy(40, 19);
+	printf("Your Score : %d", pscore);
+	setcolor(7, 0);
 }
 
 int PlayerStats(int pscore, int lv)
@@ -84,11 +109,14 @@ int PlayerStats(int pscore, int lv)
 		}
 	fclose(fptr);
 	setcolor(15, 0);
-	printf("\n Enter Player Name : ");
+	printf("\n\t Enter Player Name : ");
 	scanf("%s", p[5].name);
-	setcolor(11, 0);
-	printf(" Your Level : %d  ", lv);
-	printf("Your Score : %d\n",pscore);
+	//setcolor(11, 0);
+	//printf("Your Level : %d\n", lv);
+	//printf("Your Score : %d\n", pscore);
+	displayscore(pscore, lv , p[5].name);
+	setcolor(7, 0);
+	gotoxy(0, 14);
 	p[5].score = pscore;
 	p[5].lv = lv;
 
@@ -160,7 +188,7 @@ int PlayerStats(int pscore, int lv)
 
 	i = 0;
 	setcolor(14, 0);
-	printf("\n --------Leaderboard--------\n");
+	printf("\n\n --------Leaderboard--------\n");
 
 
 	fptr = fopen("PlayerStatsnew.txt", "r");
@@ -180,6 +208,8 @@ int PlayerStats(int pscore, int lv)
 	setcolor(11, 0);
 	printf(" Thank you for playing my game!\n");
 	setcolor(7, 0);
+
+	
 	return 0;
 }
 
@@ -302,7 +332,7 @@ void playerhealth(int php)
 {
 	gotoxy(0, 23);
 	setcolor(2, 0);
-	printf("HP : %d",php);
+	printf(" HP : %d",php);
 
 
 }
@@ -487,12 +517,12 @@ void title()
 	printf("                               \'---\'\n");
 	Sleep(600);
 	setcolor(6, 0);
-	printf("   __      __.__                          .___ ___________                   \n");
-	printf("  /  \\    /  \\__| ____    ____   ____   __| _/ \\_   _____/_ _________ ___.__.\n");
-	printf("  \\   \\/\\/   /  |/    \\  / ___\\_/ __ \\ / __ |   |    __)|  |  \\_  __ <   |  |\n");
-	printf("   \\        /|  |   |  \\/ /_/  >  ___// /_/ |   |     \\ |  |  /|  | \\/\\___  |\n");
-	printf("    \\__/\\  / |__|___|  /\\___  / \\___  >____ |   \\___  / |____/ |__|   / ____|\n");
-	printf("         \\/          \\//_____/      \\/     \\/       \\/                \\/     ");
+	printf("    __      __.__                          .___ ___________                   \n");
+	printf("   /  \\    /  \\__| ____    ____   ____   __| _/ \\_   _____/_ _________ ___.__.\n");
+	printf("   \\   \\/\\/   /  |/    \\  / ___\\_/ __ \\ / __ |   |    __)|  |  \\_  __ <   |  |\n");
+	printf("    \\        /|  |   |  \\/ /_/  >  ___// /_/ |   |     \\ |  |  /|  | \\/\\___  |\n");
+	printf("     \\__/\\  / |__|___|  /\\___  / \\___  >____ |   \\___  / |____/ |__|   / ____|\n");
+	printf("          \\/          \\//_____/      \\/     \\/       \\/                \\/     ");
 	setcolor(7, 0);
 }
 
@@ -562,18 +592,31 @@ void gameover()
 {
 	int a = 200;
 	setcolor(3, 0);
-	printf("\n         _______      ___      .___  ___.  _______      ______   ____    ____  _______ .______      \n");
+	printf("\n         _______      ___      .___  ___.  _______\n");
 	Sleep(a);
-	printf("        /  _____|    /   \\     |   \\/   | |   ____|    /  __  \\  \\   \\  /   / |   ____||   _  \\     \n");
+	printf("        /  _____|    /   \\     |   \\/   | |   ____|\n");
 	Sleep(a);
-	printf("       |  |  __     /  ^  \\    |  \\  /  | |  |__      |  |  |  |  \\   \\/   /  |  |__   |  |_)  |    \n");
+	printf("       |  |  __     /  ^  \\    |  \\  /  | |  |__\n");
 	Sleep(a);
-	printf("       |  | |_ |   /  /_\\  \\   |  |\\/|  | |   __|     |  |  |  |   \\      /   |   __|  |      /     \n");
+	printf("       |  | |_ |   /  /_\\  \\   |  |\\/|  | |   __|\n");
 	Sleep(a);
-	printf("       |  |__| |  /  _____  \\  |  |  |  | |  |____    |  `--\'  |    \\    /    |  |____ |  |\\  \\----.\n");
+	printf("       |  |__| |  /  _____  \\  |  |  |  | |  |____\n");
 	Sleep(a);
-	printf("        \\______| /__/     \\__\\ |__|  |__| |_______|    \\______/      \\__/     |_______|| _| `._____|\n     ");
+	printf("        \\______| /__/     \\__\\ |__|  |__| |_______|\n");
+	Sleep(a);
+	printf("                    ______   ____    ____  _______ .______      \n");
+	Sleep(a);
+	printf("                   /  __  \\  \\   \\  /   / |   ____||   _  \\     \n");
+	Sleep(a);
+	printf("                  |  |  |  |  \\   \\/   /  |  |__   |  |_)  |    \n");
+	Sleep(a);
+	printf("                  |  |  |  |   \\      /   |   __|  |      /     \n");
+	Sleep(a);
+	printf("                  |  `--\'  |    \\    /    |  |____ |  |\\  \\----.\n");
+	Sleep(a);
+	printf("                   \\______/      \\__/     |_______|| _| `._____|\n");
 	Sleep(500);
+	//printf("");
 	setcolor(7, 0);
 }
 
@@ -818,11 +861,84 @@ void delchargedready()
 	
 }
 
+void key()
+{
+	gotoxy(63,2);
+	setcolor(14, 0);
+	printf("Moves  - w,a,s,d");
+	gotoxy(63, 3);
+	printf("Shoots - SPACEBAR");
+	gotoxy(63, 4);
+	printf("Charge - e (hold)");
+	setcolor(7, 0);
+}
+
+void knife()
+{
+	setcolor(15, 0);
+	gotoxy(62, 6);
+	printf("       .---.\n");
+    gotoxy(62, 7);
+	printf("       |---|\n");
+	gotoxy(62, 8);
+	printf("       |---|\n");
+	gotoxy(62, 9);
+	printf("       |---|\n");
+	gotoxy(62, 10);
+	printf("   .---^ - ^---.\n");
+	gotoxy(62, 11);
+	printf("   :___________:\n");
+	setcolor(8, 0);
+	gotoxy(62, 12);
+	printf("      |  |//|\n");
+	gotoxy(62, 13);
+	printf("      |  |//|\n");
+	gotoxy(62, 14);
+	printf("      |  |//|\n");
+	gotoxy(62, 15);
+	printf("      |  |//|\n");
+	gotoxy(62, 16);
+	printf("      |  |//|\n");
+	gotoxy(62, 17);
+	printf("      |  |//|\n");
+	gotoxy(62, 18);
+	printf("      |  |.-|\n");
+	gotoxy(62, 19);
+	printf("      |.-\'**|\n");
+	gotoxy(62, 20);
+	printf("       \\***/\n");
+	gotoxy(62, 21);
+	printf("        \\*/\n");
+	gotoxy(62, 22);
+	printf("         V");
+	setcolor(14, 0);
+	gotoxy(62, 24);
+	printf("DEVELOPED BY");
+	gotoxy(62, 25);
+	printf("64010860 SUPPAPHOL");
+	setcolor(7, 0);
+}
+
 
 
 
 int main()
 {
+	/*int newWidth = 7, newHeight = 20;
+	CONSOLE_FONT_INFOEX fontStructure = { 0 };
+	fontStructure.cbSize = sizeof(fontStructure);
+	fontStructure.dwFontSize.X = newWidth;
+	fontStructure.dwFontSize.Y = newHeight;
+	wcscpy(fontStructure.FaceName, L"Arial");
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetCurrentConsoleFontEx(hConsole, true, &fontStructure);
+	//system("pause");
+
+	*/
+
+	setConsole(screen_x, screen_y);
+
+
 	setcursor(0);
 	srand(time(NULL));
 
@@ -872,6 +988,8 @@ int main()
 	}
 	menu();
 	map_generate();
+	key();
+	knife();
 	playerhealth(PlayerHP);
 	setcolor(7, 0);
 	scoreupdate(score);
@@ -2155,6 +2273,8 @@ int main()
 	system("cls");
 	gameover();
 	PlayerStats(score , level);
+	//gotoxy(0, 60);
+	//printf(" ");
 	
 	return 0;
 
