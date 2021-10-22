@@ -755,14 +755,23 @@ void chargedshot(int x, int y)
 	setcolor(3, 0);
 	gotoxy(x, y);
 	printf("   >");
-	gotoxy(x-1, y - 2);
-	printf(" >>");
+	if (y != 2)
+	{
+		gotoxy(x - 1, y - 2);
+		printf(" >>");
+	}
+	
 	gotoxy(x, y-1);
 	printf("  >");
 	gotoxy(x, y+1);
 	printf("  >");
-	gotoxy(x-1, y + 2);
-	printf(" >>");
+
+	if (y != 20)
+	{
+		gotoxy(x - 1, y + 2);
+		printf(" >>");
+	}
+	
 
 	setcolor(11, 0);
 	gotoxy(x, y);
@@ -780,12 +789,21 @@ void clearcharged(int x, int y)
 	printf("    ");
 	gotoxy(x, y - 1);
 	printf("   ");
-	gotoxy(x, y - 2);
-	printf("   ");
+	if (y != 2)
+	{
+		gotoxy(x, y - 2);
+		printf("   ");
+	}
+	
 	gotoxy(x, y + 1);
 	printf("   ");
-	gotoxy(x, y + 2);
-	printf("   ");
+
+	if (y != 20)
+	{
+		gotoxy(x, y + 2);
+		printf("   ");
+	}
+	
 
 }
 
@@ -809,7 +827,7 @@ void chargedstatus(int count)
 
 	if (count == -1 || count == 0)
 	{
-		printf("Charge Shot : DEPLETED  ");
+		printf("Charge Shot : DEPLETED      ");
 	}
 	else if (count >= 1 && count < 8)
 	{
@@ -830,6 +848,10 @@ void chargedstatus(int count)
 	else if (count == -3)
 	{
 		printf("Charge Shot : LOCKED");
+	}
+	else if (count == -4)
+	{
+		printf("Charge Shot : NEED CLEARANCE");
 	}
 	else
 	{
@@ -993,7 +1015,7 @@ int main()
 	{
 		int x = 0;
 		int y = 0;
-		int status = -3;
+		int status = 0; //default is -3
 		int chargeshothold = 0;
 		int chargeshotholdold = 0;
 	}; chargeshot cs[10];
@@ -1041,35 +1063,35 @@ int main()
 	
 				cs[0].chargeshothold -= 2;
 			}
-			if (bulletStatus[0] == 0 && ch == ' ')
+			if (bulletStatus[0] == 0 && ch == ' ' && (x + 8 < 60 || x + 7 < 60 || x + 9 < 60 || x + 10 < 60))
 			{
 				Beep(700, 50);
 				bulletStatus[0] = 1;
 				bulletx[0] = x + 7;
 				bullety[0] = y + 1;
 			}
-			else if (bulletStatus[1] == 0 && ch == ' ')
+			else if (bulletStatus[1] == 0 && ch == ' ' && (x + 8 < 60 || x + 7 < 60 || x + 9 < 60 || x + 10 < 60))
 			{
 				Beep(700, 50);
 				bulletStatus[1] = 1;
 				bulletx[1] = x + 7;
 				bullety[1] = y + 1;
 			}
-			else if (bulletStatus[2] == 0 && ch == ' ')
+			else if (bulletStatus[2] == 0 && ch == ' ' && (x + 8 < 60 || x + 7 < 60 || x + 9 < 60 || x + 10 < 60))
 			{
 				Beep(700, 50);
 				bulletStatus[2] = 1;
 				bulletx[2] = x + 7;
 				bullety[2] = y + 1;
 			}
-			else if (bulletStatus[3] == 0 && ch == ' ' && maxbullet >= 4)
+			else if (bulletStatus[3] == 0 && ch == ' ' && maxbullet >= 4 && (x + 8 < 60 || x + 7 < 60 || x + 9 < 60 || x + 10 < 60))
 			{
 				Beep(700, 50);
 				bulletStatus[3] = 1;
 				bulletx[3] = x + 7;
 				bullety[3] = y + 1;
 			}
-			else if (bulletStatus[4] == 0 && ch == ' ' && maxbullet >= 5)
+			else if (bulletStatus[4] == 0 && ch == ' ' && maxbullet >= 5 && (x + 8 < 60 || x + 7 < 60 || x + 9 < 60 || x + 10 < 60))
 			{
 				Beep(700, 50);
 				bulletStatus[4] = 1;
@@ -1475,10 +1497,22 @@ int main()
 
 		if (cs[0].chargeshothold == 20)
 		{
-			Beep(900, 60);
-			cs[0].x = x + 7;
-			cs[0].y = y + 1;
-			cs[0].status = 1;
+
+			if (x + 8 == 60 || x + 7 == 60 || x + 9 == 60 || x + 10 == 60)
+			{
+				chargedstatus(-4);
+				cs[0].chargeshothold = 0;
+			}
+			else
+			{
+				Beep(900, 60);
+				cs[0].x = x + 7;
+				cs[0].y = y + 1;
+				cs[0].status = 1;
+			}
+			
+			
+			
 		}
 
 		if (cs[0].status == 1)
