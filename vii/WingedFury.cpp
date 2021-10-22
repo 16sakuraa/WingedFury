@@ -622,7 +622,7 @@ void gameover()
 	Sleep(a-80);
 	Beep(200, 80);
 	printf("        \\______| /__/     \\__\\ |__|  |__| |_______|\n");
-	Sleep(a-40)
+	Sleep(a - 40);
 	Beep(400, 40);
 	printf("                    ______   ____    ____  _______ .______      \n");
 	Sleep(a);
