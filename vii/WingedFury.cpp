@@ -58,11 +58,19 @@ void displayscore(int pscore, int lv , char name[30])
 {
 	setcolor(11, 0);
 	gotoxy(40, 17);
-	printf("Player Name : %s",name);
+	printf("Player Name :");
+	setcolor(15, 0);
+	printf(" %s", name);
+	setcolor(11, 0);
 	gotoxy(40, 18);
-	printf("Your Level : %d  ", lv);
+	printf("Your Level :");
+	setcolor(15, 0);
+	printf(" %d", lv);
+	setcolor(11, 0);
 	gotoxy(40, 19);
-	printf("Your Score : %d", pscore);
+	printf("Your Score :");
+	setcolor(15, 0);
+	printf(" %d", pscore);
 	setcolor(7, 0);
 }
 
@@ -832,7 +840,7 @@ void chargedrop(int acq)
 	}
 
 	drop = rand() % 100;
-	if (drop >= 0)
+	if (drop >= chance)
 	{
 		x = RandomX()%20+15;
 		y = RandomY();
@@ -1279,7 +1287,7 @@ int main()
 			maxbullet += 1;
 			updatemaxbullet(maxbullet);
 			clearpack(x + 1, y - 1);
-		
+		}
 
 		if (cursor(x + 4, y + 3) == 'A')
 		{
