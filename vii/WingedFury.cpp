@@ -1015,7 +1015,7 @@ int main()
 	{
 		int x = 0;
 		int y = 0;
-		int status = 0; //default is -3
+		int status = -3; //default is -3
 		int chargeshothold = 0;
 		int chargeshotholdold = 0;
 	}; chargeshot cs[10];
@@ -1051,7 +1051,7 @@ int main()
 			if (ch == 'd' && cursor(x + 8, y) != '*') { plane(++x, y); }
 			if (ch == 'w' && cursor(x, y - 1) != '*') { clearplane(x, y);  plane(x, --y); }
 			if (ch == 's' && cursor(x, y+3) != '*') { clearplane(x, y);  plane(x, ++y); }
-			if (ch == '+') { score += 500; }
+			if (ch == '+') { score += 900; }
 			//if (ch == 'r') { maxbullet += 1; updatemaxbullet(maxbullet); }
 			if (ch == 'e' && cs[0].status != -3) 
 			{ 
@@ -1063,35 +1063,35 @@ int main()
 	
 				cs[0].chargeshothold -= 2;
 			}
-			if (bulletStatus[0] == 0 && ch == ' ' && (x + 8 < 60 || x + 7 < 60 || x + 9 < 60 || x + 10 < 60))
+			if (bulletStatus[0] == 0 && ch == ' ' && (x + 8 < 60 && x + 7 < 60 && x + 9 < 60 && x + 10 < 60))
 			{
 				Beep(700, 50);
 				bulletStatus[0] = 1;
 				bulletx[0] = x + 7;
 				bullety[0] = y + 1;
 			}
-			else if (bulletStatus[1] == 0 && ch == ' ' && (x + 8 < 60 || x + 7 < 60 || x + 9 < 60 || x + 10 < 60))
+			else if (bulletStatus[1] == 0 && ch == ' ' && (x + 8 < 60 && x + 7 < 60 && x + 9 < 60 && x + 10 < 60))
 			{
 				Beep(700, 50);
 				bulletStatus[1] = 1;
 				bulletx[1] = x + 7;
 				bullety[1] = y + 1;
 			}
-			else if (bulletStatus[2] == 0 && ch == ' ' && (x + 8 < 60 || x + 7 < 60 || x + 9 < 60 || x + 10 < 60))
+			else if (bulletStatus[2] == 0 && ch == ' ' && (x + 8 < 60 && x + 7 < 60 && x + 9 < 60 && x + 10 < 60))
 			{
 				Beep(700, 50);
 				bulletStatus[2] = 1;
 				bulletx[2] = x + 7;
 				bullety[2] = y + 1;
 			}
-			else if (bulletStatus[3] == 0 && ch == ' ' && maxbullet >= 4 && (x + 8 < 60 || x + 7 < 60 || x + 9 < 60 || x + 10 < 60))
+			else if (bulletStatus[3] == 0 && ch == ' ' && maxbullet >= 4 && (x + 8 < 60 && x + 7 < 60 && x + 9 < 60 && x + 10 < 60))
 			{
 				Beep(700, 50);
 				bulletStatus[3] = 1;
 				bulletx[3] = x + 7;
 				bullety[3] = y + 1;
 			}
-			else if (bulletStatus[4] == 0 && ch == ' ' && maxbullet >= 5 && (x + 8 < 60 || x + 7 < 60 || x + 9 < 60 || x + 10 < 60))
+			else if (bulletStatus[4] == 0 && ch == ' ' && maxbullet >= 5 && (x + 8 < 60 && x + 7 < 60 && x + 9 < 60 && x + 10 < 60))
 			{
 				Beep(700, 50);
 				bulletStatus[4] = 1;
