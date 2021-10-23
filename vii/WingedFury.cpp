@@ -292,8 +292,6 @@ void wbullet(int x, int y)
 	printf("-");
 }
 
-
-
 void clear_enemy(int x, int y)
 {
 	gotoxy(x, y);
@@ -963,6 +961,14 @@ void knife()
 	setcolor(7, 0);
 }
 
+void draw_x(int x, int y)
+{
+	setcolor(12, 0);
+	gotoxy(x, y);
+	printf("X");
+	setcolor(7, 0);
+}
+
 
 
 
@@ -992,15 +998,24 @@ int main()
 		int status=0;
 		long int x=0;
 		long int y=0;
-		int hp = 2;
+		
 	};enemy enemy[10];
+
+	struct cross
+	{
+		int status = 0;
+		int x = 0;
+		int y = 0;
+		int hp = 2;
+		int walk = 0;
+		int timer = 1;
+	}; cross cross[10];
 
 	struct wmy
 	{
 		int status = 0;
 		int x = 0;
 		int y = 0;
-		int hp = 2;
 		int walk = 0;
 	}; wmy wmy[10];
 
@@ -1052,7 +1067,8 @@ int main()
 			if (ch == 'w' && cursor(x, y - 1) != '*') { clearplane(x, y);  plane(x, --y); }
 			if (ch == 's' && cursor(x, y+3) != '*') { clearplane(x, y);  plane(x, ++y); }
 			if (ch == '+') { score += 900; }
-			//if (ch == 'r') { maxbullet += 1; updatemaxbullet(maxbullet); }
+			if (ch == 'r') { maxbullet += 1; updatemaxbullet(maxbullet); }
+			if (ch == 'c') { cs[0].status = 0;  }
 			if (ch == 'e' && cs[0].status != -3) 
 			{ 
 				cs[0].chargeshothold += 1; 
@@ -1620,6 +1636,69 @@ int main()
 			enemy[8].status = 1;
 		}
 
+		if (cross[0].timer % 20 == 0 && cross[0].status == 0 && level >= 10)
+		{
+			
+				cross[0].x = RandomX();
+				cross[0].y = RandomY();
+				draw_x(cross[0].x, cross[0].y);
+				cross[0].status = 1;
+
+		}
+		else
+		{
+			cross[0].timer += 1;
+		}
+		
+
+		if (cross[0].status == 1)
+		{
+			if (cross[0].walk % 3 == 0)
+			{
+				clear_enemy(cross[0].x, cross[0].y);
+				if (cross[0].y > y + 1 && cross[0].x > x+2)
+				{
+					draw_x(--cross[0].x, --cross[0].y);
+				}
+				
+				else if (cross[0].y < y + 1 && cross[0].x > x + 2)
+				{
+					draw_x(--cross[0].x, ++cross[0].y);
+				}
+				else if (cross[0].x <= 3)
+				{
+					clear_enemy(cross[0].x, cross[0].y);
+					cross[0].timer = 1;
+					cross[0].status = 0;
+				}
+				else
+				{
+					draw_x(--cross[0].x, cross[0].y);
+				}
+
+				
+
+			}
+			if (cursor(cross[0].x - 1, cross[0].y) == '>' || cursor(cross[0].x - 2, cross[0].y) == '>' || cursor(cross[0].x, cross[0].y) == '>' || cursor(cross[0].x - 1, cross[0].y) == '>')
+			{
+				Beep(500, 30);
+				score += 200;
+				clear_enemy(cross[0].x, cross[0].y);
+				cross[0].timer = 1;
+				cross[0].status = 0;
+			}
+			else if (cursor(cross[0].x - 2, cross[0].y) == 'D' || cursor(cross[0].x - 2, cross[0].y) == '=')
+			{
+				clear_enemy(cross[0].x, cross[0].y);
+				PlayerHP -= 1;
+				cross[0].status = 0;
+			}
+			
+
+			
+			cross[0].walk += 1;
+		}
+
 		if (wmy[0].status == 0 && level >= 3)
 		{
 			wmy[0].x = RandomX();
@@ -2091,7 +2170,7 @@ int main()
 		if (enemy[0].status == 1)
 		{
 			clear_enemy(enemy[0].x, enemy[0].y);
-			if (cursor(enemy[0].x - 2, enemy[0].y) == '>')
+			if (cursor(enemy[0].x - 2, enemy[0].y) == '>' || cursor(enemy[0].x - 1, enemy[0].y) == '>' || cursor(enemy[0].x , enemy[0].y) == '>')
 			{
 				Beep(400, 50);
 				healthpack();
@@ -2134,7 +2213,7 @@ int main()
 		if (enemy[1].status == 1)
 		{
 			clear_enemy(enemy[1].x, enemy[1].y);
-			if (cursor(enemy[1].x - 2, enemy[1].y) == '>')
+			if (cursor(enemy[1].x - 2, enemy[1].y) == '>' || cursor(enemy[1].x - 1, enemy[1].y) == '>' || cursor(enemy[1].x, enemy[1].y) == '>')
 			{
 				Beep(400, 50);
 				healthpack();
@@ -2177,7 +2256,7 @@ int main()
 		if (enemy[2].status == 1)
 		{
 			clear_enemy(enemy[2].x, enemy[2].y);
-			if (cursor(enemy[2].x - 2, enemy[2].y) == '>')
+			if (cursor(enemy[2].x - 2, enemy[2].y) == '>' || cursor(enemy[2].x - 1, enemy[2].y) == '>' || cursor(enemy[2].x, enemy[2].y) == '>')
 			{
 				Beep(400, 50);
 				healthpack();
@@ -2220,7 +2299,7 @@ int main()
 		if (enemy[3].status == 1)
 		{
 			clear_enemy(enemy[3].x, enemy[3].y);
-			if (cursor(enemy[3].x - 2, enemy[3].y) == '>')
+			if (cursor(enemy[3].x - 2, enemy[3].y) == '>' || cursor(enemy[3].x - 1, enemy[3].y) == '>' || cursor(enemy[3].x, enemy[3].y) == '>')
 			{
 				Beep(400, 50);
 				healthpack();
@@ -2263,7 +2342,7 @@ int main()
 		if (enemy[4].status == 1)
 		{
 			clear_enemy(enemy[4].x, enemy[4].y);
-			if (cursor(enemy[4].x - 2, enemy[4].y) == '>')
+			if (cursor(enemy[4].x - 2, enemy[4].y) == '>' || cursor(enemy[4].x - 1, enemy[4].y) == '>' || cursor(enemy[4].x, enemy[4].y) == '>')
 			{
 				Beep(400, 50);
 				healthpack();
@@ -2306,7 +2385,7 @@ int main()
 		if (enemy[5].status == 1)
 		{
 			clear_enemy(enemy[5].x, enemy[5].y);
-			if (cursor(enemy[5].x - 2, enemy[5].y) == '>')
+			if (cursor(enemy[5].x - 2, enemy[5].y) == '>' || cursor(enemy[5].x - 1, enemy[5].y) == '>' || cursor(enemy[5].x , enemy[5].y) == '>')
 			{
 				Beep(400, 50);
 				healthpack();
@@ -2349,7 +2428,7 @@ int main()
 		if (enemy[6].status == 1)
 		{
 			clear_enemy(enemy[6].x, enemy[6].y);
-			if (cursor(enemy[6].x - 2, enemy[6].y) == '>')
+			if (cursor(enemy[6].x - 2, enemy[6].y) == '>' || cursor(enemy[6].x - 1, enemy[6].y) == '>' || cursor(enemy[6].x, enemy[6].y) == '>')
 			{
 				Beep(400, 50);
 				healthpack();
@@ -2392,7 +2471,7 @@ int main()
 		if (enemy[7].status == 1)
 		{
 			clear_enemy(enemy[7].x, enemy[7].y);
-			if (cursor(enemy[7].x - 2, enemy[7].y) == '>')
+			if (cursor(enemy[7].x - 2, enemy[7].y) == '>' || cursor(enemy[7].x - 1, enemy[7].y) == '>' || cursor(enemy[7].x, enemy[7].y) == '>')
 			{
 				Beep(400, 50);
 				healthpack();
@@ -2435,7 +2514,7 @@ int main()
 		if (enemy[8].status == 1)
 		{
 			clear_enemy(enemy[8].x, enemy[8].y);
-			if (cursor(enemy[8].x - 2, enemy[8].y) == '>')
+			if (cursor(enemy[8].x - 2, enemy[8].y) == '>' || cursor(enemy[8].x - 1, enemy[8].y) == '>' || cursor(enemy[8].x, enemy[8].y) == '>')
 			{
 				Beep(400, 50);
 				healthpack();
