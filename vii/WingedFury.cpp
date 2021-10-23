@@ -825,7 +825,7 @@ void chargedstatus(int count)
 
 	if (count == -1 || count == 0)
 	{
-		printf("Charge Shot : DEPLETED      ");
+		printf("Charge Shot : READY      ");
 	}
 	else if (count >= 1 && count < 8)
 	{
@@ -1036,7 +1036,7 @@ int main()
 	}; chargeshot cs[10];
 
 	char ch = ' ';
-	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0 , chargemessage = 0 , chargedel = 0;
+	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0 , chargemessage = 0 , chargedel = 0 , chargecooldown = 0;
 	int bosshp = 30, oldbosshp = 30 , bossstate = 1 , maxbullet = 3 , oldmaxbullet = 3, message = 0 , messagecount = 0 , levelcap = 1000;
 	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
@@ -1546,6 +1546,7 @@ int main()
 			{
 				chargedstatus(-1);
 				clearcharged(cs[0].x, cs[0].y);
+			//	chargecooldown = 1;
 				cs[0].status = 0;
 				cs[0].chargeshothold = 0;
 
@@ -1563,6 +1564,7 @@ int main()
 			cs[0].chargeshotholdold = cs[0].chargeshothold;
 		}
 		
+		//if (chargecooldown == 1)
 
 
 		if (enemy[0].status == 0)
