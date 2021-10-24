@@ -6,6 +6,7 @@
 #include<string.h>
 #include <fcntl.h>
 #include <io.h>
+#include<thread>
 
 #define screen_x 80
 #define screen_y 27
