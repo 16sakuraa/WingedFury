@@ -641,33 +641,50 @@ void gameover()
 
 void squid()
 {
+
+	int x = 30;
+	int y = 7;
 	setcolor(4, 0);
-	gotoxy(35, 5);
+	gotoxy(x, y);
+	printf("   ,\'\"\"`.\n");
+	gotoxy(x, y+1);
+	printf("  / _  _ \\\n");
+	gotoxy(x, y+2);
+	printf("  |(@)(@)|\n");
+	gotoxy(x, y+3);
+	printf("  )  __  (\n");
+	gotoxy(x, y+4);
+	printf(" /,\'))((`.\\\n");
+	gotoxy(x, y + 5);
+	printf("(( ((  )) ))\n");
+	gotoxy(x, y + 6);
+	printf(" `\\ `)(\' /\'");
+	/*gotoxy(x, 5);
 	printf("                        _,--._\n");
-	gotoxy(35, 6);
+	gotoxy(x, 6);
 	printf("                      ,\'      `.\n");
-	gotoxy(35, 7);
+	gotoxy(x, 7);
 	printf("              |\\     / ,-.  ,-. \\     /|\n");
-	gotoxy(35, 8);
+	gotoxy(x, 8);
 	printf("              )o),/ ( ( o )( o ) ) \\.(o(\n");
-	gotoxy(35, 9);
+	gotoxy(x, 9);
 	printf("             /o/// /|  `-\'  `-\'  |\\ \\\\\\o\\\n");
-	gotoxy(35, 10);
+	gotoxy(x, 10);
 	printf("            / / |\\ \\(   .    ,   )/ /| \\ \\\n");
-	gotoxy(35, 11);
+	gotoxy(x, 11);
 	printf("            | | \\o`-/    `\\/\'    \\-\'o/ | |\n");
-	gotoxy(35, 12);
+	gotoxy(x, 12);
 	printf("            \\ \\  `,\'              `.\'  / /\n");
-	gotoxy(35, 13);
+	gotoxy(x, 13);
 	printf("         \\.  \\ `-\'  ,\'|   /\\   |`.  `-\' /  ,/\n");
-	gotoxy(35, 14);
+	gotoxy(x, 14);
 	printf("          \\`. `.__,\' /   /  \\   \\ `.__,\' ,\'/\n");
-	gotoxy(35, 15);
+	gotoxy(x, 15);
 	printf("           \\o\\     ,\'  ,\'    `.  `.     /o/\n");
-	gotoxy(35, 16);
+	gotoxy(x, 16);
 	printf("            \\o`---\'  ,\'        `.  `---\'o/\n");
-	gotoxy(35, 17);
-	printf("             `.____,\'            `.____,\'\n");
+	gotoxy(x, 17);
+	printf("             `.____,\'            `.____,\'\n");*/
 	setcolor(7, 0);
 }
 
@@ -1055,7 +1072,8 @@ int main()
 	scoreupdate(score);
 	levelupdate(level);
 	chargedstatus(cs[0].status);
-	//squid();
+	squid();
+	bossstate = 1;
 	//bosshpupdate(bosshp);
 	plane(x, y);
 	do {
@@ -1564,8 +1582,78 @@ int main()
 			chargedstatus(cs[0].chargeshothold);
 			cs[0].chargeshotholdold = cs[0].chargeshothold;
 		}
-		
+
 		//if (chargecooldown == 1)
+
+		if (bossstate == 0)
+		{
+
+		
+
+		if (cross[0].timer % 20 == 0 && cross[0].status == 0 && level >= 10)
+		{
+
+			cross[0].x = RandomX();
+			cross[0].y = RandomY();
+			draw_x(cross[0].x, cross[0].y);
+			cross[0].status = 1;
+
+		}
+		else
+		{
+			cross[0].timer += 1;
+		}
+
+
+		if (cross[0].status == 1)
+		{
+			if (cross[0].walk % 2 == 0)
+			{
+				clear_enemy(cross[0].x, cross[0].y);
+				if (cross[0].y > y + 1 && cross[0].x > x + 2)
+				{
+					draw_x(--cross[0].x, --cross[0].y);
+				}
+
+				else if (cross[0].y < y + 1 && cross[0].x > x + 2)
+				{
+					draw_x(--cross[0].x, ++cross[0].y);
+				}
+				else if (cross[0].x <= 3)
+				{
+					clear_enemy(cross[0].x, cross[0].y);
+					cross[0].timer = 1;
+					cross[0].status = 0;
+				}
+				else
+				{
+					draw_x(--cross[0].x, cross[0].y);
+				}
+
+
+
+			}
+			if (cursor(cross[0].x - 1, cross[0].y) == '>' || cursor(cross[0].x - 2, cross[0].y) == '>' || cursor(cross[0].x, cross[0].y) == '>' || cursor(cross[0].x - 1, cross[0].y) == '>')
+			{
+				Beep(500, 30);
+				score += 200;
+				clear_enemy(cross[0].x, cross[0].y);
+				cross[0].timer = 1;
+				cross[0].status = 0;
+			}
+			else if (cursor(cross[0].x - 2, cross[0].y) == 'D' || cursor(cross[0].x - 2, cross[0].y) == '=')
+			{
+				clear_enemy(cross[0].x, cross[0].y);
+				PlayerHP -= 1;
+				cross[0].status = 0;
+			}
+
+
+
+			cross[0].walk += 1;
+		}
+		
+		
 
 
 		if (enemy[0].status == 0)
@@ -1664,68 +1752,7 @@ int main()
 		}
 
 
-		if (cross[0].timer % 20 == 0 && cross[0].status == 0 && level >= 10)
-		{
-			
-				cross[0].x = RandomX();
-				cross[0].y = RandomY();
-				draw_x(cross[0].x, cross[0].y);
-				cross[0].status = 1;
-
-		}
-		else
-		{
-			cross[0].timer += 1;
-		}
 		
-
-		if (cross[0].status == 1)
-		{
-			if (cross[0].walk % 2 == 0)
-			{
-				clear_enemy(cross[0].x, cross[0].y);
-				if (cross[0].y > y + 1 && cross[0].x > x+2)
-				{
-					draw_x(--cross[0].x, --cross[0].y);
-				}
-				
-				else if (cross[0].y < y + 1 && cross[0].x > x + 2)
-				{
-					draw_x(--cross[0].x, ++cross[0].y);
-				}
-				else if (cross[0].x <= 3)
-				{
-					clear_enemy(cross[0].x, cross[0].y);
-					cross[0].timer = 1;
-					cross[0].status = 0;
-				}
-				else
-				{
-					draw_x(--cross[0].x, cross[0].y);
-				}
-
-				
-
-			}
-			if (cursor(cross[0].x - 1, cross[0].y) == '>' || cursor(cross[0].x - 2, cross[0].y) == '>' || cursor(cross[0].x, cross[0].y) == '>' || cursor(cross[0].x - 1, cross[0].y) == '>')
-			{
-				Beep(500, 30);
-				score += 200;
-				clear_enemy(cross[0].x, cross[0].y);
-				cross[0].timer = 1;
-				cross[0].status = 0;
-			}
-			else if (cursor(cross[0].x - 2, cross[0].y) == 'D' || cursor(cross[0].x - 2, cross[0].y) == '=')
-			{
-				clear_enemy(cross[0].x, cross[0].y);
-				PlayerHP -= 1;
-				cross[0].status = 0;
-			}
-			
-
-			
-			cross[0].walk += 1;
-		}
 
 		if (wmy[0].status == 0 && level >= 3)
 		{
@@ -2712,6 +2739,8 @@ int main()
 
 		}
 
+		}
+
 
 		if (bulletStatus[0] == 1)
 		{
@@ -2721,7 +2750,7 @@ int main()
 			{
 				bulletStatus[0] = 0;
 			}
-			else if (cursor(bulletx[0] + 4, bullety[0]) == '\\' || cursor(bulletx[0] + 4, bullety[0]) == '|' || cursor(bulletx[0] + 4, bullety[0]) == '/' || cursor(bulletx[0] + 4, bullety[0]) == ')' || cursor(bulletx[0] + 4, bullety[0]) == ',' || cursor(bulletx[0] + 4, bullety[0]) == '_')
+			else if (cursor(bulletx[0] + 4, bullety[0]) == '\\' || cursor(bulletx[0] + 4, bullety[0]) == '|' || cursor(bulletx[0] + 4, bullety[0]) == '/' || cursor(bulletx[0] + 4, bullety[0]) == ')' || cursor(bulletx[0] + 4, bullety[0]) == ',' || cursor(bulletx[0] + 4, bullety[0]) == '(' || cursor(bulletx[0] + 4, bullety[0]) == '`')
 			{
 				clear_bullet(bulletx[0], bullety[0], 0);
 				bulletStatus[0] = 0;
