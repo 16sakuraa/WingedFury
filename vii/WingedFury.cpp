@@ -1055,7 +1055,7 @@ int main()
 
 	char ch = ' ';
 	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0 , chargemessage = 0 , chargedel = 0 , chargecooldown = 0;
-	int bosshp = 30, oldbosshp = 30 , bossstate = 1 , maxbullet = 3 , oldmaxbullet = 3, message = 0 , messagecount = 0 , levelcap = 1000;
+	int bosshp = 30, oldbosshp = 30 , bossstate = 0 , maxbullet = 3 , oldmaxbullet = 3, message = 0 , messagecount = 0 , levelcap = 1000;
 	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
 	int PlayerHP = 3, OldPlayerHP = 3 , score=0 , oldscore=0;
@@ -1072,8 +1072,8 @@ int main()
 	scoreupdate(score);
 	levelupdate(level);
 	chargedstatus(cs[0].status);
-	squid();
-	bossstate = 1;
+	//squid();
+	//bossstate = 1;
 	//bosshpupdate(bosshp);
 	plane(x, y);
 	do {
