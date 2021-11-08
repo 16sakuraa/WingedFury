@@ -2959,7 +2959,7 @@ int main()
 	PlaySound(TEXT("gameover.wav"), NULL, SND_ASYNC);
 	gameover();
 	PlayerStats(score , level);
-	PlaySound(TEXT("score.wav"), NULL, SND_LOOP | SND_ASYNC);
+	/*PlaySound(TEXT("score.wav"), NULL, SND_LOOP | SND_ASYNC);
 	while (1)
 	{
 		if (_kbhit())
@@ -2971,7 +2971,7 @@ int main()
 			}
 		}
 
-	}
+	}*/
 	//gotoxy(0, 60);
 	//printf(" ");
 	
