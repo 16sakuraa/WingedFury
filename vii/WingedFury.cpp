@@ -60,17 +60,17 @@ void gotoxy(int x, int y)
 void displayscore(int pscore, int lv , char name[30])
 {
 	setcolor(11, 0);
-	gotoxy(40, 17);
+	gotoxy(40, 20);
 	printf("Player Name :");
 	setcolor(15, 0);
 	printf(" %s", name);
 	setcolor(11, 0);
-	gotoxy(40, 18);
+	gotoxy(40, 21);
 	printf("Your Level :");
 	setcolor(15, 0);
 	printf(" %d", lv);
 	setcolor(11, 0);
-	gotoxy(40, 19);
+	gotoxy(40, 22);
 	printf("Your Score :");
 	setcolor(15, 0);
 	printf(" %d", pscore);
@@ -203,7 +203,7 @@ int PlayerStats(int pscore, int lv)
 	Beep(900, 50);
 	Beep(700, 25);
 	setcolor(14, 0);
-	printf("\n\n --------Leaderboard--------\n");
+	printf("\n\n\n\n\n --------Leaderboard--------\n");
 
 
 	fptr = fopen("PlayerStatsnew.txt", "r");
@@ -213,15 +213,15 @@ int PlayerStats(int pscore, int lv)
 
 			while (fread(&p,sizeof(struct player),5,fptr)!=0)
 		{
-			printf("Player %d : %s\n", i + 1, sp[i].name);
-			printf("Level : %d\n", sp[i].lv);
-			printf("Score : %d\n", sp[i].score);
+			printf("  Player %d : %s\n", i + 1, sp[i].name);
+			printf("  Level : %d\n", sp[i].lv);
+			printf("  Score : %d\n", sp[i].score);
 			printf(" ---------------------------\n");
 				i++;
 		}
 	fclose(fptr);
 	setcolor(11, 0);
-	printf(" Thank you for playing my game!\n");
+	printf(" Thank you for playing my game! (Press SPACE to end)\n");
 	setcolor(7, 0);
 
 	
@@ -753,7 +753,7 @@ void extrabullet(int max)
 	drop = rand() % 100;
 	if (drop >= chance)
 	{
-		x = RandomX();
+		x = RandomX()%25;
 		y = RandomY();
 		setcolor(14, 0);
 		gotoxy(x, y);
@@ -2959,7 +2959,7 @@ int main()
 	PlaySound(TEXT("gameover.wav"), NULL, SND_ASYNC);
 	gameover();
 	PlayerStats(score , level);
-	/*PlaySound(TEXT("score.wav"), NULL, SND_LOOP | SND_ASYNC);
+	//PlaySound(TEXT("score.wav"), NULL, SND_LOOP | SND_ASYNC);
 	while (1)
 	{
 		if (_kbhit())
@@ -2971,7 +2971,7 @@ int main()
 			}
 		}
 
-	}*/
+	}
 	//gotoxy(0, 60);
 	//printf(" ");
 	
