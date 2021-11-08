@@ -753,7 +753,7 @@ void extrabullet(int max)
 	drop = rand() % 100;
 	if (drop >= chance)
 	{
-		x = RandomX()%25;
+		x = RandomX()%25+15;
 		y = RandomY();
 		setcolor(14, 0);
 		gotoxy(x, y);
