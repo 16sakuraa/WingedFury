@@ -20,7 +20,7 @@
    - W ; the enemy that only move up and down. Will shoot a laser when you're on their sight.
    - X ; X marks the spot. X will follow your coordinate and crash on you.
    
-       “Alert five. Winged Fury on standby. Ready for burn”
+       "Alert five. Winged Fury on standby. Ready for burn."
 
    Own the skies with 8-bit music , along with many other features , including leaderboard for
    top 5 players and sorting scores system.
