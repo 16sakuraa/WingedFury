@@ -300,7 +300,7 @@ void wbullet(int x, int y)
 void clear_enemy(int x, int y)
 {
 	gotoxy(x, y);
-	printf(" ");
+	printf("  ");
 }
 
 void map_generate()
@@ -461,7 +461,7 @@ void seescore()
 
 	i = 0;
 	setcolor(14, 0);
-	printf("\n --------Leaderboard--------\n");
+	printf("\n\t\t\t  --------Leaderboard--------\n");
 
 
 	fptr = fopen("PlayerStatsnew.txt", "r");
@@ -472,10 +472,10 @@ void seescore()
 			while (fread(&p,sizeof(struct player),5,fptr)!=0)
 		{
 			
-			printf("Player %d : %s\n", i + 1, p[i].name);
-			printf("Level : %d\n", p[i].lv);
-			printf("Score : %d\n", p[i].score);
-			printf(" ---------------------------\n");
+			printf("\t\t\tPlayer %d : %s\n", i + 1, p[i].name);
+			printf("\t\t\tLevel : %d\n", p[i].lv);
+			printf("\t\t\tScore : %d\n", p[i].score);
+			printf(" \t\t\t  ---------------------------\n");
 				i++;
 		}
 	fclose(fptr);
@@ -484,7 +484,7 @@ void seescore()
 	while (1)
 	{
 		gotoxy(25, 24);
-		printf("> Back");
+		printf("\t   > Back");
 		if (_kbhit())
 		{
 			ch = _getch();
@@ -541,11 +541,12 @@ void title()
 
 void menu()
 {
-	PlaySound(TEXT("title.wav"), NULL, SND_LOOP | SND_ASYNC);
+	PlaySound(TEXT("opening.wav"), NULL, SND_ASYNC);
 	char ch = ' ';
 	int play = 1;
 	title();
-	Sleep(500);
+	Sleep(900);
+	PlaySound(TEXT("opening2.wav"), NULL, SND_LOOP | SND_ASYNC);
 	setcolor(14, 0);
 	gotoxy(32,22);
 	printf("> ");
@@ -564,6 +565,7 @@ void menu()
 			{
 				Beep(900, 50);
 				Beep(700, 50);
+				//PlaySound(TEXT("button.wav"), NULL, SND_ASYNC);
 				gotoxy(32, 23);
 				printf("  ");
 				gotoxy(32, 22);
@@ -574,6 +576,7 @@ void menu()
 			{
 				Beep(900, 50);
 				Beep(700, 50);
+				//PlaySound(TEXT("button.wav"), NULL, SND_ASYNC);
 				gotoxy(32, 22);
 				printf("  ");
 				gotoxy(32, 23);
@@ -584,6 +587,7 @@ void menu()
 			{
 				Beep(900, 50);
 				Beep(700, 25);
+				//PlaySound(TEXT("button.wav"), NULL, SND_ASYNC);
 				system("cls");
 				break;
 
@@ -592,6 +596,7 @@ void menu()
 			{
 				Beep(900, 50);
 				Beep(700, 25);
+				//PlaySound(TEXT("button.wav"), NULL, SND_ASYNC);
 				system("cls");
 				seescore();
 				title();
@@ -1082,7 +1087,7 @@ int main()
 	//bossstate = 1;
 	//bosshpupdate(bosshp);
 
-	PlaySound(TEXT("mysound.wav"), NULL, SND_LOOP | SND_ASYNC);
+	PlaySound(TEXT("maintheme.wav"), NULL, SND_LOOP | SND_ASYNC);
 
 	plane(x, y);
 	do {
@@ -2953,18 +2958,19 @@ int main()
 	PlaySound(NULL, NULL, SND_LOOP | SND_ASYNC);
 	gameover();
 	PlayerStats(score , level);
-	/*PlaySound(TEXT("score.wav"), NULL, SND_LOOP | SND_ASYNC);
+	PlaySound(TEXT("score.wav"), NULL, SND_LOOP | SND_ASYNC);
 	while (1)
 	{
 		if (_kbhit())
 		{
-			if (ch == 'p')
+			ch = _getch();
+			if (ch == ' ')
 			{
 				break;
 			}
 		}
 
-	}*/
+	}
 	//gotoxy(0, 60);
 	//printf(" ");
 	
