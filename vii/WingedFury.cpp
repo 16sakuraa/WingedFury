@@ -8,6 +8,8 @@
 #include <io.h>
 #include<thread>
 
+#pragma comment(lib, "winmm.lib")
+
 #define screen_x 80
 #define screen_y 27
 HANDLE wHnd;
@@ -77,6 +79,8 @@ void displayscore(int pscore, int lv , char name[30])
 
 int PlayerStats(int pscore, int lv)
 {
+	
+
 	FILE* fptr;
 	struct player
 	{
@@ -537,6 +541,7 @@ void title()
 
 void menu()
 {
+	PlaySound(TEXT("title.wav"), NULL, SND_LOOP | SND_ASYNC);
 	char ch = ' ';
 	int play = 1;
 	title();
@@ -599,6 +604,7 @@ void menu()
 
 		}
 	}
+	PlaySound(NULL, NULL, SND_ASYNC);
 }
 
 void gameover()
@@ -1075,6 +1081,9 @@ int main()
 	//squid();
 	//bossstate = 1;
 	//bosshpupdate(bosshp);
+
+	PlaySound(TEXT("mysound.wav"), NULL, SND_LOOP | SND_ASYNC);
+
 	plane(x, y);
 	do {
 		setcolor(7, 0);
@@ -2939,9 +2948,23 @@ int main()
 
 		Sleep(100);
 	} while (ch != 'x');
+	//PlaySound(NULL, NULL, SND_ASYNC);
 	system("cls");
+	PlaySound(NULL, NULL, SND_LOOP | SND_ASYNC);
 	gameover();
 	PlayerStats(score , level);
+	/*PlaySound(TEXT("score.wav"), NULL, SND_LOOP | SND_ASYNC);
+	while (1)
+	{
+		if (_kbhit())
+		{
+			if (ch == 'p')
+			{
+				break;
+			}
+		}
+
+	}*/
 	//gotoxy(0, 60);
 	//printf(" ");
 	
