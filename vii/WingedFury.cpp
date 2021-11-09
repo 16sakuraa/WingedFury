@@ -768,7 +768,7 @@ void updatemaxbullet(int max)
 
 	setcolor(14, 0);
 	gotoxy(13, 25);
-	printf("You can now fire %d rockets at once !",max);
+	printf("You can now fire up to %d rockets !",max);
 	setcolor(7, 0);
 }
 
