@@ -121,8 +121,9 @@ int PlayerStats(int pscore, int lv)
 			i++;
 		}
 	fclose(fptr);
-	setcolor(15, 0);
+	setcolor(14, 0);
 	printf("\n\t Enter Player Name : ");
+	setcolor(15, 0);
 	scanf("%s", p[5].name);
 	//setcolor(11, 0);
 	//printf("Your Level : %d\n", lv);
@@ -221,7 +222,7 @@ int PlayerStats(int pscore, int lv)
 		}
 	fclose(fptr);
 	setcolor(11, 0);
-	printf(" Thank you for playing my game! (Press SPACE to end)\n");
+	printf("     Thank you for playing my game! (Press SPACE to end)\n");
 	setcolor(7, 0);
 
 	
@@ -1165,6 +1166,38 @@ int main()
 			
 		}
 
+		if (cursor(x + 7, y + 2) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x + 7, y + 2);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x + 7, y + 2);
+			}
+
+		}
+
+		if (cursor(x + 7, y) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x + 7, y);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x + 7, y);
+			}
+
+		}
+
 		if (cursor(x + 6, y) == '+')
 		{
 			if (PlayerHP < 5)
@@ -1320,6 +1353,24 @@ int main()
 			clearpack(x + 8, y + 1);
 		}
 
+		if (cursor(x + 7, y + 2) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x + 7, y + 2);
+		}
+
+		if (cursor(x + 7, y) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x + 7, y);
+		}
+
 		if (cursor(x + 6, y ) == 'A')
 		{
 			Beep(800, 25);
@@ -1417,6 +1468,28 @@ int main()
 			Beep(650, 25);
 			cs[0].status = 0;
 			clearpack(x + 8, y + 1);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x + 7, y + 2) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 7, y + 2);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x + 7, y) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 7, y);
 			chargedstatus(cs[0].status);
 			chargedready();
 			chargemessage = 1;
@@ -1611,6 +1684,7 @@ int main()
 			cross[0].y = RandomY();
 			draw_x(cross[0].x, cross[0].y);
 			cross[0].status = 1;
+			cross[0].timer = 1;
 
 		}
 		else
@@ -2959,7 +3033,7 @@ int main()
 	PlaySound(TEXT("gameover.wav"), NULL, SND_ASYNC);
 	gameover();
 	PlayerStats(score , level);
-	//PlaySound(TEXT("score.wav"), NULL, SND_LOOP | SND_ASYNC);
+	PlaySound(TEXT("score.wav"), NULL, SND_LOOP | SND_ASYNC);
 	while (1)
 	{
 		if (_kbhit())
