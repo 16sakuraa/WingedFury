@@ -300,7 +300,7 @@ void wbullet(int x, int y)
 void clear_enemy(int x, int y)
 {
 	gotoxy(x, y);
-	printf("  ");
+	printf(" ");
 }
 
 void map_generate()
@@ -1788,7 +1788,7 @@ int main()
 					clear_enemy(wmy[0].x, wmy[0].y);
 					wmy[0].status = 0;
 				}
-				else if (cursor(wmy[0].x, wmy[0].y - 1) == '>' || cursor(wmy[0].x, wmy[0].y - 1) == '-' || cursor(wmy[0].x+1, wmy[0].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
+				else if (cursor(wmy[0].x, wmy[0].y - 1) == '>' || cursor(wmy[0].x+1, wmy[0].y) == '>' || cursor(wmy[0].x - 1, wmy[0].y) == '>'  || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
 					Beep(480, 50);
 					clear_enemy(wmy[0].x, wmy[0].y);
@@ -1854,7 +1854,7 @@ int main()
 					clear_enemy(wmy[1].x, wmy[1].y);
 					wmy[1].status = 0;
 				}
-				else if (cursor(wmy[1].x, wmy[1].y - 1) == '>' || cursor(wmy[1].x, wmy[1].y - 1) == '-' || cursor(wmy[1].x + 1, wmy[1].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
+				else if (cursor(wmy[1].x, wmy[1].y + 1) == '>' || cursor(wmy[1].x - 1, wmy[1].y) == '>' || cursor(wmy[1].x + 1, wmy[1].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
 					Beep(480, 50);
 					clear_enemy(wmy[1].x, wmy[1].y);
@@ -1922,7 +1922,7 @@ int main()
 					clear_enemy(wmy[2].x, wmy[2].y);
 					wmy[2].status = 0;
 				}
-				else if (cursor(wmy[2].x, wmy[2].y - 1) == '>' || cursor(wmy[2].x, wmy[2].y - 1) == '-' || cursor(wmy[2].x + 1, wmy[2].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
+				else if (cursor(wmy[2].x, wmy[2].y - 1) == '>' || cursor(wmy[2].x - 1, wmy[2].y) == '>' || cursor(wmy[2].x + 1, wmy[2].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
 					Beep(480, 50);
 					clear_enemy(wmy[2].x, wmy[2].y);
@@ -1988,7 +1988,7 @@ int main()
 					clear_enemy(wmy[3].x, wmy[3].y);
 					wmy[3].status = 0;
 				}
-				else if (cursor(wmy[3].x, wmy[3].y - 1) == '>' || cursor(wmy[3].x, wmy[3].y - 1) == '-' || cursor(wmy[3].x + 1, wmy[3].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
+				else if (cursor(wmy[3].x, wmy[3].y - 1) == '>' || cursor(wmy[3].x - 1, wmy[3].y) == '>' || cursor(wmy[3].x + 1, wmy[3].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
 					Beep(480, 50);
 					clear_enemy(wmy[3].x, wmy[3].y);
@@ -2054,7 +2054,7 @@ int main()
 					clear_enemy(wmy[4].x, wmy[4].y);
 					wmy[4].status = 0;
 				}
-				else if (cursor(wmy[4].x, wmy[4].y - 1) == '>' || cursor(wmy[4].x, wmy[4].y - 1) == '-' || cursor(wmy[4].x + 1, wmy[4].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
+				else if (cursor(wmy[4].x, wmy[4].y - 1) == '>' || cursor(wmy[4].x - 1, wmy[4].y) == '>' || cursor(wmy[4].x + 1, wmy[4].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
 					Beep(480, 50);
 					clear_enemy(wmy[4].x, wmy[4].y);
@@ -2120,7 +2120,7 @@ int main()
 					clear_enemy(wmy[5].x, wmy[5].y);
 					wmy[5].status = 0;
 				}
-				else if (cursor(wmy[5].x, wmy[5].y - 1) == '>' || cursor(wmy[5].x, wmy[5].y - 1) == '-' || cursor(wmy[5].x + 1, wmy[5].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
+				else if (cursor(wmy[5].x, wmy[5].y - 1) == '>' || cursor(wmy[5].x - 1, wmy[5].y) == '>' || cursor(wmy[5].x + 1, wmy[5].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
 					Beep(480, 50);
 					clear_enemy(wmy[5].x, wmy[5].y);
@@ -2186,7 +2186,7 @@ int main()
 					clear_enemy(wmy[6].x, wmy[6].y);
 					wmy[6].status = 0;
 				}
-				else if (cursor(wmy[6].x, wmy[6].y - 1) == '>' || cursor(wmy[6].x, wmy[6].y - 1) == '-' || cursor(wmy[6].x + 1, wmy[6].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
+				else if (cursor(wmy[6].x, wmy[6].y - 1) == '>' || cursor(wmy[6].x - 1, wmy[6].y - 1) == '>' || cursor(wmy[6].x + 1, wmy[6].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
 					Beep(480, 50);
 					clear_enemy(wmy[6].x, wmy[6].y);
