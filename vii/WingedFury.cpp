@@ -859,7 +859,7 @@ void chargedstatus(int count)
 
 	if (count == -1 || count == 0)
 	{
-		printf("Charge Shot : READY      ");
+		printf("Charge Shot : READY         ");
 	}
 	else if (count >= 1 && count < 8)
 	{
@@ -1106,8 +1106,8 @@ int main()
 			if (ch == 'w' && cursor(x, y - 1) != '*') { clearplane(x, y);  plane(x, --y); }
 			if (ch == 's' && cursor(x, y+3) != '*') { clearplane(x, y);  plane(x, ++y); }
 			if (ch == '+') { score += 900; }
-			/*if (ch == 'r') { maxbullet += 1; updatemaxbullet(maxbullet); }
-			if (ch == 'c') { cs[0].status = 0;  }*/
+			/*if (ch == 'r') { maxbullet += 1; updatemaxbullet(maxbullet); }*/
+			if (ch == 'c') { cs[0].status = 0;  }
 			if (ch == 'e' && cs[0].status != -3) 
 			{ 
 				cs[0].chargeshothold += 1; 
