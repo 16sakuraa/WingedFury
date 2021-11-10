@@ -1047,6 +1047,7 @@ int main()
 		int x = 0;
 		int y = 0;
 		int walk = 0;
+		int rvse = 0;
 	}; wmy wmy[10];
 
 	struct wb
@@ -1100,8 +1101,8 @@ int main()
 			if (ch == 'd' && cursor(x + 8, y) != '*') { plane(++x, y); }
 			if (ch == 'w' && cursor(x, y - 1) != '*') { clearplane(x, y);  plane(x, --y); }
 			if (ch == 's' && cursor(x, y+3) != '*') { clearplane(x, y);  plane(x, ++y); }
-			/*if (ch == '+') { score += 900; }
-			if (ch == 'r') { maxbullet += 1; updatemaxbullet(maxbullet); }
+			if (ch == '+') { score += 900; }
+			/*if (ch == 'r') { maxbullet += 1; updatemaxbullet(maxbullet); }
 			if (ch == 'c') { cs[0].status = 0;  }*/
 			if (ch == 'e' && cs[0].status != -3) 
 			{ 
@@ -1859,8 +1860,24 @@ int main()
 				clear_enemy(wmy[0].x, wmy[0].y);
 				if (cursor(wmy[0].x, wmy[0].y - 2) == '*')
 				{
-					clear_enemy(wmy[0].x, wmy[0].y);
-					wmy[0].status = 0;
+					wmy[0].rvse = 1;
+					draw_w(--wmy[0].x, ++wmy[0].y);
+					//clear_enemy(wmy[0].x, wmy[0].y);
+					//wmy[0].status = 0;
+				}
+			/*	else if (cursor(wmy[0].x, wmy[0].y - 2) == '*' && wmy[0].rvse == 1)
+				{
+					wmy[0].rvse = 2;
+					draw_w(--wmy[0].x, ++wmy[0].y);
+					//clear_enemy(wmy[0].x, wmy[0].y);
+					//wmy[0].status = 0;
+				}*/
+				else if (cursor(wmy[0].x, wmy[0].y + 2) == '*')
+				{
+					wmy[0].rvse = 0;
+					draw_w(--wmy[0].x, --wmy[0].y);
+					//clear_enemy(wmy[0].x, wmy[0].y);
+					//wmy[0].status = 0;
 				}
 				else if (cursor(wmy[0].x, wmy[0].y - 1) == '>' || cursor(wmy[0].x+1, wmy[0].y) == '>' || cursor(wmy[0].x - 1, wmy[0].y) == '>'  || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
@@ -1869,16 +1886,32 @@ int main()
 					wmy[0].status = 0;
 					score += 200;
 				}
-				else if (wmy[0].y == y + 1 && wb[0].status == 0)
+				else if (wmy[0].y == y + 1 && wb[0].status == 0 && wmy[0].rvse == 1)
+				{
+					wb[0].x = wmy[0].x - 1;
+					wb[0].y = wmy[0].y;
+					wb[0].status = 1;
+					draw_w(wmy[0].x, ++wmy[0].y);
+				}
+				else if (wmy[0].y == y + 1 && wb[0].status == 0 && wmy[0].rvse == 0)
 				{
 					wb[0].x = wmy[0].x - 1;
 					wb[0].y = wmy[0].y;
 					wb[0].status = 1;
 					draw_w(wmy[0].x, --wmy[0].y);
 				}
-				else
+				else if (wmy[0].rvse == 0)
 				{
 					draw_w(wmy[0].x, --wmy[0].y);
+				}
+				else if (wmy[0].rvse == 1)
+				{
+					draw_w(wmy[0].x, ++wmy[0].y);
+				}
+				else if (wmy[0].x == 15)
+				{
+					clear_enemy(wmy[0].x, wmy[0].y);
+					wmy[0].status = 0;
 				}
 
 
