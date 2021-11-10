@@ -134,6 +134,10 @@ int PlayerStats(int pscore, int lv)
 	p[5].score = pscore;
 	p[5].lv = lv;
 
+
+	// DO NOT DELETE
+	// For resetting Player Stats 
+
 	/*strcpy(p[0].name, "Nom Carver");
 	p[0].lv = 4;
 	p[0].score = 3200;
@@ -1855,36 +1859,32 @@ int main()
 		if (wmy[0].status == 1)  // Normal W 
 		{
 			wmy[0].walk += 1;
-			if (wmy[0].walk % 4 == 0)
+			if (wmy[0].walk % 3 == 0)
 			{
 				clear_enemy(wmy[0].x, wmy[0].y);
 				if (cursor(wmy[0].x, wmy[0].y - 2) == '*' && wmy[0].rvse == 0)
 				{
 					wmy[0].rvse = 1;
 					draw_w(--wmy[0].x, wmy[0].y);
-					//clear_enemy(wmy[0].x, wmy[0].y);
-					//wmy[0].status = 0;
+					
 				}
 				else if (cursor(wmy[0].x, wmy[0].y - 2) == '*' && wmy[0].rvse == 1)
 				{
 					wmy[0].rvse = 2;
 					draw_w(wmy[0].x, ++wmy[0].y);
-					//clear_enemy(wmy[0].x, wmy[0].y);
-					//wmy[0].status = 0;
+					
 				}
 				else if (cursor(wmy[0].x, wmy[0].y + 2) == '*' && wmy[0].rvse == 2)
 				{
 					wmy[0].rvse = 1;
 					draw_w(--wmy[0].x, wmy[0].y);
-					//clear_enemy(wmy[0].x, wmy[0].y);
-					//wmy[0].status = 0;
+					
 				}
 				else if (cursor(wmy[0].x, wmy[0].y + 2) == '*' && wmy[0].rvse == 1)
 				{
 					wmy[0].rvse = 0;
 					draw_w(wmy[0].x, --wmy[0].y);
-					//clear_enemy(wmy[0].x, wmy[0].y);
-					//wmy[0].status = 0;
+					
 				}
 				else if (cursor(wmy[0].x, wmy[0].y - 1) == 'D' || cursor(wmy[0].x, wmy[0].y - 1) == '=' || cursor(wmy[0].x, wmy[0].y - 1) == '^' || cursor(wmy[0].x, wmy[0].y - 1) == 'v' || cursor(wmy[0].x, wmy[0].y - 1) == '\\' || cursor(wmy[0].x, wmy[0].y - 1) == '/' || cursor(wmy[0].x, wmy[0].y - 1) == 'o')
 				{
@@ -1973,36 +1973,32 @@ int main()
 		if (wmy[1].status == 1) // Reverse W
 		{
 			wmy[1].walk += 1;
-			if (wmy[1].walk % 4 == 0)
+			if (wmy[1].walk % 3 == 0)
 			{
 				clear_enemy(wmy[1].x, wmy[1].y);
 				if (cursor(wmy[1].x, wmy[1].y - 2) == '*' && wmy[1].rvse == 2)
 				{
 					wmy[1].rvse = 1;
 					draw_w(--wmy[1].x, wmy[1].y);
-					//clear_enemy(wmy[1].x, wmy[1].y);
-					//wmy[1].status = 0;
+					
 				}
 				else if (cursor(wmy[1].x, wmy[1].y - 2) == '*' && wmy[1].rvse == 1)
 				{
 					wmy[1].rvse = 0;
 					draw_w(wmy[1].x, ++wmy[1].y);
-					//clear_enemy(wmy[1].x, wmy[1].y);
-					//wmy[1].status = 0;
+					
 				}
 				else if (cursor(wmy[1].x, wmy[1].y + 2) == '*' && wmy[1].rvse == 0)
 				{
 					wmy[1].rvse = 1;
 					draw_w(--wmy[1].x, wmy[1].y);
-					//clear_enemy(wmy[1].x, wmy[1].y);
-					//wmy[1].status = 0;
+					
 				}
 				else if (cursor(wmy[1].x, wmy[1].y + 2) == '*' && wmy[1].rvse == 1)
 				{
 					wmy[1].rvse = 2;
 					draw_w(wmy[1].x, --wmy[1].y);
-					//clear_enemy(wmy[1].x, wmy[1].y);
-					//wmy[1].status = 0;
+					
 				}
 				else if (cursor(wmy[1].x, wmy[1].y - 1) == 'D' || cursor(wmy[1].x, wmy[1].y - 1) == '=' || cursor(wmy[1].x, wmy[1].y - 1) == '^' || cursor(wmy[1].x, wmy[1].y - 1) == 'v' || cursor(wmy[1].x, wmy[1].y - 1) == '\\' || cursor(wmy[1].x, wmy[1].y - 1) == '/' || cursor(wmy[1].x, wmy[1].y - 1) == 'o')
 				{
@@ -2091,36 +2087,32 @@ int main()
 		if (wmy[2].status == 1)  // Normal W 
 		{
 			wmy[2].walk += 1;
-			if (wmy[2].walk % 4 == 0)
+			if (wmy[2].walk % 3 == 0)
 			{
 				clear_enemy(wmy[2].x, wmy[2].y);
 				if (cursor(wmy[2].x, wmy[2].y - 2) == '*' && wmy[2].rvse == 0)
 				{
 					wmy[2].rvse = 1;
 					draw_w(--wmy[2].x, wmy[2].y);
-					//clear_enemy(wmy[2].x, wmy[2].y);
-					//wmy[2].status = 0;
+					
 				}
 				else if (cursor(wmy[2].x, wmy[2].y - 2) == '*' && wmy[2].rvse == 1)
 				{
 					wmy[2].rvse = 2;
 					draw_w(wmy[2].x, ++wmy[2].y);
-					//clear_enemy(wmy[2].x, wmy[2].y);
-					//wmy[2].status = 0;
+					
 				}
 				else if (cursor(wmy[2].x, wmy[2].y + 2) == '*' && wmy[2].rvse == 2)
 				{
 					wmy[2].rvse = 1;
 					draw_w(--wmy[2].x, wmy[2].y);
-					//clear_enemy(wmy[2].x, wmy[2].y);
-					//wmy[2].status = 0;
+					
 				}
 				else if (cursor(wmy[2].x, wmy[2].y + 2) == '*' && wmy[2].rvse == 1)
 				{
 					wmy[2].rvse = 0;
 					draw_w(wmy[2].x, --wmy[2].y);
-					//clear_enemy(wmy[2].x, wmy[2].y);
-					//wmy[2].status = 0;
+					
 				}
 				else if (cursor(wmy[2].x, wmy[2].y - 1) == 'D' || cursor(wmy[2].x, wmy[2].y - 1) == '=' || cursor(wmy[2].x, wmy[2].y - 1) == '^' || cursor(wmy[2].x, wmy[2].y - 1) == 'v' || cursor(wmy[2].x, wmy[2].y - 1) == '\\' || cursor(wmy[2].x, wmy[2].y - 1) == '/' || cursor(wmy[2].x, wmy[2].y - 1) == 'o')
 				{
@@ -2213,36 +2205,32 @@ int main()
 		if (wmy[3].status == 1) // Reverse W
 		{
 			wmy[3].walk += 1;
-			if (wmy[3].walk % 4 == 0)
+			if (wmy[3].walk % 3 == 0)
 			{
 				clear_enemy(wmy[3].x, wmy[3].y);
 				if (cursor(wmy[3].x, wmy[3].y - 2) == '*' && wmy[3].rvse == 2)
 				{
 					wmy[3].rvse = 1;
 					draw_w(--wmy[3].x, wmy[3].y);
-					//clear_enemy(wmy[3].x, wmy[3].y);
-					//wmy[3].status = 0;
+					
 				}
 				else if (cursor(wmy[3].x, wmy[3].y - 2) == '*' && wmy[3].rvse == 1)
 				{
 					wmy[3].rvse = 0;
 					draw_w(wmy[3].x, ++wmy[3].y);
-					//clear_enemy(wmy[3].x, wmy[3].y);
-					//wmy[3].status = 0;
+					
 				}
 				else if (cursor(wmy[3].x, wmy[3].y + 2) == '*' && wmy[3].rvse == 0)
 				{
 					wmy[3].rvse = 1;
 					draw_w(--wmy[3].x, wmy[3].y);
-					//clear_enemy(wmy[3].x, wmy[3].y);
-					//wmy[3].status = 0;
+					
 				}
 				else if (cursor(wmy[3].x, wmy[3].y + 2) == '*' && wmy[3].rvse == 1)
 				{
 					wmy[3].rvse = 2;
 					draw_w(wmy[3].x, --wmy[3].y);
-					//clear_enemy(wmy[3].x, wmy[3].y);
-					//wmy[3].status = 0;
+					
 				}
 				else if (cursor(wmy[3].x, wmy[3].y - 1) == 'D' || cursor(wmy[3].x, wmy[3].y - 1) == '=' || cursor(wmy[3].x, wmy[3].y - 1) == '^' || cursor(wmy[3].x, wmy[3].y - 1) == 'v' || cursor(wmy[3].x, wmy[3].y - 1) == '\\' || cursor(wmy[3].x, wmy[3].y - 1) == '/' || cursor(wmy[3].x, wmy[3].y - 1) == 'o')
 				{
@@ -2331,36 +2319,32 @@ int main()
 		if (wmy[4].status == 1)  // Normal W 
 		{
 			wmy[4].walk += 1;
-			if (wmy[4].walk % 4 == 0)
+			if (wmy[4].walk % 3 == 0)
 			{
 				clear_enemy(wmy[4].x, wmy[4].y);
 				if (cursor(wmy[4].x, wmy[4].y - 2) == '*' && wmy[4].rvse == 0)
 				{
 					wmy[4].rvse = 1;
 					draw_w(--wmy[4].x, wmy[4].y);
-					//clear_enemy(wmy[4].x, wmy[4].y);
-					//wmy[4].status = 0;
+					
 				}
 				else if (cursor(wmy[4].x, wmy[4].y - 2) == '*' && wmy[4].rvse == 1)
 				{
 					wmy[4].rvse = 2;
 					draw_w(wmy[4].x, ++wmy[4].y);
-					//clear_enemy(wmy[4].x, wmy[4].y);
-					//wmy[4].status = 0;
+					
 				}
 				else if (cursor(wmy[4].x, wmy[4].y + 2) == '*' && wmy[4].rvse == 2)
 				{
 					wmy[4].rvse = 1;
 					draw_w(--wmy[4].x, wmy[4].y);
-					//clear_enemy(wmy[4].x, wmy[4].y);
-					//wmy[4].status = 0;
+					
 				}
 				else if (cursor(wmy[4].x, wmy[4].y + 2) == '*' && wmy[4].rvse == 1)
 				{
 					wmy[4].rvse = 0;
 					draw_w(wmy[4].x, --wmy[4].y);
-					//clear_enemy(wmy[4].x, wmy[4].y);
-					//wmy[4].status = 0;
+					
 				}
 				else if (cursor(wmy[4].x, wmy[4].y - 1) == 'D' || cursor(wmy[4].x, wmy[4].y - 1) == '=' || cursor(wmy[4].x, wmy[4].y - 1) == '^' || cursor(wmy[4].x, wmy[4].y - 1) == 'v' || cursor(wmy[4].x, wmy[4].y - 1) == '\\' || cursor(wmy[4].x, wmy[4].y - 1) == '/' || cursor(wmy[4].x, wmy[4].y - 1) == 'o')
 				{
@@ -2449,36 +2433,32 @@ int main()
 		if (wmy[5].status == 1) // Reverse W
 		{
 			wmy[5].walk += 1;
-			if (wmy[5].walk % 4 == 0)
+			if (wmy[5].walk % 3 == 0)
 			{
 				clear_enemy(wmy[5].x, wmy[5].y);
 				if (cursor(wmy[5].x, wmy[5].y - 2) == '*' && wmy[5].rvse == 2)
 				{
 					wmy[5].rvse = 1;
 					draw_w(--wmy[5].x, wmy[5].y);
-					//clear_enemy(wmy[5].x, wmy[5].y);
-					//wmy[5].status = 0;
+					
 				}
 				else if (cursor(wmy[5].x, wmy[5].y - 2) == '*' && wmy[5].rvse == 1)
 				{
 					wmy[5].rvse = 0;
 					draw_w(wmy[5].x, ++wmy[5].y);
-					//clear_enemy(wmy[5].x, wmy[5].y);
-					//wmy[5].status = 0;
+				
 				}
 				else if (cursor(wmy[5].x, wmy[5].y + 2) == '*' && wmy[5].rvse == 0)
 				{
 					wmy[5].rvse = 1;
 					draw_w(--wmy[5].x, wmy[5].y);
-					//clear_enemy(wmy[5].x, wmy[5].y);
-					//wmy[5].status = 0;
+				
 				}
 				else if (cursor(wmy[5].x, wmy[5].y + 2) == '*' && wmy[5].rvse == 1)
 				{
 					wmy[5].rvse = 2;
 					draw_w(wmy[5].x, --wmy[5].y);
-					//clear_enemy(wmy[5].x, wmy[5].y);
-					//wmy[5].status = 0;
+					
 				}
 				else if (cursor(wmy[5].x, wmy[5].y - 1) == 'D' || cursor(wmy[5].x, wmy[5].y - 1) == '=' || cursor(wmy[5].x, wmy[5].y - 1) == '^' || cursor(wmy[5].x, wmy[5].y - 1) == 'v' || cursor(wmy[5].x, wmy[5].y - 1) == '\\' || cursor(wmy[5].x, wmy[5].y - 1) == '/' || cursor(wmy[5].x, wmy[5].y - 1) == 'o')
 				{
@@ -2567,36 +2547,32 @@ int main()
 		if (wmy[6].status == 1)  // Normal W 
 		{
 			wmy[6].walk += 1;
-			if (wmy[6].walk % 4 == 0)
+			if (wmy[6].walk % 3 == 0)
 			{
 				clear_enemy(wmy[6].x, wmy[6].y);
 				if (cursor(wmy[6].x, wmy[6].y - 2) == '*' && wmy[6].rvse == 0)
 				{
 					wmy[6].rvse = 1;
 					draw_w(--wmy[6].x, wmy[6].y);
-					//clear_enemy(wmy[6].x, wmy[6].y);
-					//wmy[6].status = 0;
+					
 				}
 				else if (cursor(wmy[6].x, wmy[6].y - 2) == '*' && wmy[6].rvse == 1)
 				{
 					wmy[6].rvse = 2;
 					draw_w(wmy[6].x, ++wmy[6].y);
-					//clear_enemy(wmy[6].x, wmy[6].y);
-					//wmy[6].status = 0;
+					
 				}
 				else if (cursor(wmy[6].x, wmy[6].y + 2) == '*' && wmy[6].rvse == 2)
 				{
 					wmy[6].rvse = 1;
 					draw_w(--wmy[6].x, wmy[6].y);
-					//clear_enemy(wmy[6].x, wmy[6].y);
-					//wmy[6].status = 0;
+					
 				}
 				else if (cursor(wmy[6].x, wmy[6].y + 2) == '*' && wmy[6].rvse == 1)
 				{
 					wmy[6].rvse = 0;
 					draw_w(wmy[6].x, --wmy[6].y);
-					//clear_enemy(wmy[6].x, wmy[6].y);
-					//wmy[6].status = 0;
+					
 				}
 				else if (cursor(wmy[6].x, wmy[6].y - 1) == 'D' || cursor(wmy[6].x, wmy[6].y - 1) == '=' || cursor(wmy[6].x, wmy[6].y - 1) == '^' || cursor(wmy[6].x, wmy[6].y - 1) == 'v' || cursor(wmy[6].x, wmy[6].y - 1) == '\\' || cursor(wmy[6].x, wmy[6].y - 1) == '/' || cursor(wmy[6].x, wmy[6].y - 1) == 'o')
 				{
@@ -2686,36 +2662,32 @@ int main()
 		if (wmy[7].status == 1) // Reverse W
 		{
 			wmy[7].walk += 1;
-			if (wmy[7].walk % 4 == 0)
+			if (wmy[7].walk % 3 == 0)
 			{
 				clear_enemy(wmy[7].x, wmy[7].y);
 				if (cursor(wmy[7].x, wmy[7].y - 2) == '*' && wmy[7].rvse == 2)
 				{
 					wmy[7].rvse = 1;
 					draw_w(--wmy[7].x, wmy[7].y);
-					//clear_enemy(wmy[7].x, wmy[7].y);
-					//wmy[7].status = 0;
+					
 				}
 				else if (cursor(wmy[7].x, wmy[7].y - 2) == '*' && wmy[7].rvse == 1)
 				{
 					wmy[7].rvse = 0;
 					draw_w(wmy[7].x, ++wmy[7].y);
-					//clear_enemy(wmy[7].x, wmy[7].y);
-					//wmy[7].status = 0;
+					
 				}
 				else if (cursor(wmy[7].x, wmy[7].y + 2) == '*' && wmy[7].rvse == 0)
 				{
 					wmy[7].rvse = 1;
 					draw_w(--wmy[7].x, wmy[7].y);
-					//clear_enemy(wmy[7].x, wmy[7].y);
-					//wmy[7].status = 0;
+					
 				}
 				else if (cursor(wmy[7].x, wmy[7].y + 2) == '*' && wmy[7].rvse == 1)
 				{
 					wmy[7].rvse = 2;
 					draw_w(wmy[7].x, --wmy[7].y);
-					//clear_enemy(wmy[7].x, wmy[7].y);
-					//wmy[7].status = 0;
+					
 				}
 				else if (cursor(wmy[7].x, wmy[7].y - 1) == 'D' || cursor(wmy[7].x, wmy[7].y - 1) == '=' || cursor(wmy[7].x, wmy[7].y - 1) == '^' || cursor(wmy[7].x, wmy[7].y - 1) == 'v' || cursor(wmy[7].x, wmy[7].y - 1) == '\\' || cursor(wmy[7].x, wmy[7].y - 1) == '/' || cursor(wmy[7].x, wmy[7].y - 1) == 'o')
 				{
