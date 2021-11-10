@@ -235,7 +235,7 @@ void plane(int x,int y)
 	gotoxy(x, y);
 	printf(" \\  ^ ");
 	gotoxy(x, y+=1);
-	printf(" =>=O=D ");
+	printf(" =o=O=D ");
 	gotoxy(x, y+=1);
 	printf(" /  v ");
 	setcolor(7, 0);
@@ -1858,26 +1858,45 @@ int main()
 			if (wmy[0].walk % 4 == 0)
 			{
 				clear_enemy(wmy[0].x, wmy[0].y);
-				if (cursor(wmy[0].x, wmy[0].y - 2) == '*')
+				if (cursor(wmy[0].x, wmy[0].y - 2) == '*' && wmy[0].rvse == 0)
 				{
 					wmy[0].rvse = 1;
-					draw_w(--wmy[0].x, ++wmy[0].y);
+					draw_w(--wmy[0].x, wmy[0].y);
 					//clear_enemy(wmy[0].x, wmy[0].y);
 					//wmy[0].status = 0;
 				}
-			/*	else if (cursor(wmy[0].x, wmy[0].y - 2) == '*' && wmy[0].rvse == 1)
+				else if (cursor(wmy[0].x, wmy[0].y - 2) == '*' && wmy[0].rvse == 1)
 				{
 					wmy[0].rvse = 2;
-					draw_w(--wmy[0].x, ++wmy[0].y);
+					draw_w(wmy[0].x, ++wmy[0].y);
 					//clear_enemy(wmy[0].x, wmy[0].y);
 					//wmy[0].status = 0;
-				}*/
-				else if (cursor(wmy[0].x, wmy[0].y + 2) == '*')
+				}
+				else if (cursor(wmy[0].x, wmy[0].y + 2) == '*' && wmy[0].rvse == 2)
+				{
+					wmy[0].rvse = 1;
+					draw_w(--wmy[0].x, wmy[0].y);
+					//clear_enemy(wmy[0].x, wmy[0].y);
+					//wmy[0].status = 0;
+				}
+				else if (cursor(wmy[0].x, wmy[0].y + 2) == '*' && wmy[0].rvse == 1)
 				{
 					wmy[0].rvse = 0;
-					draw_w(--wmy[0].x, --wmy[0].y);
+					draw_w(wmy[0].x, --wmy[0].y);
 					//clear_enemy(wmy[0].x, wmy[0].y);
 					//wmy[0].status = 0;
+				}
+				else if (cursor(wmy[0].x, wmy[0].y - 1) == 'D' || cursor(wmy[0].x, wmy[0].y - 1) == '=' || cursor(wmy[0].x, wmy[0].y - 1) == '^' || cursor(wmy[0].x, wmy[0].y - 1) == 'v' || cursor(wmy[0].x, wmy[0].y - 1) == '\\' || cursor(wmy[0].x, wmy[0].y - 1) == '/' || cursor(wmy[0].x, wmy[0].y - 1) == 'o')
+				{
+					clear_enemy(wmy[0].x, wmy[0].y);
+					wmy[0].status = 0;
+					PlayerHP -= 1;
+				}
+				else if (cursor(wmy[0].x, wmy[0].y + 1) == 'D' || cursor(wmy[0].x, wmy[0].y + 1) == '=' || cursor(wmy[0].x, wmy[0].y + 1) == '^' || cursor(wmy[0].x, wmy[0].y + 1) == 'v' || cursor(wmy[0].x, wmy[0].y + 1) == '\\' || cursor(wmy[0].x, wmy[0].y + 1) == '/' || cursor(wmy[0].x, wmy[0].y + 1) == 'o')
+				{
+					clear_enemy(wmy[0].x, wmy[0].y);
+					wmy[0].status = 0;
+					PlayerHP -= 1;
 				}
 				else if (cursor(wmy[0].x, wmy[0].y - 1) == '>' || cursor(wmy[0].x+1, wmy[0].y) == '>' || cursor(wmy[0].x - 1, wmy[0].y) == '>'  || cursor(wmy[0].x, wmy[0].y) == '>')
 				{
@@ -1886,7 +1905,7 @@ int main()
 					wmy[0].status = 0;
 					score += 200;
 				}
-				else if (wmy[0].y == y + 1 && wb[0].status == 0 && wmy[0].rvse == 1)
+				else if (wmy[0].y == y + 1 && wb[0].status == 0 && wmy[0].rvse == 2)
 				{
 					wb[0].x = wmy[0].x - 1;
 					wb[0].y = wmy[0].y;
@@ -1904,7 +1923,7 @@ int main()
 				{
 					draw_w(wmy[0].x, --wmy[0].y);
 				}
-				else if (wmy[0].rvse == 1)
+				else if (wmy[0].rvse == 2)
 				{
 					draw_w(wmy[0].x, ++wmy[0].y);
 				}
