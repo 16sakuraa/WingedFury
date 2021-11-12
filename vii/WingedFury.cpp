@@ -3369,7 +3369,7 @@ int main()
 			{
 				Beep(400, 50);
 				healthpack();
-				chargedrop(cs[9].status);
+				chargedrop(cs[0].status);
 				extrabullet(maxbullet);
 				clear_enemy(enemy[9].x, enemy[9].y);
 				enemy[9].status = 0;
@@ -3412,7 +3412,7 @@ int main()
 			{
 				Beep(400, 50);
 				healthpack();
-				chargedrop(cs[10].status);
+				chargedrop(cs[0].status);
 				extrabullet(maxbullet);
 				clear_enemy(enemy[10].x, enemy[10].y);
 				enemy[10].status = 0;
@@ -3455,7 +3455,7 @@ int main()
 			{
 				Beep(400, 50);
 				healthpack();
-				chargedrop(cs[11].status);
+				chargedrop(cs[1].status);
 				extrabullet(maxbullet);
 				clear_enemy(enemy[11].x, enemy[11].y);
 				enemy[11].status = 0;
