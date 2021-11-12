@@ -1003,6 +1003,11 @@ void draw_x(int x, int y)
 	setcolor(7, 0);
 }
 
+void drawxb(int x, int y)
+{
+	gotoxy(x, y);
+	printf("x");
+}
 
 
 
@@ -1040,10 +1045,17 @@ int main()
 		int status = 0;
 		int x = 0;
 		int y = 0;
-		int hp = 2;
+		int count = 0;
 		int walk = 0;
 		int timer = 1;
 	}; cross cross[10];
+
+	struct cb
+	{
+		int x = 0;
+		int y = 0;
+		int status = 0;
+	}; cb cb[8];
 
 	struct wmy
 	{
@@ -1657,7 +1669,6 @@ int main()
 			{
 				chargedstatus(-1);
 				clearcharged(cs[0].x, cs[0].y);
-			//	chargecooldown = 1;
 				cs[0].status = 0;
 				cs[0].chargeshothold = 0;
 
@@ -1675,14 +1686,13 @@ int main()
 			cs[0].chargeshotholdold = cs[0].chargeshothold;
 		}
 
-		//if (chargecooldown == 1)
 
 		if (bossstate == 0)
 		{
 
 		
 
-		if (cross[0].timer % 20 == 0 && cross[0].status == 0 && level >= 10)
+		if (cross[0].timer % 20 == 0 && cross[0].status == 0 && level >= 0)
 		{
 
 			cross[0].x = RandomX();
@@ -1700,10 +1710,37 @@ int main()
 
 		if (cross[0].status == 1)
 		{
-			if (cross[0].walk % 2 == 0)
+			if (cross[0].walk % 5 == 0)
 			{
 				clear_enemy(cross[0].x, cross[0].y);
-				if (cross[0].y > y + 1 && cross[0].x > x + 2)
+				cross[0].count += 1;
+				if (cross[0].count % 7 == 0)
+				{
+					if (cb[0].status == 0 && cb[1].status == 0 && cb[2].status == 0 && cb[3].status == 0 && cross[0].x >= 3 && cross[0].x <= 56 && cross[0].y >= 2 && cross[0].y <= 18 )
+					{
+						cb[0].x = cross[0].x - 1; // upper left
+						cb[0].y = cross[0].y - 1;
+						cb[0].status = 1;
+
+						cb[1].x = cross[0].x - 1; // down left
+						cb[1].y = cross[0].y + 1;
+						cb[1].status = 1;
+
+						cb[2].x = cross[0].x + 1; // upper right
+						cb[2].y = cross[0].y - 1;
+						cb[2].status = 1;
+
+						cb[3].x = cross[0].x + 1; // down right
+						cb[3].y = cross[0].y + 1;
+						cb[3].status = 1;
+					}
+					draw_x(--cross[0].x, cross[0].y);
+				}
+				else
+				{
+					draw_x(--cross[0].x, cross[0].y);
+				}
+				/*if (cross[0].y > y + 1 && cross[0].x > x + 2)
 				{
 					draw_x(--cross[0].x, --cross[0].y);
 				}
@@ -1722,7 +1759,7 @@ int main()
 				{
 					draw_x(--cross[0].x, cross[0].y);
 				}
-
+				*/
 
 
 			}
@@ -1734,6 +1771,13 @@ int main()
 				cross[0].timer = 1;
 				cross[0].status = 0;
 			}
+			else if (cursor(cross[0].x - 1, cross[0].y) == '*')
+			{
+				clear_enemy(cross[0].x, cross[0].y);
+				cross[0].timer = 1;
+				cross[0].status = 0;
+
+			}
 			else if (cursor(cross[0].x - 2, cross[0].y) == 'D' || cursor(cross[0].x - 2, cross[0].y) == '=')
 			{
 				clear_enemy(cross[0].x, cross[0].y);
@@ -1744,6 +1788,84 @@ int main()
 
 
 			cross[0].walk += 1;
+		}
+
+		if (cb[0].status == 1)
+		{
+			clear_enemy(cb[0].x, cb[0].y);
+			if (cb[0].x == 2 || cb[0].y == 2)
+			{
+				clear_enemy(cb[0].x, cb[0].y);
+				cb[0].status = 0;
+			}
+			else if (cursor(cb[0].x - 1, cb[0].y - 1) == 'D' || cursor(cb[0].x - 1, cb[0].y - 1) == '=' || cursor(cb[0].x - 1, cb[0].y - 1) == 'v' || cursor(cb[0].x - 1, cb[0].y - 1) == '^' || cursor(cb[0].x - 1, cb[0].y - 1) == 'o' || cursor(cb[0].x - 1, cb[0].y - 1) == '/')
+			{
+				PlayerHP -= 1;
+				cb[0].status = 0;
+			}
+			else
+			{
+				drawxb(--cb[0].x, --cb[0].y);
+			}		
+		}
+
+		if (cb[1].status == 1)
+		{
+			clear_enemy(cb[1].x, cb[1].y);
+			if (cb[1].x == 2 || cursor(cb[1].x , cb[1].y + 1) == '*')
+			{
+				clear_enemy(cb[1].x, cb[1].y);
+				cb[1].status = 0;
+			}
+			else if (cursor(cb[1].x - 1, cb[1].y - 1) == 'D' || cursor(cb[1].x - 1, cb[1].y - 1) == '=' || cursor(cb[1].x - 1, cb[1].y - 1) == 'v' || cursor(cb[1].x - 1, cb[1].y - 1) == '^' || cursor(cb[1].x - 1, cb[1].y - 1) == 'o' || cursor(cb[1].x - 1, cb[1].y - 1) == '/' || cursor(cb[1].x - 1, cb[1].y - 1) == '\\')
+			{
+				PlayerHP -= 1;
+				cb[1].status = 0;
+			}
+			else
+			{
+				drawxb(--cb[1].x, ++cb[1].y);
+			}
+
+		}
+
+		if (cb[2].status == 1) // upper right
+		{
+			clear_enemy(cb[2].x, cb[2].y);
+			if (cursor(cb[2].x + 1, cb[2].y) == '*' || cursor(cb[2].x, cb[2].y - 1) == '*')
+			{
+				clear_enemy(cb[2].x, cb[2].y);
+				cb[2].status = 0;
+			}
+			else if (cursor(cb[2].x - 1, cb[2].y - 1) == 'D' || cursor(cb[2].x - 1, cb[2].y - 1) == '=' || cursor(cb[2].x - 1, cb[2].y - 1) == 'v' || cursor(cb[2].x - 1, cb[2].y - 1) == '^' || cursor(cb[2].x - 1, cb[2].y - 1) == 'o' || cursor(cb[2].x - 1, cb[2].y - 1) == '/' || cursor(cb[1].x - 1, cb[1].y - 1) == '\\')
+			{
+				PlayerHP -= 1;
+				cb[2].status = 0;
+			}
+			else
+			{
+				drawxb(++cb[2].x, --cb[2].y);
+			}
+		}
+
+		if (cb[3].status == 1) // down right
+		{
+			clear_enemy(cb[3].x, cb[3].y);
+			if (cursor(cb[3].x + 1, cb[3].y) == '*' || cursor(cb[3].x, cb[3].y + 1) == '*')
+			{
+				clear_enemy(cb[3].x, cb[3].y);
+				cb[3].status = 0;
+			}
+			else if (cursor(cb[3].x - 1, cb[3].y - 1) == 'D' || cursor(cb[3].x - 1, cb[3].y - 1) == '=' || cursor(cb[3].x - 1, cb[3].y - 1) == 'v' || cursor(cb[3].x - 1, cb[3].y - 1) == '^' || cursor(cb[3].x - 1, cb[3].y - 1) == 'o' || cursor(cb[3].x - 1, cb[3].y - 1) == '/')
+			{
+				PlayerHP -= 1;
+				cb[3].status = 0;
+			}
+			else
+			{
+				drawxb(++cb[3].x, ++cb[3].y);
+			}
+
 		}
 		
 		
