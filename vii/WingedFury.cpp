@@ -1055,6 +1055,8 @@ int main()
 		int x = 0;
 		int y = 0;
 		int status = 0;
+		int count = 0;
+		int speed = 2; // lower number for faster x's bullet speed
 	}; cb cb[8];
 
 	struct wmy
@@ -1716,13 +1718,13 @@ int main()
 				cross[0].count += 1;
 				if (cross[0].count % 7 == 0)
 				{
-					if (cb[0].status == 0 && cb[1].status == 0 && cb[2].status == 0 && cb[3].status == 0 && cross[0].x >= 3 && cross[0].x <= 56 && cross[0].y >= 2 && cross[0].y <= 18 )
+					if (cb[0].status == 0 && cb[1].status == 0 && cb[2].status == 0 && cb[3].status == 0 && cross[0].x >= 3 && cross[0].x <= 56 )
 					{
 						cb[0].x = cross[0].x - 1; // upper left
 						cb[0].y = cross[0].y - 1;
 						cb[0].status = 1;
 
-						cb[1].x = cross[0].x - 1; // down left
+						cb[1].x = cross[0].x - 1; // lower left
 						cb[1].y = cross[0].y + 1;
 						cb[1].status = 1;
 
@@ -1730,7 +1732,7 @@ int main()
 						cb[2].y = cross[0].y - 1;
 						cb[2].status = 1;
 
-						cb[3].x = cross[0].x + 1; // down right
+						cb[3].x = cross[0].x + 1; // lower right
 						cb[3].y = cross[0].y + 1;
 						cb[3].status = 1;
 					}
@@ -1740,26 +1742,6 @@ int main()
 				{
 					draw_x(--cross[0].x, cross[0].y);
 				}
-				/*if (cross[0].y > y + 1 && cross[0].x > x + 2)
-				{
-					draw_x(--cross[0].x, --cross[0].y);
-				}
-
-				else if (cross[0].y < y + 1 && cross[0].x > x + 2)
-				{
-					draw_x(--cross[0].x, ++cross[0].y);
-				}
-				else if (cross[0].x <= 3)
-				{
-					clear_enemy(cross[0].x, cross[0].y);
-					cross[0].timer = 1;
-					cross[0].status = 0;
-				}
-				else
-				{
-					draw_x(--cross[0].x, cross[0].y);
-				}
-				*/
 
 
 			}
@@ -1790,81 +1772,106 @@ int main()
 			cross[0].walk += 1;
 		}
 
-		if (cb[0].status == 1)
+		if (cb[0].status == 1) // upper left
 		{
-			clear_enemy(cb[0].x, cb[0].y);
-			if (cb[0].x == 2 || cb[0].y == 2)
+			cb[0].count += 1;
+			if (cb[0].count % cb[0].speed == 0)
 			{
 				clear_enemy(cb[0].x, cb[0].y);
-				cb[0].status = 0;
+				if (cb[0].x == 2 || cb[0].y == 2)
+				{
+					clear_enemy(cb[0].x, cb[0].y);
+					cb[0].status = 0;
+				}
+
+				else
+				{
+					drawxb(--cb[0].x, --cb[0].y);
+				}
 			}
-			else if (cursor(cb[0].x - 1, cb[0].y - 1) == 'D' || cursor(cb[0].x - 1, cb[0].y - 1) == '=' || cursor(cb[0].x - 1, cb[0].y - 1) == 'v' || cursor(cb[0].x - 1, cb[0].y - 1) == '^' || cursor(cb[0].x - 1, cb[0].y - 1) == 'o' || cursor(cb[0].x - 1, cb[0].y - 1) == '/')
+
+			if (cursor(cb[0].x - 1, cb[0].y - 1) == 'D' || cursor(cb[0].x - 1, cb[0].y - 1) == '=' || cursor(cb[0].x - 1, cb[0].y - 1) == 'v' || cursor(cb[0].x - 1, cb[0].y - 1) == '^' || cursor(cb[0].x - 1, cb[0].y - 1) == 'o' || cursor(cb[0].x - 1, cb[0].y - 1) == '/' || cursor(cb[0].x - 1, cb[0].y - 1) == 'O')
 			{
+				clear_enemy(cb[0].x, cb[0].y);
 				PlayerHP -= 1;
 				cb[0].status = 0;
 			}
-			else
-			{
-				drawxb(--cb[0].x, --cb[0].y);
-			}		
 		}
 
 		if (cb[1].status == 1)
 		{
-			clear_enemy(cb[1].x, cb[1].y);
-			if (cb[1].x == 2 || cursor(cb[1].x , cb[1].y + 1) == '*')
+			cb[1].count += 1;
+			if (cb[1].count % cb[1].speed == 0)
 			{
 				clear_enemy(cb[1].x, cb[1].y);
-				cb[1].status = 0;
+				if (cb[1].x == 2 || cursor(cb[1].x, cb[1].y + 1) == '*')
+				{
+					clear_enemy(cb[1].x, cb[1].y);
+					cb[1].status = 0;
+				}
+				else
+				{
+					drawxb(--cb[1].x, ++cb[1].y);
+				}
 			}
-			else if (cursor(cb[1].x - 1, cb[1].y - 1) == 'D' || cursor(cb[1].x - 1, cb[1].y - 1) == '=' || cursor(cb[1].x - 1, cb[1].y - 1) == 'v' || cursor(cb[1].x - 1, cb[1].y - 1) == '^' || cursor(cb[1].x - 1, cb[1].y - 1) == 'o' || cursor(cb[1].x - 1, cb[1].y - 1) == '/' || cursor(cb[1].x - 1, cb[1].y - 1) == '\\')
+			if (cursor(cb[1].x - 1, cb[1].y + 1) == 'D' || cursor(cb[1].x - 1, cb[1].y + 1) == '=' || cursor(cb[1].x - 1, cb[1].y + 1) == 'v' || cursor(cb[1].x - 1, cb[1].y + 1) == '^' || cursor(cb[1].x - 1, cb[1].y + 1) == 'o' || cursor(cb[1].x - 1, cb[1].y + 1) == '/' || cursor(cb[1].x - 1, cb[1].y + 1) == '\\' || cursor(cb[1].x - 1, cb[1].y + 1) == 'O')
 			{
+				clear_enemy(cb[1].x, cb[1].y);
 				PlayerHP -= 1;
 				cb[1].status = 0;
-			}
-			else
-			{
-				drawxb(--cb[1].x, ++cb[1].y);
 			}
 
 		}
 
 		if (cb[2].status == 1) // upper right
 		{
-			clear_enemy(cb[2].x, cb[2].y);
-			if (cursor(cb[2].x + 1, cb[2].y) == '*' || cursor(cb[2].x, cb[2].y - 1) == '*')
+			cb[2].count += 1;
+			if (cb[2].count % cb[2].speed == 0)
 			{
 				clear_enemy(cb[2].x, cb[2].y);
-				cb[2].status = 0;
+				if (cursor(cb[2].x + 1, cb[2].y) == '*' || cursor(cb[2].x, cb[2].y - 1) == '*')
+				{
+					clear_enemy(cb[2].x, cb[2].y);
+					cb[2].status = 0;
+				}
+				else
+				{
+					drawxb(++cb[2].x, --cb[2].y);
+				}
 			}
-			else if (cursor(cb[2].x - 1, cb[2].y - 1) == 'D' || cursor(cb[2].x - 1, cb[2].y - 1) == '=' || cursor(cb[2].x - 1, cb[2].y - 1) == 'v' || cursor(cb[2].x - 1, cb[2].y - 1) == '^' || cursor(cb[2].x - 1, cb[2].y - 1) == 'o' || cursor(cb[2].x - 1, cb[2].y - 1) == '/' || cursor(cb[1].x - 1, cb[1].y - 1) == '\\')
+			if (cursor(cb[2].x + 1, cb[2].y - 1) == 'D' || cursor(cb[2].x + 1, cb[2].y - 1) == '=' || cursor(cb[2].x + 1, cb[2].y - 1) == 'v' || cursor(cb[2].x + 1, cb[2].y - 1) == '^' || cursor(cb[2].x + 1, cb[2].y - 1) == 'o' || cursor(cb[2].x + 1, cb[2].y - 1) == '/' || cursor(cb[2].x + 1, cb[2].y - 1) == '\\' || cursor(cb[2].x + 1, cb[2].y - 1) == 'O')
 			{
+				clear_enemy(cb[2].x, cb[2].y);
 				PlayerHP -= 1;
 				cb[2].status = 0;
-			}
-			else
-			{
-				drawxb(++cb[2].x, --cb[2].y);
 			}
 		}
 
 		if (cb[3].status == 1) // down right
 		{
-			clear_enemy(cb[3].x, cb[3].y);
-			if (cursor(cb[3].x + 1, cb[3].y) == '*' || cursor(cb[3].x, cb[3].y + 1) == '*')
+			cb[3].count += 1;
+			if (cb[3].count % cb[3].speed == 0)
 			{
 				clear_enemy(cb[3].x, cb[3].y);
-				cb[3].status = 0;
+				if (cursor(cb[3].x + 1, cb[3].y) == '*' || cursor(cb[3].x, cb[3].y + 1) == '*')
+				{
+					clear_enemy(cb[3].x, cb[3].y);
+					cb[3].status = 0;
+				}
+				else
+				{
+					drawxb(++cb[3].x, ++cb[3].y);
+				}
 			}
-			else if (cursor(cb[3].x - 1, cb[3].y - 1) == 'D' || cursor(cb[3].x - 1, cb[3].y - 1) == '=' || cursor(cb[3].x - 1, cb[3].y - 1) == 'v' || cursor(cb[3].x - 1, cb[3].y - 1) == '^' || cursor(cb[3].x - 1, cb[3].y - 1) == 'o' || cursor(cb[3].x - 1, cb[3].y - 1) == '/')
+			if (cursor(cb[3].x + 1, cb[3].y + 1) == 'D' || cursor(cb[3].x + 1, cb[3].y + 1) == '=' || cursor(cb[3].x + 1, cb[3].y + 1) == 'v' || cursor(cb[3].x + 1, cb[3].y + 1) == '^' || cursor(cb[3].x + 1, cb[3].y + 1) == 'o' || cursor(cb[3].x + 1, cb[3].y + 1) == '/' || cursor(cb[3].x + 1, cb[3].y + 1) == 'O')
 			{
+				clear_enemy(cb[3].x, cb[3].y);
 				PlayerHP -= 1;
 				cb[3].status = 0;
 			}
-			else
-			{
-				drawxb(++cb[3].x, ++cb[3].y);
-			}
+
+
+
 
 		}
 		
