@@ -2075,14 +2075,14 @@ int main()
 
 
 			}
-			if (cursor(wmy[0].x, wmy[0].y + 1) == '>' || cursor(wmy[0].x + 1, wmy[0].y) == '>' || cursor(wmy[0].x - 1, wmy[0].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>' && wmy[0].rvse == 0)
+			if (cursor(wmy[0].x, wmy[0].y - 1) == '>' || cursor(wmy[0].x + 1, wmy[0].y) == '>' || cursor(wmy[0].x - 1, wmy[0].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>' && wmy[0].rvse == 0)
 			{
 				Beep(480, 50);
 				clear_enemy(wmy[0].x, wmy[0].y);
 				wmy[0].status = 0;
 				score += 200;
 			}
-			else if (cursor(wmy[0].x, wmy[0].y - 1) == '>' || cursor(wmy[0].x + 1, wmy[0].y) == '>' || cursor(wmy[0].x - 1, wmy[0].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>' && wmy[0].rvse == 2)
+			else if (cursor(wmy[0].x, wmy[0].y + 1) == '>' || cursor(wmy[0].x + 1, wmy[0].y) == '>' || cursor(wmy[0].x - 1, wmy[0].y) == '>' || cursor(wmy[0].x, wmy[0].y) == '>' && wmy[0].rvse == 2)
 			{
 				Beep(480, 50);
 				clear_enemy(wmy[0].x, wmy[0].y);
@@ -2203,7 +2203,7 @@ int main()
 				wmy[1].status = 0;
 				score += 200;
 			}
-			else if (cursor(wmy[1].x, wmy[1].y + 1) == '>' || cursor(wmy[1].x + 1, wmy[1].y) == '>' || cursor(wmy[1].x - 1, wmy[1].y) == '>' || cursor(wmy[1].x, wmy[1].y) == '>' && wmy[1].rvse == 0)
+			else if (cursor(wmy[1].x, wmy[1].y - 1) == '>' || cursor(wmy[1].x + 1, wmy[1].y) == '>' || cursor(wmy[1].x - 1, wmy[1].y) == '>' || cursor(wmy[1].x, wmy[1].y) == '>' && wmy[1].rvse == 0)
 			{
 				Beep(480, 50);
 				clear_enemy(wmy[1].x, wmy[1].y);
@@ -2317,14 +2317,14 @@ int main()
 
 
 			}
-			if (cursor(wmy[2].x, wmy[2].y + 1) == '>' || cursor(wmy[2].x + 1, wmy[2].y) == '>' || cursor(wmy[2].x - 1, wmy[2].y) == '>' || cursor(wmy[2].x, wmy[2].y) == '>' && wmy[2].rvse == 0)
+			if (cursor(wmy[2].x, wmy[2].y - 1) == '>' || cursor(wmy[2].x + 1, wmy[2].y) == '>' || cursor(wmy[2].x - 1, wmy[2].y) == '>' || cursor(wmy[2].x, wmy[2].y) == '>' && wmy[2].rvse == 0)
 			{
 				Beep(480, 50);
 				clear_enemy(wmy[2].x, wmy[2].y);
 				wmy[2].status = 0;
 				score += 200;
 			}
-			else if (cursor(wmy[2].x, wmy[2].y - 1) == '>' || cursor(wmy[2].x + 1, wmy[2].y) == '>' || cursor(wmy[2].x - 1, wmy[2].y) == '>' || cursor(wmy[2].x, wmy[2].y) == '>' && wmy[2].rvse == 2)
+			else if (cursor(wmy[2].x, wmy[2].y + 1) == '>' || cursor(wmy[2].x + 1, wmy[2].y) == '>' || cursor(wmy[2].x - 1, wmy[2].y) == '>' || cursor(wmy[2].x, wmy[2].y) == '>' && wmy[2].rvse == 2)
 			{
 				Beep(480, 50);
 				clear_enemy(wmy[2].x, wmy[2].y);
@@ -2564,7 +2564,7 @@ int main()
 
 
 			}
-			if (cursor(wmy[4].x, wmy[4].y + 1) == '>' || cursor(wmy[4].x + 1, wmy[4].y) == '>' || cursor(wmy[4].x - 1, wmy[4].y) == '>' || cursor(wmy[4].x, wmy[4].y) == '>' && wmy[4].rvse == 0)
+			if (cursor(wmy[4].x, wmy[4].y - 1) == '>' || cursor(wmy[4].x + 1, wmy[4].y) == '>' || cursor(wmy[4].x - 1, wmy[4].y) == '>' || cursor(wmy[4].x, wmy[4].y) == '>' && wmy[4].rvse == 0)
 			{
 				Beep(480, 50);
 				clear_enemy(wmy[4].x, wmy[4].y);
@@ -2692,7 +2692,7 @@ int main()
 				wmy[5].status = 0;
 				score += 200;
 			}
-			else if (cursor(wmy[5].x, wmy[5].y + 1) == '>' || cursor(wmy[5].x + 1, wmy[5].y) == '>' || cursor(wmy[5].x - 1, wmy[5].y) == '>' || cursor(wmy[5].x, wmy[5].y) == '>' && wmy[5].rvse == 0)
+			else if (cursor(wmy[5].x, wmy[5].y - 1) == '>' || cursor(wmy[5].x + 1, wmy[5].y) == '>' || cursor(wmy[5].x - 1, wmy[5].y) == '>' || cursor(wmy[5].x, wmy[5].y) == '>' && wmy[5].rvse == 0)
 			{
 				Beep(480, 50);
 				clear_enemy(wmy[5].x, wmy[5].y);
@@ -2806,14 +2806,14 @@ int main()
 
 
 			}
-			if (cursor(wmy[6].x, wmy[6].y + 1) == '>' || cursor(wmy[6].x + 1, wmy[6].y) == '>' || cursor(wmy[6].x - 1, wmy[6].y) == '>' || cursor(wmy[6].x, wmy[6].y) == '>' && wmy[6].rvse == 0)
+			if (cursor(wmy[6].x, wmy[6].y - 1) == '>' || cursor(wmy[6].x + 1, wmy[6].y) == '>' || cursor(wmy[6].x - 1, wmy[6].y) == '>' || cursor(wmy[6].x, wmy[6].y) == '>' && wmy[6].rvse == 0)
 			{
 				Beep(480, 50);
 				clear_enemy(wmy[6].x, wmy[6].y);
 				wmy[6].status = 0;
 				score += 200;
 			}
-			else if (cursor(wmy[6].x, wmy[6].y - 1) == '>' || cursor(wmy[6].x + 1, wmy[6].y) == '>' || cursor(wmy[6].x - 1, wmy[6].y) == '>' || cursor(wmy[6].x, wmy[6].y) == '>' && wmy[6].rvse == 2)
+			else if (cursor(wmy[6].x, wmy[6].y + 1) == '>' || cursor(wmy[6].x + 1, wmy[6].y) == '>' || cursor(wmy[6].x - 1, wmy[6].y) == '>' || cursor(wmy[6].x, wmy[6].y) == '>' && wmy[6].rvse == 2)
 			{
 				Beep(480, 50);
 				clear_enemy(wmy[6].x, wmy[6].y);
