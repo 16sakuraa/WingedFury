@@ -1584,6 +1584,17 @@ int main()
 			chargemessage = 1;
 		}
 
+		if (cursor(x + 5, y + 3) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 5, y + 3);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
 		if (cursor(x + 4, y + 3) == 'C')
 		{
 			Beep(800, 25);
