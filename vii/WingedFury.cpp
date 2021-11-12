@@ -941,7 +941,7 @@ void key()
 	setcolor(14, 0);
 	printf("Moves  - w,a,s,d");
 	gotoxy(63, 2);
-	printf("Shoots - SPACEBAR");
+	printf("Shoot  - SPACEBAR");
 	gotoxy(63, 3);
 	printf("Charge - e (HOLD)");
 	gotoxy(63, 4);
@@ -997,7 +997,7 @@ void knife()
 
 void draw_x(int x, int y)
 {
-	setcolor(4, 0);
+	setcolor(5, 0);
 	gotoxy(x, y);
 	printf("X");
 	setcolor(7, 0);
@@ -1034,7 +1034,7 @@ int main()
 	srand(time(NULL));
 
 
-	struct enemy
+	struct enemy // M
 	{
 		int status=0;
 		long int x=0;
@@ -1042,7 +1042,7 @@ int main()
 		
 	};enemy enemy[20];
 
-	struct cross
+	struct cross // X
 	{
 		int status = 0;
 		int x = 0;
@@ -1052,7 +1052,7 @@ int main()
 		int timer = 1;
 	}; cross cross[10];
 
-	struct cb
+	struct cb // X scatter bullet
 	{
 		int x = 0;
 		int y = 0;
@@ -1061,24 +1061,23 @@ int main()
 		int speed = 2; // lower number for faster x's bullet speed
 	}; cb cb[8];
 
-	struct wmy
+	struct wmy // W
 	{
 		int status = 0;
-		int speed = 3; // lower the number for faster w's speed
 		int x = 0;
 		int y = 0;
 		int walk = 0;
 		int rvse = 0;
 	}; wmy wmy[10];
 
-	struct wb
+	struct wb // W bullet
 	{
 		int status = 0;
 		int x = 0;
 		int y = 0;
 	}; wb wb[10];
 
-	struct chargeshot
+	struct chargeshot // Charge Shot
 	{
 		int x = 0;
 		int y = 0;
@@ -1089,7 +1088,8 @@ int main()
 
 	char ch = ' ';
 	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0 , chargemessage = 0 , chargedel = 0 , chargecooldown = 0;
-	int wspeed = 3;
+	int wspeed = 4; // lower the number for faster w's walk speed
+	int xspawn = 250; // lower the number for faster x's spawn time
 	int bosshp = 30, oldbosshp = 30 , bossstate = 0 , maxbullet = 3 , oldmaxbullet = 3, message = 0 , messagecount = 0 , levelcap = 1000;
 	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
@@ -1698,7 +1698,7 @@ int main()
 
 		
 
-		if (cross[0].timer % 250 == 0 && cross[0].status == 0 && level >= 0)
+		if (cross[0].timer % xspawn == 0 && cross[0].status == 0 && level >= 10)
 		{
 
 			cross[0].x = 50;
@@ -3669,9 +3669,21 @@ int main()
 			clearmaxbullet();
 		}
 
-		if (level >= 15)
+		if (level >= 10 && level<20)
+		{
+			wspeed = 3;
+		}
+
+		if (level == 10 && maxbullet == 3)
+		{
+			maxbullet += 1; 
+			updatemaxbullet(maxbullet); 
+		}
+
+		if (level >= 20)
 		{
 			wspeed = 2;
+			xspawn = 150;
 		}
 
 		/*if (level == 2 && bossstate == 1)
