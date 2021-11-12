@@ -1697,7 +1697,7 @@ int main()
 		if (cross[0].timer % 20 == 0 && cross[0].status == 0 && level >= 0)
 		{
 
-			cross[0].x = RandomX();
+			cross[0].x = 50;
 			cross[0].y = RandomY();
 			draw_x(cross[0].x, cross[0].y);
 			cross[0].status = 1;
@@ -1712,7 +1712,7 @@ int main()
 
 		if (cross[0].status == 1)
 		{
-			if (cross[0].walk % 5 == 0)
+			if (cross[0].walk % 4 == 0)
 			{
 				clear_enemy(cross[0].x, cross[0].y);
 				cross[0].count += 1;
@@ -1720,21 +1720,35 @@ int main()
 				{
 					if (cb[0].status == 0 && cb[1].status == 0 && cb[2].status == 0 && cb[3].status == 0 && cross[0].x >= 3 && cross[0].x <= 56 )
 					{
-						cb[0].x = cross[0].x - 1; // upper left
-						cb[0].y = cross[0].y - 1;
-						cb[0].status = 1;
+						if (cross[0].y >= 3)
+						{
+							if (cross[0].x > 2)
+							{
+								cb[0].x = cross[0].x - 1; // upper left
+								cb[0].y = cross[0].y - 1;
+								cb[0].status = 1;
+							}
 
-						cb[1].x = cross[0].x - 1; // lower left
-						cb[1].y = cross[0].y + 1;
-						cb[1].status = 1;
+							cb[2].x = cross[0].x + 1; // upper right
+							cb[2].y = cross[0].y - 1;
+							cb[2].status = 1;
+						}
 
-						cb[2].x = cross[0].x + 1; // upper right
-						cb[2].y = cross[0].y - 1;
-						cb[2].status = 1;
+						if (cross[0].y <= 17)
+						{
+							if (cross[0].x > 2)
+							{
+								cb[1].x = cross[0].x - 1; // lower left
+								cb[1].y = cross[0].y + 1;
+								cb[1].status = 1;
+							}
 
-						cb[3].x = cross[0].x + 1; // lower right
-						cb[3].y = cross[0].y + 1;
-						cb[3].status = 1;
+
+
+							cb[3].x = cross[0].x + 1; // lower right
+							cb[3].y = cross[0].y + 1;
+							cb[3].status = 1;
+						}
 					}
 					draw_x(--cross[0].x, cross[0].y);
 				}
