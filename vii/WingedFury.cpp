@@ -1005,8 +1005,10 @@ void draw_x(int x, int y)
 
 void drawxb(int x, int y)
 {
+	setcolor(13, 0);
 	gotoxy(x, y);
 	printf("x");
+	setcolor(7, 0);
 }
 
 
@@ -1062,6 +1064,7 @@ int main()
 	struct wmy
 	{
 		int status = 0;
+		int speed = 3; // lower the number for faster w's speed
 		int x = 0;
 		int y = 0;
 		int walk = 0;
@@ -1086,6 +1089,7 @@ int main()
 
 	char ch = ' ';
 	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0 , chargemessage = 0 , chargedel = 0 , chargecooldown = 0;
+	int wspeed = 3;
 	int bosshp = 30, oldbosshp = 30 , bossstate = 0 , maxbullet = 3 , oldmaxbullet = 3, message = 0 , messagecount = 0 , levelcap = 1000;
 	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
@@ -1694,7 +1698,7 @@ int main()
 
 		
 
-		if (cross[0].timer % 20 == 0 && cross[0].status == 0 && level >= 0)
+		if (cross[0].timer % 250 == 0 && cross[0].status == 0 && level >= 0)
 		{
 
 			cross[0].x = 50;
@@ -1762,7 +1766,7 @@ int main()
 			if (cursor(cross[0].x - 1, cross[0].y) == '>' || cursor(cross[0].x - 2, cross[0].y) == '>' || cursor(cross[0].x, cross[0].y) == '>' || cursor(cross[0].x - 1, cross[0].y) == '>')
 			{
 				Beep(500, 30);
-				score += 200;
+				score += 300;
 				clear_enemy(cross[0].x, cross[0].y);
 				cross[0].timer = 1;
 				cross[0].status = 0;
@@ -2002,7 +2006,7 @@ int main()
 		if (wmy[0].status == 1)  // Normal W 
 		{
 			wmy[0].walk += 1;
-			if (wmy[0].walk % 3 == 0)
+			if (wmy[0].walk % wspeed == 0)
 			{
 				clear_enemy(wmy[0].x, wmy[0].y);
 				if (cursor(wmy[0].x, wmy[0].y - 2) == '*' && wmy[0].rvse == 0)
@@ -2123,7 +2127,7 @@ int main()
 		if (wmy[1].status == 1) // Reverse W
 		{
 			wmy[1].walk += 1;
-			if (wmy[1].walk % 3 == 0)
+			if (wmy[1].walk % wspeed == 0)
 			{
 				clear_enemy(wmy[1].x, wmy[1].y);
 				if (cursor(wmy[1].x, wmy[1].y - 2) == '*' && wmy[1].rvse == 2)
@@ -2244,7 +2248,7 @@ int main()
 		if (wmy[2].status == 1)  // Normal W 
 		{
 			wmy[2].walk += 1;
-			if (wmy[2].walk % 3 == 0)
+			if (wmy[2].walk % wspeed == 0)
 			{
 				clear_enemy(wmy[2].x, wmy[2].y);
 				if (cursor(wmy[2].x, wmy[2].y - 2) == '*' && wmy[2].rvse == 0)
@@ -2369,7 +2373,7 @@ int main()
 		if (wmy[3].status == 1) // Reverse W
 		{
 			wmy[3].walk += 1;
-			if (wmy[3].walk % 3 == 0)
+			if (wmy[3].walk % wspeed == 0)
 			{
 				clear_enemy(wmy[3].x, wmy[3].y);
 				if (cursor(wmy[3].x, wmy[3].y - 2) == '*' && wmy[3].rvse == 2)
@@ -2491,7 +2495,7 @@ int main()
 		if (wmy[4].status == 1)  // Normal W 
 		{
 			wmy[4].walk += 1;
-			if (wmy[4].walk % 3 == 0)
+			if (wmy[4].walk % wspeed == 0)
 			{
 				clear_enemy(wmy[4].x, wmy[4].y);
 				if (cursor(wmy[4].x, wmy[4].y - 2) == '*' && wmy[4].rvse == 0)
@@ -2612,7 +2616,7 @@ int main()
 		if (wmy[5].status == 1) // Reverse W
 		{
 			wmy[5].walk += 1;
-			if (wmy[5].walk % 3 == 0)
+			if (wmy[5].walk % wspeed == 0)
 			{
 				clear_enemy(wmy[5].x, wmy[5].y);
 				if (cursor(wmy[5].x, wmy[5].y - 2) == '*' && wmy[5].rvse == 2)
@@ -2733,7 +2737,7 @@ int main()
 		if (wmy[6].status == 1)  // Normal W 
 		{
 			wmy[6].walk += 1;
-			if (wmy[6].walk % 3 == 0)
+			if (wmy[6].walk % wspeed == 0)
 			{
 				clear_enemy(wmy[6].x, wmy[6].y);
 				if (cursor(wmy[6].x, wmy[6].y - 2) == '*' && wmy[6].rvse == 0)
@@ -2855,7 +2859,7 @@ int main()
 		if (wmy[7].status == 1) // Reverse W
 		{
 			wmy[7].walk += 1;
-			if (wmy[7].walk % 3 == 0)
+			if (wmy[7].walk % wspeed == 0)
 			{
 				clear_enemy(wmy[7].x, wmy[7].y);
 				if (cursor(wmy[7].x, wmy[7].y - 2) == '*' && wmy[7].rvse == 2)
@@ -3663,6 +3667,11 @@ int main()
 			message = 0;
 			messagecount = 0;
 			clearmaxbullet();
+		}
+
+		if (level >= 15)
+		{
+			wspeed = 2;
 		}
 
 		/*if (level == 2 && bossstate == 1)
