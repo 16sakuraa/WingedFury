@@ -431,7 +431,7 @@ void healthpack()
 {
 	int x, y, drop;
 	drop = rand() % 100;
-	if (drop >= 89)
+	if (drop >= 89) // default is 89
 	{
 		x = RandomX()%30+10;
 		y = RandomY();
@@ -1253,6 +1253,38 @@ int main()
 
 		}
 
+		if (cursor(x + 6, y - 1) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x + 6, y - 1);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x + 6, y - 1);
+			}
+
+		}
+
+		if (cursor(x + 5, y - 1) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x + 5, y - 1);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x + 5, y - 1);
+			}
+
+		}
+
 		if (cursor(x + 4, y - 1) == '+')
 		{
 			if (PlayerHP < 5)
@@ -1301,6 +1333,70 @@ int main()
 
 		}
 
+		if (cursor(x - 1, y) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x - 1, y);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x - 1, y );
+			}
+
+		}
+
+		if (cursor(x - 1, y + 1) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x - 1, y + 1);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x - 1, y + 1);
+			}
+
+		}
+
+		if (cursor(x - 1, y + 2) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x - 1, y + 2);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x - 1, y + 2);
+			}
+
+		}
+
+		if (cursor(x - 1, y + 3) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x - 1, y + 3);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x - 1, y + 3);
+			}
+
+		}
+
 		if (cursor(x + 1, y - 1) == '+')
 		{
 			if (PlayerHP < 5)
@@ -1313,6 +1409,38 @@ int main()
 			else
 			{
 				clearpack(x + 1, y - 1);
+			}
+
+		}
+
+		if (cursor(x + 5, y + 3) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x + 5, y + 3);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x + 5, y + 3);
+			}
+
+		}
+
+		if (cursor(x + 4, y + 3) == '+')
+		{
+			if (PlayerHP < 5)
+			{
+				Beep(800, 25);
+				Beep(650, 25);
+				clearpack(x + 4, y + 3);
+				PlayerHP += 1;
+			}
+			else
+			{
+				clearpack(x + 4, y + 3);
 			}
 
 		}
@@ -1365,7 +1493,41 @@ int main()
 
 		}
 
-		
+		if (cursor(x - 1, y ) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x - 1, y);
+		}
+
+		if (cursor(x - 1, y + 1) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x - 1, y + 1);
+		}
+
+		if (cursor(x - 1, y + 2) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x - 1, y + 2);
+		}
+
+		if (cursor(x - 1, y + 3) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x - 1, y + 3);
+		}
 
 		if (cursor(x + 8, y + 1) == 'A')
 		{
@@ -1411,6 +1573,23 @@ int main()
 			updatemaxbullet(maxbullet);
 			clearpack(x + 6, y + 2);
 		}
+		if (cursor(x + 6, y - 1) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x + 6, y - 1);
+		}
+
+		if (cursor(x + 5, y - 1) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x + 5, y - 1);
+		}
 
 		if (cursor(x + 4, y - 1) == 'A')
 		{
@@ -1446,6 +1625,15 @@ int main()
 			maxbullet += 1;
 			updatemaxbullet(maxbullet);
 			clearpack(x + 1, y - 1);
+		}
+
+		if (cursor(x + 5, y + 3) == 'A')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			maxbullet += 1;
+			updatemaxbullet(maxbullet);
+			clearpack(x + 5, y + 3);
 		}
 
 		if (cursor(x + 4, y + 3) == 'A')
@@ -1507,6 +1695,39 @@ int main()
 			chargemessage = 1;
 		}
 
+		if (cursor(x - 1, y) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x - 1, y);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x - 1, y + 1) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x - 1, y + 1);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x - 1, y + 2) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x - 1, y + 2);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
 		if (cursor(x + 7, y) == 'C')
 		{
 			Beep(800, 25);
@@ -1535,6 +1756,28 @@ int main()
 			Beep(650, 25);
 			cs[0].status = 0;
 			clearpack(x + 6, y + 2);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x + 6, y - 1) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 6, y - 1);
+			chargedstatus(cs[0].status);
+			chargedready();
+			chargemessage = 1;
+		}
+
+		if (cursor(x + 5, y - 1) == 'C')
+		{
+			Beep(800, 25);
+			Beep(650, 25);
+			cs[0].status = 0;
+			clearpack(x + 5, y - 1);
 			chargedstatus(cs[0].status);
 			chargedready();
 			chargemessage = 1;
