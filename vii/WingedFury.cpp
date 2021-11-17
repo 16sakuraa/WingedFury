@@ -125,9 +125,6 @@ int PlayerStats(int pscore, int lv)
 	printf("\n\t Enter Player Name : ");
 	setcolor(15, 0);
 	scanf("%s", p[5].name);
-	//setcolor(11, 0);
-	//printf("Your Level : %d\n", lv);
-	//printf("Your Score : %d\n", pscore);
 	displayscore(pscore, lv , p[5].name);
 	setcolor(7, 0);
 	gotoxy(0, 14);
@@ -247,16 +244,13 @@ void plane(int x,int y)
 
 void clearplane(int x, int y)
 {
-	/*gotoxy(x, y -= 1);
-	printf("        ");*/
 	gotoxy(x, y);
 	printf("        ");
 	gotoxy(x, y += 1);
 	printf("        ");
 	gotoxy(x, y += 1);
 	printf("       ");
-/*	gotoxy(x, y += 1);
-	printf("       ");*/
+
 }
 
 void draw_bullet(int x, int y, int bulletStatus)
@@ -570,7 +564,6 @@ void menu()
 			{
 				Beep(900, 50);
 				Beep(700, 50);
-				//PlaySound(TEXT("button.wav"), NULL, SND_ASYNC);
 				gotoxy(32, 23);
 				printf("  ");
 				gotoxy(32, 22);
@@ -581,7 +574,6 @@ void menu()
 			{
 				Beep(900, 50);
 				Beep(700, 50);
-				//PlaySound(TEXT("button.wav"), NULL, SND_ASYNC);
 				gotoxy(32, 22);
 				printf("  ");
 				gotoxy(32, 23);
@@ -592,7 +584,6 @@ void menu()
 			{
 				Beep(900, 50);
 				Beep(700, 25);
-				//PlaySound(TEXT("button.wav"), NULL, SND_ASYNC);
 				system("cls");
 				break;
 
@@ -601,7 +592,6 @@ void menu()
 			{
 				Beep(900, 50);
 				Beep(700, 25);
-				//PlaySound(TEXT("button.wav"), NULL, SND_ASYNC);
 				system("cls");
 				seescore();
 				title();
@@ -623,22 +613,16 @@ void gameover()
 	setcolor(3, 0);
 	printf("\n         _______      ___      .___  ___.  _______\n");
 	Sleep(a-20);
-	//Beep(600,20);
 	printf("        /  _____|    /   \\     |   \\/   | |   ____|\n");
 	Sleep(a-20);
-	//Beep(400, 20);
 	printf("       |  |  __     /  ^  \\    |  \\  /  | |  |__\n");
 	Sleep(a-40);
-	//Beep(200, 40);
 	printf("       |  | |_ |   /  /_\\  \\   |  |\\/|  | |   __|\n");
 	Sleep(a-60);
-	//Beep(200, 60);
 	printf("       |  |__| |  /  _____  \\  |  |  |  | |  |____\n");
 	Sleep(a-80);
-	//Beep(200, 80);
 	printf("        \\______| /__/     \\__\\ |__|  |__| |_______|\n");
 	Sleep(a - 40);
-	//Beep(400, 40);
 	printf("                    ______   ____    ____  _______ .______      \n");
 	Sleep(a);
 	printf("                   /  __  \\  \\   \\  /   / |   ____||   _  \\     \n");
@@ -651,7 +635,6 @@ void gameover()
 	Sleep(a);
 	printf("                   \\______/      \\__/     |_______|| _| `._____|\n");
 	Sleep(500);
-	//printf("");
 	setcolor(7, 0);
 }
 
@@ -675,32 +658,6 @@ void squid()
 	printf("(( ((  )) ))\n");
 	gotoxy(x, y + 6);
 	printf(" `\\ `)(\' /\'");
-	/*gotoxy(x, 5);
-	printf("                        _,--._\n");
-	gotoxy(x, 6);
-	printf("                      ,\'      `.\n");
-	gotoxy(x, 7);
-	printf("              |\\     / ,-.  ,-. \\     /|\n");
-	gotoxy(x, 8);
-	printf("              )o),/ ( ( o )( o ) ) \\.(o(\n");
-	gotoxy(x, 9);
-	printf("             /o/// /|  `-\'  `-\'  |\\ \\\\\\o\\\n");
-	gotoxy(x, 10);
-	printf("            / / |\\ \\(   .    ,   )/ /| \\ \\\n");
-	gotoxy(x, 11);
-	printf("            | | \\o`-/    `\\/\'    \\-\'o/ | |\n");
-	gotoxy(x, 12);
-	printf("            \\ \\  `,\'              `.\'  / /\n");
-	gotoxy(x, 13);
-	printf("         \\.  \\ `-\'  ,\'|   /\\   |`.  `-\' /  ,/\n");
-	gotoxy(x, 14);
-	printf("          \\`. `.__,\' /   /  \\   \\ `.__,\' ,\'/\n");
-	gotoxy(x, 15);
-	printf("           \\o\\     ,\'  ,\'    `.  `.     /o/\n");
-	gotoxy(x, 16);
-	printf("            \\o`---\'  ,\'        `.  `---\'o/\n");
-	gotoxy(x, 17);
-	printf("             `.____,\'            `.____,\'\n");*/
 	setcolor(7, 0);
 }
 
@@ -843,19 +800,6 @@ void chargedstatus(int count)
 {
 	gotoxy(38, 23);
 	setcolor(11, 0);
-	/*if (count == -1)
-	{
-		printf("Charge Shot : 0 ");
-	}
-	else if (count >= 10)
-	{
-		printf("Charge Shot : %d", count);
-	}
-	else
-	{
-		printf("Charge Shot : %d ", count);
-	}
-	setcolor(7, 0);*/
 
 	if (count == -1 || count == 0)
 	{
@@ -1015,21 +959,8 @@ void drawxb(int x, int y)
 
 int main()
 {
-	/*int newWidth = 7, newHeight = 20;
-	CONSOLE_FONT_INFOEX fontStructure = { 0 };
-	fontStructure.cbSize = sizeof(fontStructure);
-	fontStructure.dwFontSize.X = newWidth;
-	fontStructure.dwFontSize.Y = newHeight;
-	wcscpy(fontStructure.FaceName, L"Arial");
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetCurrentConsoleFontEx(hConsole, true, &fontStructure);
-	//system("pause");
-
-	*/
 
 	setConsole(screen_x, screen_y);
-
-
 	setcursor(0);
 	srand(time(NULL));
 
@@ -1107,9 +1038,6 @@ int main()
 	scoreupdate(score);
 	levelupdate(level);
 	chargedstatus(cs[0].status);
-	//squid();
-	//bossstate = 1;
-	//bosshpupdate(bosshp);
 
 	PlaySound(TEXT("maintheme.wav"), NULL, SND_LOOP | SND_ASYNC);
 
@@ -3940,29 +3868,10 @@ int main()
 			xspawn = 150;
 		}
 
-		/*if (level == 2 && bossstate == 1)
-		{
-			squid();
-			bossstate = 0;
-		}
-
-		if (bosshp != oldbosshp)
-		{
-			bosshpupdate(bosshp);
-			oldbosshp = bosshp;
-		}
-
-		if (bosshp <= 0)
-		{
-			delsquid();
-			//score += 500;
-			bosshp = 50;
 		
-		}*/
 
 		Sleep(100);
 	} while (ch != 'x');
-	//PlaySound(NULL, NULL, SND_ASYNC);
 	system("cls");
 	PlaySound(NULL, NULL, SND_LOOP | SND_ASYNC);
 	PlaySound(TEXT("gameover.wav"), NULL, SND_ASYNC);
@@ -3981,8 +3890,6 @@ int main()
 		}
 
 	}
-	//gotoxy(0, 60);
-	//printf(" ");
 	
 	return 0;
 
