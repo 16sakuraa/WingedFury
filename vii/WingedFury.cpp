@@ -1123,9 +1123,9 @@ int main()
 			if (ch == 'd' && cursor(x + 8, y) != '*') { plane(++x, y); }
 			if (ch == 'w' && cursor(x, y - 1) != '*') { clearplane(x, y);  plane(x, --y); }
 			if (ch == 's' && cursor(x, y+3) != '*') { clearplane(x, y);  plane(x, ++y); }
-			if (ch == '+') { score += 900; }
-			/*if (ch == 'r') { maxbullet += 1; updatemaxbullet(maxbullet); }*/
-			if (ch == 'c') { cs[0].status = 0;  }
+			if (ch == '1') { score += 900; }
+			if (ch == '2') { maxbullet += 1; updatemaxbullet(maxbullet); }
+			if (ch == '3') { cs[0].status = 0;  }
 			if (ch == 'e' && cs[0].status != -3) 
 			{ 
 				cs[0].chargeshothold += 1; 
