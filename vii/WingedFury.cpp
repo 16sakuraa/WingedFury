@@ -955,7 +955,22 @@ void drawxb(int x, int y)
 	setcolor(7, 0);
 }
 
+void energyblast(int x, int y)
+{
+		setcolor(13, 0);
+		gotoxy(x, y);
+		printf("))");
+		setcolor(7, 0);
+}
 
+
+void ceb(int x, int y)
+{
+	
+	gotoxy(x, y);
+	printf("  ");
+	
+}
 
 int main()
 {
@@ -1017,6 +1032,15 @@ int main()
 		int chargeshotholdold = 0;
 	}; chargeshot cs[10];
 
+	struct energyshot
+	{
+		int x = 0;
+		int y = 0;
+		int status = 0;
+		int speed = 2;
+		int count = 0;
+	}; energyshot es[10];
+
 	char ch = ' ';
 	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0 , chargemessage = 0 , chargedel = 0 , chargecooldown = 0;
 	int wspeed = 4; // lower the number for faster w's walk speed
@@ -1051,9 +1075,29 @@ int main()
 			if (ch == 'd' && cursor(x + 8, y) != '*') { plane(++x, y); }
 			if (ch == 'w' && cursor(x, y - 1) != '*') { clearplane(x, y);  plane(x, --y); }
 			if (ch == 's' && cursor(x, y+3) != '*') { clearplane(x, y);  plane(x, ++y); }
+			if (ch == 'q' && (x + 8 < 60 && x + 7 < 60 && x + 9 < 60 && x + 10 < 60)) 
+			{ 
+				if (es[0].status == 0)
+				{
+					es[0].x = x + 7;
+					es[0].y = y + 1;
+					es[0].status = 1;
+				}
+				
+			}
 			if (ch == '1') { score += 900; }
 			if (ch == '2') { maxbullet += 1; updatemaxbullet(maxbullet); }
-			if (ch == '3') { cs[0].status = 0;  }
+			if (ch == '3') { cs[0].status = 0; chargedstatus(cs[0].status); chargedready(); chargemessage = 1;
+			}
+			if (ch == '4') 
+			{
+				cross[0].x = 50;
+				cross[0].y = RandomY();
+				draw_x(cross[0].x, cross[0].y);
+				cross[0].status = 1;
+				cross[0].timer = 1;
+			}
+			if (ch == '5') { PlayerHP += 1; }
 			if (ch == 'e' && cs[0].status != -3) 
 			{ 
 				cs[0].chargeshothold += 1; 
@@ -1101,6 +1145,30 @@ int main()
 			}
 			fflush(stdin);
 		}
+
+		if (es[0].status == 1)
+		{
+			if (es[0].count % es[0].speed == 0)
+			{
+				ceb(es[0].x, es[0].y);
+				if (cursor(es[0].x + 3, es[0].y) != '*')
+				{
+					energyblast(++es[0].x, es[0].y);
+				}
+				else if (cursor(es[0].x + 3, es[0].y) == 'M' || cursor(es[0].x + 4, es[0].y) == 'M' || cursor(es[0].x +1 , es[0].y) == 'M')
+				{
+					es[0].status = 0;
+				}
+				else if (cursor(es[0].x + 3, es[0].y) == '*' )
+				{
+					es[0].status = 0;
+				}
+			}
+			es[0].count++;
+			
+			
+		}
+
 		if (cursor(x + 8, y+1) == '+')
 		{
 			if (PlayerHP < 5)
