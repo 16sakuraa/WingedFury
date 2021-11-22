@@ -957,14 +957,21 @@ void drawxb(int x, int y)
 
 void energyblast(int x, int y)
 {
-		setcolor(13, 0);
+		setcolor(10, 0);
 		gotoxy(x, y);
-		printf("  ))");
-		setcolor(13, 0);
+		printf("   )");
 		gotoxy(x, y+1);
-		printf(" ))");
+		printf("  )");
 		gotoxy(x, y - 1);
-		printf(" ))");
+		printf("  )");
+
+		setcolor(2, 0);
+		gotoxy(x, y);
+		printf("  )");
+		gotoxy(x, y + 1);
+		printf(" )");
+		gotoxy(x, y - 1);
+		printf(" )");
 		setcolor(7, 0);
 }
 
@@ -999,14 +1006,14 @@ void clearcrossshot(int x, int y)
 void crossshot(int x, int y)
 {
 	gotoxy(x, y);
-	setcolor(13, 0);
+	setcolor(11, 0);
 	printf("   >");
 	gotoxy(x, y - 1);
 	printf("  >");
 	gotoxy(x, y + 1);
 	printf("  >");
 
-	setcolor(5, 0);
+	setcolor(2, 0);
 	gotoxy(x, y);
 	printf("  >");
 	gotoxy(x, y - 1);
@@ -1021,10 +1028,10 @@ void crossshot(int x, int y)
 void scattershot(int x, int y)
 {
 	gotoxy(x, y);
-	setcolor(3, 0);
+	setcolor(10, 0);
 	printf("  >");
 	gotoxy(x, y);
-	setcolor(13, 0);
+	setcolor(11, 0);
 	printf(" >");
 
 	setcolor(7, 0);
@@ -1310,7 +1317,7 @@ int main()
 			if (ccs[1].count % ccs[1].speed == 0)
 			{
 				clearscattershot(ccs[1].x, ccs[1].y);
-				if (cursor(ccs[1].x + 4, ccs[1].y) == '*' || cursor(ccs[1].x, ccs[1].y - 1) == '*')
+				if (cursor(ccs[1].x + 5, ccs[1].y) == '*' || cursor(ccs[1].x, ccs[1].y - 1) == '*' || ccs[1].x >= 55)
 				{
 					ccs[1].status = 0;
 				}
@@ -1318,6 +1325,11 @@ int main()
 				{
 					scattershot(ccs[1].x+=4, --ccs[1].y);
 				}
+			}
+			if (cursor(ccs[1].x + 5, ccs[1].y) == '*' || cursor(ccs[1].x, ccs[1].y - 1) == '*' || ccs[1].x >= 55)
+			{
+				clearscattershot(ccs[1].x, ccs[1].y);
+				ccs[1].status = 0;
 			}
 			ccs[1].count++;
 			
@@ -1328,7 +1340,7 @@ int main()
 			if (ccs[3].count % (ccs[3].speed)== 0)
 			{
 				clearscattershot(ccs[3].x, ccs[3].y);
-				if (cursor(ccs[3].x + 4, ccs[3].y) == '*' || cursor(ccs[3].x, ccs[3].y - 1) == '*')
+				if (cursor(ccs[3].x + 5, ccs[3].y) == '*' || cursor(ccs[3].x, ccs[3].y - 1) == '*' || ccs[3].x >= 55)
 				{
 					ccs[3].status = 0;
 				}
@@ -1337,6 +1349,12 @@ int main()
 					scattershot(ccs[3].x += 3, --ccs[3].y);
 				}
 			}
+			if (cursor(ccs[3].x + 5, ccs[3].y) == '*' || cursor(ccs[3].x, ccs[3].y - 1) == '*' || ccs[3].x >= 55)
+			{
+				clearscattershot(ccs[3].x, ccs[3].y);
+				ccs[3].status = 0;
+			}
+
 			ccs[3].count++;
 
 		}
@@ -1346,7 +1364,7 @@ int main()
 			if (ccs[2].count % ccs[2].speed == 0)
 			{
 				clearscattershot(ccs[2].x, ccs[2].y);
-				if (cursor(ccs[2].x + 4, ccs[2].y) == '*' || cursor(ccs[2].x, ccs[2].y + 1) == '*')
+				if (cursor(ccs[2].x + 5, ccs[2].y) == '*' || cursor(ccs[2].x, ccs[2].y + 1) == '*' || ccs[2].x >= 55)
 				{
 					ccs[2].status = 0;
 				}
@@ -1354,6 +1372,11 @@ int main()
 				{
 					scattershot(ccs[2].x+=4, ++ccs[2].y);
 				}
+			}
+			if (cursor(ccs[2].x + 5, ccs[2].y) == '*' || cursor(ccs[2].x, ccs[2].y + 1) == '*' || ccs[2].x >= 55)
+			{
+				clearscattershot(ccs[2].x, ccs[2].y);
+				ccs[2].status = 0;
 			}
 			ccs[2].count++;
 
@@ -1364,7 +1387,7 @@ int main()
 			if (ccs[4].count % (ccs[4].speed) == 0)
 			{
 				clearscattershot(ccs[4].x, ccs[4].y);
-				if (cursor(ccs[4].x + 4, ccs[4].y) == '*' || cursor(ccs[4].x, ccs[4].y + 1) == '*')
+				if (cursor(ccs[4].x + 4, ccs[4].y) == '*' || cursor(ccs[4].x, ccs[4].y + 1) == '*' || ccs[4].x >= 56)
 				{
 					ccs[4].status = 0;
 				}
@@ -1372,6 +1395,11 @@ int main()
 				{
 					scattershot(ccs[4].x += 3, ++ccs[4].y);
 				}
+			}
+			if (cursor(ccs[4].x + 4, ccs[4].y) == '*' || cursor(ccs[4].x, ccs[4].y + 1) == '*' || ccs[4].x >= 56)
+			{
+				clearscattershot(ccs[4].x, ccs[4].y);
+				ccs[4].status = 0;
 			}
 			ccs[4].count++;
 
