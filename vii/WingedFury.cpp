@@ -1004,6 +1004,25 @@ void crossshot(int x, int y)
 
 }
 
+void scattershot(int x, int y)
+{
+	gotoxy(x, y);
+	setcolor(14, 0);
+	printf("  >");
+	gotoxy(x, y);
+	setcolor(2, 0);
+	printf(" >");
+
+	setcolor(7, 0);
+}
+
+void clearscattershot(int x, int y)
+{
+	gotoxy(x, y);
+	printf("    ");
+
+}
+
 int main()
 {
 
@@ -1078,8 +1097,9 @@ int main()
 		int x = 0;
 		int y = 0;
 		int status = 0;
-		int speed = 2;
+		int speed = 3;
 		int count = 0;
+		int fire = 1;
 	}; crosschargeshot ccs[10];
 
 	struct blast
@@ -1218,17 +1238,78 @@ int main()
 			
 		}
 
+
 		if (ccs[0].status == 1)
 		{
+			
 			clearcrossshot(ccs[0].x, ccs[0].y);
 			if (cursor(ccs[0].x + 4, ccs[0].y) == '*')
 			{
 				ccs[0].status = 0;
+				
 			}
 			else
 			{
 				crossshot(++ccs[0].x, ccs[0].y);
 			}
+
+			if (ccs[1].status == 0 && ccs[2].status == 0 && ccs[1].fire == 1 && ccs[2].fire == 1)
+			{
+				if (ccs[0].x > 5 && ccs[0].y > 5)
+				{
+					ccs[1].fire = 0;
+					ccs[1].x = ccs[0].x - 3;
+					ccs[1].y = ccs[0].y - 3;
+					ccs[1].status = 1;
+				}
+				
+				if (ccs[0].x > 5 && ccs[0].y < 17)
+				{
+					ccs[2].fire = 0;
+					ccs[2].x = ccs[0].x - 3;
+					ccs[2].y = ccs[0].y + 3;
+					ccs[2].status = 1;
+				}
+
+				
+			}
+		}
+
+
+		if (ccs[1].status == 1)
+		{
+			if (ccs[1].count % ccs[1].speed == 0)
+			{
+				clearscattershot(ccs[1].x, ccs[1].y);
+				if (cursor(ccs[1].x + 4, ccs[1].y) == '*' || cursor(ccs[1].x, ccs[1].y - 1) == '*')
+				{
+					ccs[1].status = 0;
+				}
+				else
+				{
+					scattershot(ccs[1].x+=3, --ccs[1].y);
+				}
+			}
+			ccs[1].count++;
+			
+		}
+
+		if (ccs[2].status == 1)
+		{
+			if (ccs[2].count % ccs[2].speed == 0)
+			{
+				clearscattershot(ccs[2].x, ccs[2].y);
+				if (cursor(ccs[2].x + 4, ccs[2].y) == '*' || cursor(ccs[2].x, ccs[2].y + 1) == '*')
+				{
+					ccs[2].status = 0;
+				}
+				else
+				{
+					scattershot(ccs[2].x+=3, ++ccs[2].y);
+				}
+			}
+			ccs[2].count++;
+
 		}
 
 		if (cursor(x + 8, y+1) == '+')
@@ -1990,6 +2071,22 @@ int main()
 				cs[0].status = 0;
 				cs[0].chargeshothold = 0;
 
+			}
+
+			else if (cursor(cs[0].x + 4, cs[0].y) == ')')
+			{
+				chargedstatus(-1);
+				cs[0].chargeshothold = 0;
+				clearcharged(cs[0].x, cs[0].y);
+				cs[0].status = 0;
+				es[0].status = 0;
+				ceb(es[0].x, es[0].y);
+
+				ccs[1].fire = 1;
+				ccs[2].fire = 1;
+				ccs[0].x = cs[0].x;
+				ccs[0].y = cs[0].y;
+				ccs[0].status = 1;
 			}
 			else
 			{
@@ -3814,7 +3911,7 @@ int main()
 			{
 				bulletStatus[0] = 0;
 			}
-			else if (cursor(bulletx[0] + 4, bullety[0]) == ')' )
+		/*	else if (cursor(bulletx[0] + 4, bullety[0]) == ')')
 			{
 				clear_bullet(bulletx[0], bullety[0], 0);
 				bulletStatus[0] = 0;
@@ -3825,7 +3922,7 @@ int main()
 				ccs[0].y = bullety[0];
 				ccs[0].status = 1;
 
-			}
+			}*/
 
 			else if (cursor(bulletx[0]+3, bullety[0]) == '*')
 			{
