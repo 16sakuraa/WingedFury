@@ -972,6 +972,38 @@ void ceb(int x, int y)
 	
 }
 
+void clearcrossshot(int x, int y)
+{
+	gotoxy(x, y);
+	printf("    ");
+	gotoxy(x, y + 1);
+	printf("   ");
+	gotoxy(x, y - 1);
+	printf("   ");
+
+}
+void crossshot(int x, int y)
+{
+	gotoxy(x, y);
+	setcolor(13, 0);
+	printf("   >");
+	gotoxy(x, y - 1);
+	printf("  >");
+	gotoxy(x, y + 1);
+	printf("  >");
+
+	setcolor(5, 0);
+	gotoxy(x, y);
+	printf("  >");
+	gotoxy(x, y - 1);
+	printf(" >");
+	gotoxy(x, y + 1);
+	printf(" >");
+
+	setcolor(7, 0);
+
+}
+
 int main()
 {
 
@@ -1040,6 +1072,23 @@ int main()
 		int speed = 2;
 		int count = 0;
 	}; energyshot es[10];
+
+	struct crosschargeshot
+	{
+		int x = 0;
+		int y = 0;
+		int status = 0;
+		int speed = 2;
+		int count = 0;
+	}; crosschargeshot ccs[10];
+
+	struct blast
+	{
+		int x = 0;
+		int y = 0;
+		int status = 0;
+
+	}; blast ccsb[10];
 
 	char ch = ' ';
 	int x = 12, y = 10 , level = 1 , oldlevel = 1 , pack = 0 , chargemessage = 0 , chargedel = 0 , chargecooldown = 0;
@@ -1167,6 +1216,19 @@ int main()
 			es[0].count++;
 			
 			
+		}
+
+		if (ccs[0].status == 1)
+		{
+			clearcrossshot(ccs[0].x, ccs[0].y);
+			if (cursor(ccs[0].x + 4, ccs[0].y) == '*')
+			{
+				ccs[0].status = 0;
+			}
+			else
+			{
+				crossshot(++ccs[0].x, ccs[0].y);
+			}
 		}
 
 		if (cursor(x + 8, y+1) == '+')
@@ -3752,11 +3814,16 @@ int main()
 			{
 				bulletStatus[0] = 0;
 			}
-			else if (cursor(bulletx[0] + 4, bullety[0]) == '\\' || cursor(bulletx[0] + 4, bullety[0]) == '|' || cursor(bulletx[0] + 4, bullety[0]) == '/' || cursor(bulletx[0] + 4, bullety[0]) == ')' || cursor(bulletx[0] + 4, bullety[0]) == ',' || cursor(bulletx[0] + 4, bullety[0]) == '(' || cursor(bulletx[0] + 4, bullety[0]) == '`')
+			else if (cursor(bulletx[0] + 4, bullety[0]) == ')' )
 			{
 				clear_bullet(bulletx[0], bullety[0], 0);
 				bulletStatus[0] = 0;
-				bosshp -= 1;
+				es[0].status = 0;
+				ceb(es[0].x, es[0].y);
+
+				ccs[0].x = bulletx[0];
+				ccs[0].y = bullety[0];
+				ccs[0].status = 1;
 
 			}
 
