@@ -959,10 +959,24 @@ void energyblast(int x, int y)
 {
 		setcolor(13, 0);
 		gotoxy(x, y);
-		printf("))");
+		printf("  ))");
+		setcolor(13, 0);
+		gotoxy(x, y+1);
+		printf(" ))");
+		gotoxy(x, y - 1);
+		printf(" ))");
 		setcolor(7, 0);
 }
 
+void clearenergyblast(int x, int y)
+{
+	gotoxy(x, y);
+	printf("    ");
+	gotoxy(x, y + 1);
+	printf("   ");
+	gotoxy(x, y - 1);
+	printf("   ");
+}
 
 void ceb(int x, int y)
 {
@@ -1007,10 +1021,10 @@ void crossshot(int x, int y)
 void scattershot(int x, int y)
 {
 	gotoxy(x, y);
-	setcolor(14, 0);
+	setcolor(3, 0);
 	printf("  >");
 	gotoxy(x, y);
-	setcolor(2, 0);
+	setcolor(13, 0);
 	printf(" >");
 
 	setcolor(7, 0);
@@ -1219,10 +1233,10 @@ int main()
 		{
 			if (es[0].count % es[0].speed == 0)
 			{
-				ceb(es[0].x, es[0].y);
-				if (cursor(es[0].x + 3, es[0].y) != '*')
+				clearenergyblast(es[0].x, es[0].y);
+				if (cursor(es[0].x + 5, es[0].y) == '*')
 				{
-					energyblast(++es[0].x, es[0].y);
+					es[0].status = 0;
 				}
 				else if (cursor(es[0].x + 3, es[0].y) == 'M' || cursor(es[0].x + 4, es[0].y) == 'M' || cursor(es[0].x +1 , es[0].y) == 'M')
 				{
@@ -1231,6 +1245,10 @@ int main()
 				else if (cursor(es[0].x + 3, es[0].y) == '*' )
 				{
 					es[0].status = 0;
+				}
+				else
+				{
+					energyblast(++es[0].x, es[0].y);
 				}
 			}
 			es[0].count++;
@@ -1258,17 +1276,28 @@ int main()
 				if (ccs[0].x > 5 && ccs[0].y > 5)
 				{
 					ccs[1].fire = 0;
-					ccs[1].x = ccs[0].x - 3;
+					ccs[1].x = ccs[0].x - 4;
 					ccs[1].y = ccs[0].y - 3;
 					ccs[1].status = 1;
+
+					ccs[3].fire = 0;
+					ccs[3].x = ccs[0].x - 4;
+					ccs[3].y = ccs[0].y - 2;
+					ccs[3].status = 1;
+
 				}
 				
 				if (ccs[0].x > 5 && ccs[0].y < 17)
 				{
 					ccs[2].fire = 0;
-					ccs[2].x = ccs[0].x - 3;
+					ccs[2].x = ccs[0].x - 4;
 					ccs[2].y = ccs[0].y + 3;
 					ccs[2].status = 1;
+
+					ccs[4].fire = 0;
+					ccs[4].x = ccs[0].x - 4;
+					ccs[4].y = ccs[0].y + 2;
+					ccs[4].status = 1;
 				}
 
 				
@@ -1287,11 +1316,29 @@ int main()
 				}
 				else
 				{
-					scattershot(ccs[1].x+=3, --ccs[1].y);
+					scattershot(ccs[1].x+=4, --ccs[1].y);
 				}
 			}
 			ccs[1].count++;
 			
+		}
+
+		if (ccs[3].status == 1)
+		{
+			if (ccs[3].count % (ccs[3].speed)== 0)
+			{
+				clearscattershot(ccs[3].x, ccs[3].y);
+				if (cursor(ccs[3].x + 4, ccs[3].y) == '*' || cursor(ccs[3].x, ccs[3].y - 1) == '*')
+				{
+					ccs[3].status = 0;
+				}
+				else
+				{
+					scattershot(ccs[3].x += 3, --ccs[3].y);
+				}
+			}
+			ccs[3].count++;
+
 		}
 
 		if (ccs[2].status == 1)
@@ -1305,10 +1352,28 @@ int main()
 				}
 				else
 				{
-					scattershot(ccs[2].x+=3, ++ccs[2].y);
+					scattershot(ccs[2].x+=4, ++ccs[2].y);
 				}
 			}
 			ccs[2].count++;
+
+		}
+
+		if (ccs[4].status == 1)
+		{
+			if (ccs[4].count % (ccs[4].speed) == 0)
+			{
+				clearscattershot(ccs[4].x, ccs[4].y);
+				if (cursor(ccs[4].x + 4, ccs[4].y) == '*' || cursor(ccs[4].x, ccs[4].y + 1) == '*')
+				{
+					ccs[4].status = 0;
+				}
+				else
+				{
+					scattershot(ccs[4].x += 3, ++ccs[4].y);
+				}
+			}
+			ccs[4].count++;
 
 		}
 
@@ -2084,6 +2149,8 @@ int main()
 
 				ccs[1].fire = 1;
 				ccs[2].fire = 1;
+				ccs[3].fire = 1;
+				ccs[4].fire = 1;
 				ccs[0].x = cs[0].x;
 				ccs[0].y = cs[0].y;
 				ccs[0].status = 1;
