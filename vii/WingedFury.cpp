@@ -1193,7 +1193,7 @@ int main()
 				cs[0].chargeshothold += 1; 
 				
 			}
-			else if (cs[0].chargeshothold > 0)
+			else if (cs[0].chargeshothold > 0 && cs[0].chargeshothold < 18)
 			{
 	
 				cs[0].chargeshothold -= 2;
