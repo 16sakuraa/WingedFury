@@ -1165,7 +1165,7 @@ int main()
 			if (ch == 'd' && cursor(x + 8, y) != '*') { plane(++x, y); }
 			if (ch == 'w' && cursor(x, y - 1) != '*') { clearplane(x, y);  plane(x, --y); }
 			if (ch == 's' && cursor(x, y+3) != '*') { clearplane(x, y);  plane(x, ++y); }
-			if (ch == 'q' && (x + 8 < 60 && x + 7 < 60 && x + 9 < 60 && x + 10 < 60)) 
+			/*if (ch == 'q' && (x + 8 < 60 && x + 7 < 60 && x + 9 < 60 && x + 10 < 60))
 			{ 
 				if (es[0].status == 0)
 				{
@@ -1174,7 +1174,7 @@ int main()
 					es[0].status = 1;
 				}
 				
-			}
+			}*/
 			if (ch == '1') { score += 900; }
 			if (ch == '2') { maxbullet += 1; updatemaxbullet(maxbullet); }
 			if (ch == '3') { cs[0].status = 0; chargedstatus(cs[0].status); chargedready(); chargemessage = 1;
@@ -1270,6 +1270,7 @@ int main()
 			clearcrossshot(ccs[0].x, ccs[0].y);
 			if (cursor(ccs[0].x + 4, ccs[0].y) == '*')
 			{
+
 				ccs[0].status = 0;
 				
 			}
@@ -2126,10 +2127,26 @@ int main()
 		}
 		
 
-		if (cs[0].chargeshothold == 20)
+		if (cs[0].chargeshothold == 20 && x + 8 < 60 && x + 7 < 60 && x + 9 < 60 && x + 10 < 60)
 		{
+			if (es[0].status == 0 && cs[0].status == 0)
+			{
+				Beep(900, 30);
+				es[0].x = x + 7;
+				es[0].y = y + 1;
+				es[0].status = 1;
+				cs[0].chargeshothold -= 2;
+			}
 
-			if (x + 8 == 60 || x + 7 == 60 || x + 9 == 60 || x + 10 == 60)
+			else if (es[0].status == 1 && cs[0].status == 0)
+			{
+				Beep(900, 60);
+				cs[0].x = x + 7;
+				cs[0].y = y + 1;
+				cs[0].status = 1;
+			}
+
+			/*if (x + 8 == 60 || x + 7 == 60 || x + 9 == 60 || x + 10 == 60)
 			{
 				chargedstatus(-4);
 				cs[0].chargeshothold = 0;
@@ -2140,7 +2157,7 @@ int main()
 				cs[0].x = x + 7;
 				cs[0].y = y + 1;
 				cs[0].status = 1;
-			}
+			}*/
 			
 			
 			
