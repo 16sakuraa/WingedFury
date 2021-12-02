@@ -1044,6 +1044,12 @@ void clearscattershot(int x, int y)
 
 }
 
+void experimental(int x, int y)
+{
+	gotoxy(x, y);
+	printf(" :");
+}
+
 int main()
 {
 
@@ -1051,6 +1057,12 @@ int main()
 	setcursor(0);
 	srand(time(NULL));
 
+	struct experiment
+	{
+		int status = 0;
+		long int x = 0;
+		long int y = 0;
+	}; experiment eb[100];
 
 	struct enemy // M
 	{
@@ -1136,6 +1148,7 @@ int main()
 	int wspeed = 4; // lower the number for faster w's walk speed
 	int xspawn = 250; // lower the number for faster x's spawn time
 	int bosshp = 30, oldbosshp = 30 , bossstate = 0 , maxbullet = 3 , oldmaxbullet = 3, message = 0 , messagecount = 0 , levelcap = 1000;
+	int ebcount = 0, ebloop = 0;
 	int bulletx[5] = { 0,0,0,0,0 }, bullety[5] = {0,0,0,0,0};
 	int bulletStatus[5];
 	int PlayerHP = 3, OldPlayerHP = 3 , score=0 , oldscore=0;
@@ -1165,6 +1178,18 @@ int main()
 			if (ch == 'd' && cursor(x + 8, y) != '*') { plane(++x, y); }
 			if (ch == 'w' && cursor(x, y - 1) != '*') { clearplane(x, y);  plane(x, --y); }
 			if (ch == 's' && cursor(x, y+3) != '*') { clearplane(x, y);  plane(x, ++y); }
+			if (ch == 'f' && (x + 8 < 60 && x + 7 < 60 && x + 9 < 60 && x + 10 < 60))
+			{
+				eb[ebcount].status = 1;
+				eb[ebcount].x = x + 7;
+				eb[ebcount].y = y + 1;
+				ebcount++;
+
+				if (ebcount == 100)
+				{
+					ebcount = 0;
+				}
+			}
 			/*if (ch == 'q' && (x + 8 < 60 && x + 7 < 60 && x + 9 < 60 && x + 10 < 60))
 			{ 
 				if (es[0].status == 0)
@@ -1234,6 +1259,22 @@ int main()
 				bullety[4] = y + 1;
 			}
 			fflush(stdin);
+		}
+
+		for (ebloop = 0; ebloop <= 100; ebloop++)
+		{
+			if (eb[ebloop].status == 1)
+			{
+				eb[ebloop].x++;
+				experimental(eb[ebloop].x, eb[ebloop].y);
+			}
+
+			if (eb[ebloop].x + 2 == 60)
+			{
+				eb[ebloop].status = 0;
+				clear_enemy(eb[ebloop].x+1, eb[ebloop].y);
+			}
+
 		}
 
 		if (es[0].status == 1)
