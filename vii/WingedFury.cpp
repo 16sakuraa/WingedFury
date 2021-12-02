@@ -1047,7 +1047,9 @@ void clearscattershot(int x, int y)
 void experimental(int x, int y)
 {
 	gotoxy(x, y);
-	printf(" :");
+	setcolor(14, 0);
+	printf(" >>");
+	setcolor(7, 0);
 }
 
 int main()
@@ -1269,10 +1271,10 @@ int main()
 				experimental(eb[ebloop].x, eb[ebloop].y);
 			}
 
-			if (eb[ebloop].x + 2 == 60)
+			if (eb[ebloop].x + 3 == 60)
 			{
 				eb[ebloop].status = 0;
-				clear_enemy(eb[ebloop].x+1, eb[ebloop].y);
+				ceb(eb[ebloop].x+1, eb[ebloop].y);
 			}
 
 		}
